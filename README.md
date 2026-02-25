@@ -37,7 +37,7 @@ Engineering intelligent systems that turn chaos into coordinated action.
 
 ---
 
-## 📊 GitHub Stats
+##  GitHub Stats
 
 <p align="center">
   <img height="180em" src="https://github-readme-stats-one-bice.vercel.app/api?username=Vaibhav8075&show_icons=true&theme=tokyonight&count_private=true" alt="Vaibhav's GitHub Stats" />
