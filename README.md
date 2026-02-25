@@ -7,17 +7,17 @@ Engineering intelligent systems that turn chaos into coordinated action.
 
 ---
 
-## 🚀 About Me
+##  About Me
 
-- 🎓 BTech Computer Science & Engineering
-- 💻 Frontend Developer at MossX
-- 🧠 Building AI-powered production systems
-- 🌍 Working on OpenRescue (AI Disaster Response Platform)
-- ⚡ Focused on Agentic AI & Real-world Decision Systems
+-  BTech Computer Science & Engineering
+-  Frontend Developer at MossX
+-  Building AI-powered production systems
+-  Working on OpenRescue (AI Disaster Response Platform)
+-  Focused on Agentic AI & Real-world Decision Systems
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 ### Frontend
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
@@ -33,7 +33,7 @@ Engineering intelligent systems that turn chaos into coordinated action.
 
 ---
 
-## 📊 GitHub Stats
+##  GitHub Stats
 
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=Vaibhav8075&show_icons=true&theme=tokyonight" />
@@ -49,10 +49,10 @@ Engineering intelligent systems that turn chaos into coordinated action.
 
 ---
 
-## 🌐 Connect With Me
+##  Connect With Me
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](YOUR_LINK)
-[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-orange?style=for-the-badge)](YOUR_PORTFOLIO_LINK)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](www.linkedin.com/in/vaibhav-goel-23983b344)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-orange?style=for-the-badge)]([YOUR_PORTFOLIO_LINK](https://vaibhav-goel-portfolio.vercel.app/))
 
 ---
 
