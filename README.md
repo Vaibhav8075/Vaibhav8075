@@ -36,15 +36,16 @@ Engineering intelligent systems that turn chaos into coordinated action.
 ## GitHub Stats
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Vaibhav8075&show_icons=true&theme=tokyonight&count_private=true" alt="Vaibhav's GitHub Stats" />
+  <a href="https://github.com/Vaibhav8075">
+    <img height="180em" src="https://github-readme-stats.vercel.app/api?username=Vaibhav8075&show_icons=true&theme=tokyonight&count_private=true&cache_id=1" alt="Vaibhav's GitHub Stats" />
+  </a>
+  <a href="https://github.com/Vaibhav8075">
+    <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Vaibhav8075&layout=compact&theme=tokyonight&cache_id=1" alt="Top Languages" />
+  </a>
 </p>
 
 <p align="center">
-  <img src="https://streak-stats.demolab.com?user=Vaibhav8075&theme=tokyonight" alt="GitHub Streak" />
-</p>
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Vaibhav8075&layout=compact&theme=tokyonight" alt="Top Languages" />
+  <img width="100%" src="https://streak-stats.demolab.com?user=Vaibhav8075&theme=tokyonight&cache_id=1" alt="GitHub Streak" />
 </p>
 
 ---
