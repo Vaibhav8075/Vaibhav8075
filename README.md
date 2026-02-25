@@ -35,18 +35,20 @@ Engineering intelligent systems that turn chaos into coordinated action.
 
 ## GitHub Stats
 
+---
+
+## 📊 GitHub Stats
+
 <p align="center">
-  <a href="https://github.com/Vaibhav8075">
-    <img height="180em" src="https://github-readme-stats.vercel.app/api?username=Vaibhav8075&show_icons=true&theme=tokyonight&count_private=true&cache_id=1" alt="Vaibhav's GitHub Stats" />
-  </a>
-  <a href="https://github.com/Vaibhav8075">
-    <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Vaibhav8075&layout=compact&theme=tokyonight&cache_id=1" alt="Top Languages" />
-  </a>
+  <img height="180em" src="https://github-readme-stats-one-bice.vercel.app/api?username=Vaibhav8075&show_icons=true&theme=tokyonight&count_private=true" alt="Vaibhav's GitHub Stats" />
+  <img height="180em" src="https://github-readme-stats-one-bice.vercel.app/api/top-langs/?username=Vaibhav8075&layout=compact&theme=tokyonight" alt="Top Languages" />
 </p>
 
 <p align="center">
-  <img width="100%" src="https://streak-stats.demolab.com?user=Vaibhav8075&theme=tokyonight&cache_id=1" alt="GitHub Streak" />
+  <img width="100%" src="https://github-readme-streak-stats.herokuapp.com/?user=Vaibhav8075&theme=tokyonight" alt="GitHub Streak" />
 </p>
+
+---
 
 ---
 
