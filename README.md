@@ -33,14 +33,14 @@ Engineering intelligent systems that turn chaos into coordinated action.
 
 ---
 
-##  GitHub Stats
+## GitHub Stats
 
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=Vaibhav8075&show_icons=true&theme=tokyonight" />
 </p>
 
 <p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Vaibhav8075&theme=tokyonight" />
+  <img src="https://streak-stats.demolab.com?user=Vaibhav8075&theme=tokyonight" />
 </p>
 
 <p align="center">
@@ -51,8 +51,8 @@ Engineering intelligent systems that turn chaos into coordinated action.
 
 ##  Connect With Me
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](www.linkedin.com/in/vaibhav-goel-23983b344)
-[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-orange?style=for-the-badge)]([YOUR_PORTFOLIO_LINK](https://vaibhav-goel-portfolio.vercel.app/))
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/vaibhav-goel-23983b344)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-orange?style=for-the-badge)](https://vaibhav-goel-portfolio.vercel.app/)
 
 ---
 
