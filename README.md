@@ -33,10 +33,6 @@ Engineering intelligent systems that turn chaos into coordinated action.
 
 ---
 
-## GitHub Stats
-
----
-
 ##  GitHub Stats
 
 <p align="center">
@@ -47,8 +43,6 @@ Engineering intelligent systems that turn chaos into coordinated action.
 <p align="center">
   <img width="100%" src="https://github-readme-streak-stats.herokuapp.com/?user=Vaibhav8075&theme=tokyonight" alt="GitHub Streak" />
 </p>
-
----
 
 ---
 
