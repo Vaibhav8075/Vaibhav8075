@@ -33,27 +33,59 @@ I enjoy building intelligent systems that solve real-world problems through auto
 
 # Featured Projects
 
-## OpenRescue
+<table>
+<tr>
+<td width="50%">
 
-An AI-powered disaster response platform designed to assist emergency teams with resource allocation, coordination, and real-time decision making.
+### Financial Technology
 
----
+A modern fintech web application focused on delivering a seamless and intuitive financial management experience.
 
-## AI Voice Detection
+**Tech Stack**
 
-A React Native application capable of detecting AI-generated voices in real time using on-device machine learning.
+JavaScript • HTML • CSS
 
----
+</td>
 
-## Audit Management System
+<td width="50%">
 
-Enterprise-grade auditing platform with secure voice recording management, PostgreSQL, FastAPI backend, authentication, analytics, and role-based access.
+### Moss-X Website
 
----
+A responsive company website developed during my frontend internship, emphasizing performance, clean UI, and modern web development practices.
 
-## Smart Fire Detection System
+**Tech Stack**
 
-An ESP32-S3 based IoT fire detection system integrating multiple sensors, TinyML, and Digital Twin technologies.
+JavaScript • HTML • CSS
+
+</td>
+</tr>
+
+<tr>
+<td width="50%">
+
+### Audict Audio Technology
+
+An enterprise-grade audit management platform featuring secure audio storage, authentication, PostgreSQL integration, analytics, and role-based access.
+
+**Tech Stack**
+
+FastAPI • PostgreSQL • JavaScript • HTML • CSS
+
+</td>
+
+<td width="50%">
+
+### IoT ML Project
+
+An intelligent IoT monitoring system integrating ESP32, multiple sensors, machine learning, and digital twin technologies for real-time monitoring and anomaly detection.
+
+**Tech Stack**
+
+Python • ESP32 • Machine Learning • IoT
+
+</td>
+</tr>
+</table>
 
 ---
 
