@@ -4,7 +4,6 @@
 
 ### AI Engineer • Full Stack Developer • Building Intelligent Systems
 
-*Building AI that doesn't just answer questions—it takes action.*
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-Visit-orange?style=for-the-badge)](https://vaibhav-goel-portfolio.vercel.app/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/vaibhav-goel-23983b344)
@@ -195,6 +194,5 @@ Python • ESP32 • Machine Learning • IoT
 
 <div align="center">
 
-**Building intelligent software that creates real-world impact.**
 
 </div>
