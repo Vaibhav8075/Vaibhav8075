@@ -19,7 +19,7 @@ Building production AI pipelines, distributed asynchronous backends, real-time I
 
 ## About Me
 
-- **B.Tech in Computer Science & Engineering** at **Vellore Institute of Technology (VIT)** (CGPA: 8.19/10).
+- **B.Tech in Computer Science & Engineering** at **Vellore Institute of Technology (VIT)** (CGPA: 8.31/10).
 - **Software Engineering Intern** at **DCM Shriram Ltd.** & **Frontend Developer** at **MossX** (Ex-Intern at **Aarvasa**).
 - **Software Division Member** at **Team Sammard (VIT Rocket Team)** — built live Ground Control Station (GCS) telemetry over WebSockets and integrated ESP32 avionics.
 - **Core Focus:** Voice AI & Speech Intelligence, Async Task Queues (Celery + Redis), Distributed Systems, and Full-Stack Engineering.
