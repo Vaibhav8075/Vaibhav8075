@@ -1,12 +1,9 @@
- name: Generate Snake Contribution Animation
+name: Generate Snake Contribution Animation
 
     on:
       schedule:
-        # Run every 12 hours
         - cron: "0 */12 * * *"
-
       workflow_dispatch:
-
       push:
         branches:
           - main
