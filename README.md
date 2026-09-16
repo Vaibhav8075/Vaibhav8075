@@ -1,12 +1,12 @@
 <div align="center">
 
-<img src="assets/header.svg?v=2" width="100%" alt="Vaibhav Goel - Software Engineer" />
+<img src="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/main/assets/header.svg?bust=9823475" width="100%" alt="Vaibhav Goel - Software Engineer" />
 
 <a href="https://github.com/Vaibhav8075?tab=repositories">
-  <img src="assets/projects.svg?v=2" width="100%" alt="Projects" />
+  <img src="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/main/assets/projects.svg?bust=9823475" width="100%" alt="Projects" />
 </a>
 
-<img src="assets/experience.svg?v=2" width="100%" alt="Experience Timeline" />
+<img src="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/main/assets/experience.svg?bust=9823475" width="100%" alt="Experience Timeline" />
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/output/github-contribution-grid-snake-dark.svg">
