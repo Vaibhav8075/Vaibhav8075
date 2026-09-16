@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #050505; }
+      .card-bg { fill: #09090b; stroke: #27272a; stroke-width: 1; rx: 12; }
+      .section-title { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 11px; fill: #71717a; letter-spacing: 3px; }
+      
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 600; fill: #f4f4f5; }
+      .desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #a1a1aa; line-height: 1.5; }
+      .stat-text { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 11px; fill: #71717a; }
+      
+      .icon-bg { fill: #18181b; rx: 6; stroke: #27272a; stroke-width: 1; }
+      .icon { fill: none; stroke: #a1a1aa; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+
+  <rect width="800" height="440" class="bg" />
+
+  <!-- Section Title -->
+  <text x="40" y="30" class="section-title">SELECTED WORK</text>
+
+  <!-- Grid: 2 Columns, 2 Rows -->
+
+  <!-- Card 1: Agentic Ledger -->
+  <g transform="translate(40, 60)">
+    <rect width="350" height="170" class="card-bg" />
+    <!-- Icon -->
+    <rect x="24" y="24" width="32" height="32" class="icon-bg" />
+    <path d="M30 34 L36 40 L44 32 L50 38" class="icon" />
+    <!-- Content -->
+    <text x="72" y="45" class="title">Agentic Ledger</text>
+    <text x="24" y="85" class="desc">Autonomous multi-agent financial engine built</text>
+    <text x="24" y="105" class="desc">on Phinite OS. Underwrites SMB micro-loans</text>
+    <text x="24" y="125" class="desc">and prevents transaction fraud in real-time.</text>
+    <!-- Footer -->
+    <circle cx="28" cy="148" r="4" fill="#3b82f6"/>
+    <text x="38" y="152" class="stat-text">Python</text>
+    <circle cx="98" cy="148" r="4" fill="#eab308"/>
+    <text x="108" y="152" class="stat-text">PyTorch</text>
+  </g>
+
+  <!-- Card 2: 1D CNN -->
+  <g transform="translate(410, 60)">
+    <rect width="350" height="170" class="card-bg" />
+    <!-- Icon -->
+    <rect x="24" y="24" width="32" height="32" class="icon-bg" />
+    <path d="M30 34 C 36 34, 36 44, 42 44 C 48 44, 48 34, 54 34" class="icon" />
+    <!-- Content -->
+    <text x="72" y="45" class="title">Physics-Augmented 1D-CNN</text>
+    <text x="24" y="85" class="desc">Industrial fault diagnosis system utilizing</text>
+    <text x="24" y="105" class="desc">a physics-informed 1D Convolutional Neural</text>
+    <text x="24" y="125" class="desc">Network for rapid bearing analysis.</text>
+    <!-- Footer -->
+    <circle cx="28" cy="148" r="4" fill="#eab308"/>
+    <text x="38" y="152" class="stat-text">Jupyter</text>
+    <circle cx="98" cy="148" r="4" fill="#14b8a6"/>
+    <text x="108" y="152" class="stat-text">TensorFlow</text>
+  </g>
+
+  <!-- Card 3: Audict -->
+  <g transform="translate(40, 250)">
+    <rect width="350" height="170" class="card-bg" />
+    <!-- Icon -->
+    <rect x="24" y="24" width="32" height="32" class="icon-bg" />
+    <path d="M35 30 L35 46 M40 26 L40 50 M45 34 L45 42" class="icon" />
+    <!-- Content -->
+    <text x="72" y="45" class="title">Financial Audio AI (Audict)</text>
+    <text x="24" y="85" class="desc">Asynchronous FastAPI backend using Celery &amp;</text>
+    <text x="24" y="105" class="desc">Redis. Processes audio via OpenAI Whisper</text>
+    <text x="24" y="125" class="desc">for custom NLP risk-signal detection.</text>
+    <!-- Footer -->
+    <circle cx="28" cy="148" r="4" fill="#ec4899"/>
+    <text x="38" y="152" class="stat-text">FastAPI</text>
+    <circle cx="108" cy="148" r="4" fill="#ef4444"/>
+    <text x="118" y="152" class="stat-text">Redis</text>
+  </g>
+
+  <!-- Card 4: IoT ML -->
+  <g transform="translate(410, 250)">
+    <rect width="350" height="170" class="card-bg" />
+    <!-- Icon -->
+    <rect x="24" y="24" width="32" height="32" class="icon-bg" />
+    <path d="M28 34 A 10 10 0 0 1 52 34 M32 38 A 6 6 0 0 1 48 38 M40 42 A 1 1 0 0 1 40.1 42" class="icon" />
+    <!-- Content -->
+    <text x="72" y="45" class="title">IoT Smart Monitoring</text>
+    <text x="24" y="85" class="desc">Edge ML telemetry network integrating a Random</text>
+    <text x="24" y="105" class="desc">Forest classifier with ESP32 hardware to</text>
+    <text x="24" y="125" class="desc">process sensor data locally at the edge.</text>
+    <!-- Footer -->
+    <circle cx="28" cy="148" r="4" fill="#22c55e"/>
+    <text x="38" y="152" class="stat-text">C++</text>
+    <circle cx="88" cy="148" r="4" fill="#eab308"/>
+    <text x="98" y="152" class="stat-text">Python</text>
+  </g>
+
+</svg>

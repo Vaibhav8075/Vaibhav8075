@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" width="100%" height="100%">
+  <defs>
+    <!-- Background Spotlight -->
+    <radialGradient id="spotlight" cx="50%" cy="0%" r="80%" fx="50%" fy="0%">
+      <stop offset="0%" stop-color="#2a2a35" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#050505" stop-opacity="1"/>
+    </radialGradient>
+
+    <!-- Chrome Text Gradient -->
+    <linearGradient id="chrome" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#d4d4d8"/>
+      <stop offset="100%" stop-color="#71717a"/>
+    </linearGradient>
+
+    <!-- Styles -->
+    <style>
+      .bg { fill: url(#spotlight); }
+      .name { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 42px; font-weight: 700; fill: url(#chrome); letter-spacing: -1px; }
+      .role { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 13px; fill: #888; letter-spacing: 2px; text-transform: uppercase; }
+      .desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; fill: #a1a1aa; font-weight: 400; }
+      .badge-bg { fill: #111; stroke: #222; stroke-width: 1; rx: 4; }
+      .badge-text { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 10px; fill: #999; }
+      .icon-stroke { fill: none; stroke: #e4e4e7; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="250" class="bg" rx="12" />
+  
+  <!-- Outer Border -->
+  <rect x="0.5" y="0.5" width="799" height="249" fill="none" stroke="#ffffff" stroke-opacity="0.05" rx="12" />
+
+  <!-- Avatar / Logo Box -->
+  <g transform="translate(40, 40)">
+    <rect width="56" height="56" rx="12" fill="#09090b" stroke="#27272a" stroke-width="1"/>
+    <path d="M18 16 L28 40 L38 16" class="icon-stroke"/>
+    <path d="M23 16 L28 28 L33 16" fill="none" stroke="#71717a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="28" cy="40" r="2.5" fill="#e4e4e7"/>
+  </g>
+
+  <!-- Text Content -->
+  <text x="120" y="70" class="name">Vaibhav Goel</text>
+  <text x="123" y="94" class="role">Software Engineer · Intelligent Systems</text>
+  
+  <text x="123" y="130" class="desc">I build production-grade systems at the intersection of machine</text>
+  <text x="123" y="152" class="desc">learning, distributed engineering, and frontend architecture.</text>
+
+  <!-- Badges -->
+  <g transform="translate(123, 185)">
+    <!-- Badge 1 -->
+    <rect x="0" y="0" width="85" height="24" class="badge-bg"/>
+    <circle cx="12" cy="12" r="3" fill="#3b82f6"/>
+    <text x="22" y="15" class="badge-text">TYPESCRIPT</text>
+
+    <!-- Badge 2 -->
+    <rect x="95" y="0" width="70" height="24" class="badge-bg"/>
+    <circle cx="107" cy="12" r="3" fill="#eab308"/>
+    <text x="117" y="15" class="badge-text">PYTHON</text>
+
+    <!-- Badge 3 -->
+    <rect x="175" y="0" width="60" height="24" class="badge-bg"/>
+    <circle cx="187" cy="12" r="3" fill="#14b8a6"/>
+    <text x="197" y="15" class="badge-text">REACT</text>
+
+    <!-- Badge 4 -->
+    <rect x="245" y="0" width="75" height="24" class="badge-bg"/>
+    <circle cx="257" cy="12" r="3" fill="#ec4899"/>
+    <text x="267" y="15" class="badge-text">FASTAPI</text>
+
+    <!-- Badge 5 -->
+    <rect x="330" y="0" width="70" height="24" class="badge-bg"/>
+    <circle cx="342" cy="12" r="3" fill="#f97316"/>
+    <text x="352" y="15" class="badge-text">PYTORCH</text>
+  </g>
+
+  <!-- Decorative Graph / Lines on the right -->
+  <g transform="translate(620, 40)" opacity="0.4">
+    <path d="M 0 150 C 40 150, 60 50, 100 50 C 140 50, 150 120, 180 120" fill="none" stroke="#52525b" stroke-width="1.5"/>
+    <path d="M 0 150 C 40 150, 60 80, 100 80 C 140 80, 150 140, 180 140" fill="none" stroke="#3f3f46" stroke-width="1.5"/>
+    <circle cx="100" cy="50" r="3" fill="#71717a"/>
+    <circle cx="100" cy="80" r="3" fill="#52525b"/>
+  </g>
+
+</svg>
