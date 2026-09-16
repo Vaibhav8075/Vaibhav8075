@@ -11,6 +11,14 @@
       .line { fill: none; stroke: #27272a; stroke-width: 2; }
       .dot { fill: #18181b; stroke: #52525b; stroke-width: 2; }
       .dot-active { fill: #e4e4e7; stroke: #e4e4e7; stroke-width: 2; }
+      .pulse {
+        animation: pulse 4s infinite ease-in-out;
+      }
+      @keyframes pulse {
+        0% { opacity: 0.5; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.2); }
+        100% { opacity: 0.5; transform: scale(1); }
+      }
     </style>
   </defs>
 
@@ -24,7 +32,7 @@
 
   <!-- Role 1 -->
   <g transform="translate(0, 70)">
-    <circle cx="50" cy="5" r="5" class="dot-active" />
+    <circle cx="50" cy="5" r="5" class="dot-active pulse" style="transform-origin: 50px 5px;" />
     <text x="75" y="10" class="title">Software Engineering Intern <tspan class="company">at DCM Shriram Ltd.</tspan></text>
     <text x="760" y="10" class="date">2026.05 - 2026.07</text>
   </g>

@@ -74,12 +74,27 @@
     <text x="352" y="15" class="badge-text">PYTORCH</text>
   </g>
 
-  <!-- Decorative Graph / Lines on the right -->
-  <g transform="translate(620, 40)" opacity="0.4">
-    <path d="M 0 150 C 40 150, 60 50, 100 50 C 140 50, 150 120, 180 120" fill="none" stroke="#52525b" stroke-width="1.5"/>
-    <path d="M 0 150 C 40 150, 60 80, 100 80 C 140 80, 150 140, 180 140" fill="none" stroke="#3f3f46" stroke-width="1.5"/>
-    <circle cx="100" cy="50" r="3" fill="#71717a"/>
-    <circle cx="100" cy="80" r="3" fill="#52525b"/>
+  <!-- Decorative Morphing Data Wave on the right -->
+  <g transform="translate(600, 50)" opacity="0.5">
+    <path fill="none" stroke="#52525b" stroke-width="1.5" stroke-linecap="round">
+      <animate attributeName="d" 
+        values="M 0 100 C 40 100, 60 30, 100 30 C 140 30, 160 120, 200 120;
+                M 0 100 C 40 100, 60 80, 100 80 C 140 80, 160 50, 200 50;
+                M 0 100 C 40 100, 60 30, 100 30 C 140 30, 160 120, 200 120" 
+        dur="8s" repeatCount="indefinite" />
+    </path>
+    <path fill="none" stroke="#3f3f46" stroke-width="1.5" stroke-linecap="round">
+      <animate attributeName="d" 
+        values="M 0 100 C 40 100, 60 60, 100 60 C 140 60, 160 90, 200 90;
+                M 0 100 C 40 100, 60 120, 100 120 C 140 120, 160 40, 200 40;
+                M 0 100 C 40 100, 60 60, 100 60 C 140 60, 160 90, 200 90" 
+        dur="6s" repeatCount="indefinite" />
+    </path>
+    <!-- Glowing Node on Wave -->
+    <circle r="3" fill="#e4e4e7">
+      <animateMotion dur="8s" repeatCount="indefinite" path="M 0 100 C 40 100, 60 30, 100 30 C 140 30, 160 120, 200 120" />
+      <animate attributeName="opacity" values="0;1;0" dur="8s" repeatCount="indefinite" />
+    </circle>
   </g>
 
 </svg>

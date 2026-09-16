@@ -11,6 +11,12 @@
       
       .icon-bg { fill: #18181b; rx: 6; stroke: #27272a; stroke-width: 1; }
       .icon { fill: none; stroke: #a1a1aa; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .float { animation: float 6s ease-in-out infinite; }
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-3px); }
+        100% { transform: translateY(0px); }
+      }
     </style>
   </defs>
 
@@ -26,7 +32,7 @@
     <rect width="350" height="170" class="card-bg" />
     <!-- Icon -->
     <rect x="24" y="24" width="32" height="32" class="icon-bg" />
-    <path d="M30 34 L36 40 L44 32 L50 38" class="icon" />
+    <path d="M30 34 L36 40 L44 32 L50 38" class="icon float" />
     <!-- Content -->
     <text x="72" y="45" class="title">Agentic Ledger</text>
     <text x="24" y="85" class="desc">Autonomous multi-agent financial engine built</text>
@@ -44,7 +50,7 @@
     <rect width="350" height="170" class="card-bg" />
     <!-- Icon -->
     <rect x="24" y="24" width="32" height="32" class="icon-bg" />
-    <path d="M30 34 C 36 34, 36 44, 42 44 C 48 44, 48 34, 54 34" class="icon" />
+    <path d="M30 34 C 36 34, 36 44, 42 44 C 48 44, 48 34, 54 34" class="icon float" style="animation-delay: 1s;" />
     <!-- Content -->
     <text x="72" y="45" class="title">Physics-Augmented 1D-CNN</text>
     <text x="24" y="85" class="desc">Industrial fault diagnosis system utilizing</text>
@@ -62,7 +68,7 @@
     <rect width="350" height="170" class="card-bg" />
     <!-- Icon -->
     <rect x="24" y="24" width="32" height="32" class="icon-bg" />
-    <path d="M35 30 L35 46 M40 26 L40 50 M45 34 L45 42" class="icon" />
+    <path d="M35 30 L35 46 M40 26 L40 50 M45 34 L45 42" class="icon float" style="animation-delay: 2s;" />
     <!-- Content -->
     <text x="72" y="45" class="title">Financial Audio AI (Audict)</text>
     <text x="24" y="85" class="desc">Asynchronous FastAPI backend using Celery &amp;</text>
@@ -80,7 +86,7 @@
     <rect width="350" height="170" class="card-bg" />
     <!-- Icon -->
     <rect x="24" y="24" width="32" height="32" class="icon-bg" />
-    <path d="M28 34 A 10 10 0 0 1 52 34 M32 38 A 6 6 0 0 1 48 38 M40 42 A 1 1 0 0 1 40.1 42" class="icon" />
+    <path d="M28 34 A 10 10 0 0 1 52 34 M32 38 A 6 6 0 0 1 48 38 M40 42 A 1 1 0 0 1 40.1 42" class="icon float" style="animation-delay: 3s;" />
     <!-- Content -->
     <text x="72" y="45" class="title">IoT Smart Monitoring</text>
     <text x="24" y="85" class="desc">Edge ML telemetry network integrating a Random</text>
