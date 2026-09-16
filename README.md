@@ -1,7 +1,9 @@
 <div align="center">
-  <img src="assets/hero.svg?v=2" width="100%" alt="Vaibhav Goel — AI, Frontend, Systems" />
+  <a href="https://vaibhav-goel-portfolio.vercel.app/" target="_blank">
+    <img src="assets/hero.svg?v=3" width="100%" alt="Vaibhav Goel - Software Engineer" />
+  </a>
   <br>
-  <code><a href="https://github.com/Vaibhav8075">GITHUB</a></code> &nbsp; • &nbsp; <code><a href="https://vaibhav-goel-portfolio.vercel.app/">PORTFOLIO</a></code> &nbsp; • &nbsp; <code><a href="https://www.linkedin.com/in/vaibhav-goel-23983b344">LINKEDIN</a></code> &nbsp; • &nbsp; <code><a href="mailto:vaibhav.goel0531@gmail.com">EMAIL</a></code>
+  <code><a href="https://github.com/Vaibhav8075">GITHUB</a></code> &nbsp; | &nbsp; <code><a href="https://vaibhav-goel-portfolio.vercel.app/">PORTFOLIO</a></code> &nbsp; | &nbsp; <code><a href="https://www.linkedin.com/in/vaibhav-goel-23983b344">LINKEDIN</a></code> &nbsp; | &nbsp; <code><a href="mailto:vaibhav.goel0531@gmail.com">EMAIL</a></code>
   <br><br>
 </div>
 
@@ -51,28 +53,28 @@ I am a software engineer specializing in **machine learning pipelines**, **distr
 
 <table width="100%">
   <tr>
-    <td width="20%" valign="top"><code>2026.05 — 2026.07</code></td>
+    <td width="20%" valign="top"><code>2026.05 - 2026.07</code></td>
     <td width="80%" valign="top">
       <b>SOFTWARE ENGINEERING INTERN</b> · <i>DCM SHRIRAM LTD.</i><br>
       Architected an enterprise audit management platform. Handled database migrations (SQLite to PostgreSQL) and configured Linux networking (MPLS, VPN, Layer 2-7 routing). Deployed production servers via Nginx and Uvicorn.
     </td>
   </tr>
   <tr>
-    <td width="20%" valign="top"><code>2025.06 — PRESENT</code></td>
+    <td width="20%" valign="top"><code>2025.06 - PRESENT</code></td>
     <td width="80%" valign="top">
       <b>FRONTEND DEVELOPER</b> · <i>MOSSX</i><br>
       Engineered modular React component architectures, improving code reusability by 40%. Built sustained 60 FPS animation pipelines using Framer Motion and implemented Zustand global state.
     </td>
   </tr>
   <tr>
-    <td width="20%" valign="top"><code>2026.01 — 2026.05</code></td>
+    <td width="20%" valign="top"><code>2026.01 - 2026.05</code></td>
     <td width="80%" valign="top">
       <b>FRONTEND DEVELOPER INTERN</b> · <i>AARVASA</i><br>
       Delivered over 20 responsive components with high-fidelity design accuracy. Built highly interactive interfaces using GSAP and optimized REST API integrations.
     </td>
   </tr>
   <tr>
-    <td width="20%" valign="top"><code>2025.05 — 2025.10</code></td>
+    <td width="20%" valign="top"><code>2025.05 - 2025.10</code></td>
     <td width="80%" valign="top">
       <b>SOFTWARE DIVISION MEMBER</b> · <i>TEAM SAMMARD (VIT ROCKETRY)</i><br>
       Built a real-time Ground Control Station (GCS) telemetry dashboard via WebSocket pipelines. Integrated hardware-level ESP32 avionics streams into flight simulation frameworks.
