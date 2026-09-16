@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/hero.svg" width="100%" alt="Vaibhav Goel — AI, Frontend, Systems" />
+  <img src="assets/hero.svg?v=2" width="100%" alt="Vaibhav Goel — AI, Frontend, Systems" />
   <br>
   <code><a href="https://github.com/Vaibhav8075">GITHUB</a></code> &nbsp; • &nbsp; <code><a href="https://vaibhav-goel-portfolio.vercel.app/">PORTFOLIO</a></code> &nbsp; • &nbsp; <code><a href="https://www.linkedin.com/in/vaibhav-goel-23983b344">LINKEDIN</a></code> &nbsp; • &nbsp; <code><a href="mailto:vaibhav.goel0531@gmail.com">EMAIL</a></code>
   <br><br>
