@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 440" width="100%" height="100%">
   <defs>
     <style>
-      .bg { fill: #050505; }
-      .card-bg { fill: #09090b; stroke: #27272a; stroke-width: 1; rx: 12; }
-      .section-title { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 11px; fill: #71717a; letter-spacing: 3px; }
+      .bg { fill: transparent; }
+      .card-bg { fill: transparent; stroke: #30363d; stroke-width: 1; rx: 12; }
+      .section-title { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 11px; fill: #8b949e; letter-spacing: 3px; }
       
-      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 600; fill: #f4f4f5; }
-      .desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #a1a1aa; line-height: 1.5; }
-      .stat-text { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 11px; fill: #71717a; }
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 600; fill: #c9d1d9; }
+      .desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #8b949e; line-height: 1.5; }
+      .stat-text { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 11px; fill: #8b949e; }
       
-      .icon-bg { fill: #18181b; rx: 6; stroke: #27272a; stroke-width: 1; }
-      .icon { fill: none; stroke: #a1a1aa; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+      .icon-bg { fill: #21262d; rx: 6; stroke: #30363d; stroke-width: 1; }
+      .icon { fill: none; stroke: #c9d1d9; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
       .float { animation: float 6s ease-in-out infinite; }
       @keyframes float {
         0% { transform: translateY(0px); }

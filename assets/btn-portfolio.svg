@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 40" width="150" height="40">
   <defs>
     <style>
-      .btn { fill: #111; stroke: #333; stroke-width: 1; rx: 4; }
-      .text-light { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 10px; fill: #aaa; letter-spacing: 1px; font-weight: 500;}
-      .text-dark { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 10px; fill: #000; letter-spacing: 1px; font-weight: 700; }
-      .accent { fill: #f4f4f5; rx: 2; }
+      .btn { fill: transparent; stroke: #30363d; stroke-width: 1; rx: 6; }
+      .text-light { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 10px; fill: #8b949e; letter-spacing: 1px; font-weight: 500;}
+      .text-dark { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 10px; fill: #c9d1d9; letter-spacing: 1px; font-weight: 700; }
+      .accent { fill: #21262d; rx: 4; stroke: #30363d; stroke-width: 1; }
     </style>
   </defs>
   

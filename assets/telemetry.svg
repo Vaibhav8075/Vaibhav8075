@@ -1,35 +1,35 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 220" width="100%" height="100%">
   <defs>
     <!-- Background Gradient (Perfect match to header.svg) -->
-    <radialGradient id="spotlight" cx="50%" cy="0%" r="80%" fx="50%" fy="0%">
-      <stop offset="0%" stop-color="#111" stop-opacity="0.2"/>
-      <stop offset="100%" stop-color="#050505" stop-opacity="1"/>
-    </radialGradient>
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#161b22"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </linearGradient>
 
     <!-- Chrome Text Gradient -->
     <linearGradient id="chrome" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="50%" stop-color="#d4d4d8"/>
-      <stop offset="100%" stop-color="#a1a1aa"/>
+      <stop offset="50%" stop-color="#c9d1d9"/>
+      <stop offset="100%" stop-color="#8b949e"/>
     </linearGradient>
 
     <style>
-      .bg { fill: url(#spotlight); stroke: none; rx: 12; }
+      .bg { fill: url(#panelGrad); stroke: #30363d; stroke-width: 1; rx: 12; }
       
-      .label { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 11px; fill: #71717a; letter-spacing: 3px; text-transform: uppercase; }
+      .label { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 11px; fill: #8b949e; letter-spacing: 3px; text-transform: uppercase; }
       
       .big-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 56px; font-weight: 600; fill: url(#chrome); letter-spacing: -2px; }
-      .sub-label { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 9px; fill: #52525b; letter-spacing: 2px; text-transform: uppercase; }
+      .sub-label { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 9px; fill: #8b949e; letter-spacing: 2px; text-transform: uppercase; }
       
-      .stat-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 24px; font-weight: 500; fill: #e4e4e7; }
+      .stat-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 24px; font-weight: 500; fill: #c9d1d9; }
       
-      .lang-label { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 9px; fill: #a1a1aa; letter-spacing: 1px; text-transform: uppercase; }
-      .bar-bg { fill: #111; rx: 2; }
-      .bar-fg { fill: #52525b; rx: 2; }
+      .lang-label { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 9px; fill: #8b949e; letter-spacing: 1px; text-transform: uppercase; }
+      .bar-bg { fill: #21262d; rx: 2; }
+      .bar-fg { fill: #8b949e; rx: 2; }
       
-      .divider { stroke: #27272a; stroke-width: 1; }
+      .divider { stroke: #30363d; stroke-width: 1; }
       
-      .sync { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 9px; fill: #3f3f46; letter-spacing: 2px; }
+      .sync { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 9px; fill: #8b949e; letter-spacing: 2px; }
     </style>
   </defs>
 
@@ -37,9 +37,6 @@
   <g transform="translate(40, 20)">
     <!-- Base Card -->
     <rect width="720" height="180" class="bg" />
-    
-    <!-- Outer Border to match Header -->
-    <rect x="0.5" y="0.5" width="719" height="179" fill="none" stroke="#ffffff" stroke-opacity="0.05" rx="12"/>
 
     <!-- LEFT SECTION (Contributions) -->
     <text x="40" y="45" class="label">TELEMETRY</text>
