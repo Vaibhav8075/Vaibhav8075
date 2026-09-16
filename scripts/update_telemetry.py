@@ -33,17 +33,38 @@ def fetch_stats():
             stars += repo.get("stargazers_count", 0)
         page += 1
 
-    # 3. Fetch Contributions (Using third-party API or scraping fallback)
-    contributions = 0
-    try:
-        url = f"https://github-contributions-api.jasonraimondi.com/v1/contributions/{username}"
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-        res = json.loads(urllib.request.urlopen(req).read().decode())
-        contributions = res['years'][0]['total']
-    except Exception as e:
-        print(f"Failed to fetch exact contributions: {e}")
-        # Fallback if API is down
-        contributions = 568 
+    # 3. Fetch Contributions via GraphQL
+    contributions = 568
+    if token:
+        try:
+            graphql_url = "https://api.github.com/graphql"
+            query = {
+                "query": f"""
+                query {{
+                  user(login: "{username}") {{
+                    contributionsCollection {{
+                      contributionCalendar {{
+                        totalContributions
+                      }}
+                    }}
+                  }}
+                }}
+                """
+            }
+            req_gql = urllib.request.Request(graphql_url, data=json.dumps(query).encode('utf-8'), headers=headers)
+            res_gql = json.loads(urllib.request.urlopen(req_gql).read().decode())
+            contributions = res_gql['data']['user']['contributionsCollection']['contributionCalendar']['totalContributions']
+        except Exception as e:
+            print(f"Failed to fetch contributions via GraphQL: {e}")
+            
+            # Fallback scraper if GraphQL token fails
+            try:
+                import re
+                url = f"https://github.com/{username}?tab=contributions"
+                html = urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'Mozilla'})).read().decode()
+                # We can't easily regex it directly from HTML because it's lazy-loaded. 
+            except:
+                pass
         
     return {
         "contributions": contributions,

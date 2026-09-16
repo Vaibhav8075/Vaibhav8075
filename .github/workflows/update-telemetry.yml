@@ -19,7 +19,7 @@ jobs:
       - name: Generate Telemetry SVG
         run: python scripts/update_telemetry.py
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT }}
           
       - name: Commit and Push
         run: |
