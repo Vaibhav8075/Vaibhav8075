@@ -1,8 +1,5 @@
 <div align="center">
-  <br>
-  <h1>V A I B H A V &nbsp; G O E L</h1>
-  <p><b>S O F T W A R E &nbsp; E N G I N E E R</b></p>
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=400&size=14&pause=2500&color=00E5FF&center=true&vCenter=true&width=600&lines=INITIALIZING_ENVIRONMENT...;SYSTEM_ARCHITECTURE_+_AI_PIPELINES;FRONTEND_ENGINEERING_+_DISTRIBUTED_BACKENDS;HARDWARE-SOFTWARE_INTEGRATION" alt="Focus Areas" />
+  <img src="assets/hero.svg" width="100%" alt="Vaibhav Goel — AI, Frontend, Distributed Systems" />
   <br>
   <code><a href="https://github.com/Vaibhav8075">GITHUB</a></code> &nbsp; • &nbsp; <code><a href="https://vaibhav-goel-portfolio.vercel.app/">PORTFOLIO</a></code> &nbsp; • &nbsp; <code><a href="https://www.linkedin.com/in/vaibhav-goel-23983b344">LINKEDIN</a></code> &nbsp; • &nbsp; <code><a href="mailto:vaibhav.goel0531@gmail.com">EMAIL</a></code>
   <br><br>
@@ -154,17 +151,6 @@
     <img alt="GitHub Contribution Grid Snake" src="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/output/github-contribution-grid-snake.svg" width="100%" />
   </picture>
 </div>
-<br>
-<table width="100%">
-  <tr>
-    <td width="50%" valign="top" align="center">
-      <img src="https://github-readme-stats-one-bice.vercel.app/api?username=Vaibhav8075&show_icons=true&theme=tokyonight&count_private=true&bg_color=00000000&hide_border=true&title_color=00E5FF&icon_color=00E5FF&text_color=c9c9c9" alt="GitHub Stats" width="100%" />
-    </td>
-    <td width="50%" valign="top" align="center">
-      <img src="https://github-readme-stats-one-bice.vercel.app/api/top-langs/?username=Vaibhav8075&layout=compact&theme=tokyonight&bg_color=00000000&hide_border=true&title_color=00E5FF&text_color=c9c9c9" alt="Top Languages" width="100%" />
-    </td>
-  </tr>
-</table>
 
 ---
 
