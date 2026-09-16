@@ -62,10 +62,10 @@
     </g>
 
     <!-- Vertical Divider 2 -->
-    <line x1="480" y1="40" x2="480" y2="140" class="divider" />
+    <line x1="520" y1="40" x2="520" y2="140" class="divider" />
 
     <!-- RIGHT SECTION (Languages) -->
-    <g transform="translate(510, 45)">
+    <g transform="translate(550, 45)">
       <text x="0" y="0" class="label">LANGUAGES</text>
       
       <!-- Python -->
