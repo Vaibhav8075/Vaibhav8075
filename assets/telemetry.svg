@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 220" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181b"/>
+      <stop offset="50%" stop-color="#09090b"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </linearGradient>
+
+    <!-- Chrome Text Gradient -->
+    <linearGradient id="chrome" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#d4d4d8"/>
+      <stop offset="100%" stop-color="#a1a1aa"/>
+    </linearGradient>
+
+    <style>
+      .bg { fill: url(#bgGrad); stroke: #27272a; stroke-width: 1; rx: 16; }
+      
+      .label { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 10px; fill: #71717a; letter-spacing: 3px; text-transform: uppercase; }
+      
+      .big-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 56px; font-weight: 300; fill: url(#chrome); letter-spacing: -2px; }
+      .sub-label { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 9px; fill: #52525b; letter-spacing: 2px; text-transform: uppercase; }
+      
+      .stat-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 24px; font-weight: 400; fill: #e4e4e7; }
+      
+      .lang-label { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 9px; fill: #a1a1aa; letter-spacing: 1px; text-transform: uppercase; }
+      .bar-bg { fill: #18181b; rx: 2; }
+      .bar-fg { fill: #52525b; rx: 2; }
+      
+      .divider { stroke: #27272a; stroke-width: 1; }
+      
+      .sync { font-family: "SF Mono", "JetBrains Mono", Consolas, monospace; font-size: 8px; fill: #3f3f46; letter-spacing: 2px; }
+    </style>
+  </defs>
+
+  <!-- Container -->
+  <g transform="translate(40, 20)">
+    <!-- Base Card -->
+    <rect width="720" height="180" class="bg" />
+    
+    <!-- Top Highlight -->
+    <rect x="2" y="2" width="716" height="1" fill="#ffffff" fill-opacity="0.05" rx="0.5"/>
+
+    <!-- LEFT SECTION (Contributions) -->
+    <text x="40" y="45" class="label">TELEMETRY</text>
+    <text x="40" y="115" class="big-num">942</text>
+    <text x="40" y="145" class="sub-label">CONTRIBUTIONS · PAST YEAR</text>
+
+    <!-- Vertical Divider 1 -->
+    <line x1="280" y1="40" x2="280" y2="140" class="divider" />
+
+    <!-- MIDDLE SECTION (Stats) -->
+    <g transform="translate(310, 0)">
+      <!-- Stars -->
+      <text x="0" y="60" class="stat-num">12</text>
+      <text x="0" y="75" class="sub-label">STARS</text>
+
+      <!-- Repositories -->
+      <text x="0" y="115" class="stat-num">18</text>
+      <text x="0" y="130" class="sub-label">REPOSITORIES</text>
+      
+      <!-- Followers -->
+      <text x="120" y="60" class="stat-num">8</text>
+      <text x="120" y="75" class="sub-label">FOLLOWERS</text>
+    </g>
+
+    <!-- Vertical Divider 2 -->
+    <line x1="480" y1="40" x2="480" y2="140" class="divider" />
+
+    <!-- RIGHT SECTION (Languages) -->
+    <g transform="translate(510, 45)">
+      <text x="0" y="0" class="label">LANGUAGES</text>
+      
+      <!-- Python -->
+      <text x="0" y="25" class="lang-label">PYTHON</text>
+      <rect x="0" y="32" width="160" height="4" class="bar-bg"/>
+      <rect x="0" y="32" width="120" height="4" class="bar-fg"/>
+      
+      <!-- TypeScript -->
+      <text x="0" y="55" class="lang-label">TYPESCRIPT</text>
+      <rect x="0" y="62" width="160" height="4" class="bar-bg"/>
+      <rect x="0" y="62" width="70" height="4" class="bar-fg"/>
+      
+      <!-- C++ -->
+      <text x="0" y="85" class="lang-label">C++</text>
+      <rect x="0" y="92" width="160" height="4" class="bar-bg"/>
+      <rect x="0" y="92" width="30" height="4" class="bar-fg"/>
+    </g>
+
+    <!-- Sync Footer -->
+    <text x="680" y="165" class="sync" text-anchor="end">SYNC_2026-09-17</text>
+  </g>
+</svg>
