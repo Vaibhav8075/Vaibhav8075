@@ -40,7 +40,7 @@
 
     <!-- LEFT SECTION (Contributions) -->
     <text x="40" y="45" class="label">TELEMETRY</text>
-    <text x="40" y="115" class="big-num">568</text>
+    <text x="40" y="115" class="big-num">385</text>
     <text x="40" y="145" class="sub-label">CONTRIBUTIONS · PAST YEAR</text>
 
     <!-- Vertical Divider 1 -->
