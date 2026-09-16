@@ -1,211 +1,173 @@
 <div align="center">
-
-# Vaibhav Goel
-
-### AI Engineer • Full-Stack Developer • Real-Time Systems
-
-[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-orange?style=for-the-badge&logo=vercel&logoColor=white)](https://vaibhav-goel-portfolio.vercel.app/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/vaibhav-goel-23983b344)
-[![Email](https://img.shields.io/badge/Email-Contact-red?style=for-the-badge&logo=gmail&logoColor=white)](mailto:vaibhav.goel0531@gmail.com)
-[![GitHub followers](https://img.shields.io/github/followers/Vaibhav8075?style=for-the-badge&logo=github)](https://github.com/Vaibhav8075)
-
-<p>
-Building production AI pipelines, distributed asynchronous backends, real-time IoT systems, and high-performance web applications.
-</p>
-
+  <br>
+  <h1>V A I B H A V &nbsp; G O E L</h1>
+  <p><b>S O F T W A R E &nbsp; E N G I N E E R</b></p>
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=400&size=14&pause=2500&color=00E5FF&center=true&vCenter=true&width=600&lines=INITIALIZING_ENVIRONMENT...;SYSTEM_ARCHITECTURE_+_AI_PIPELINES;FRONTEND_ENGINEERING_+_DISTRIBUTED_BACKENDS;HARDWARE-SOFTWARE_INTEGRATION" alt="Focus Areas" />
+  <br>
+  <code><a href="https://github.com/Vaibhav8075">GITHUB</a></code> &nbsp; • &nbsp; <code><a href="https://vaibhav-goel-portfolio.vercel.app/">PORTFOLIO</a></code> &nbsp; • &nbsp; <code><a href="https://www.linkedin.com/in/vaibhav-goel-23983b344">LINKEDIN</a></code> &nbsp; • &nbsp; <code><a href="mailto:vaibhav.goel0531@gmail.com">EMAIL</a></code>
+  <br><br>
 </div>
 
 ---
 
-## About Me
+<h2 align="left"><code>&gt; SYSTEM_PROFILE</code></h2>
 
-- **B.Tech in Computer Science & Engineering** at **Vellore Institute of Technology (VIT)** (CGPA: 8.31/10).
-- **Software Engineering Intern** at **DCM Shriram Ltd.** & **Frontend Developer** at **MossX** (Ex-Intern at **Aarvasa**).
-- **Software Division Member** at **Team Sammard (VIT Rocket Team)** — built live Ground Control Station (GCS) telemetry over WebSockets and integrated ESP32 avionics.
-- **Core Focus:** Voice AI & Speech Intelligence, Async Task Queues (Celery + Redis), Distributed Systems, and Full-Stack Engineering.
-- **Current Research:** Agentic AI, Multi-Agent Systems, Model Context Protocol (MCP), and Edge AI.
+<blockquote>
+<p><b>EXECUTION_ENV:</b> Vellore Institute of Technology (B.Tech Computer Science | CGPA: 8.31)</p>
+<p><b>CURRENT_THREAD:</b> Frontend Developer @ MossX</p>
+<p><b>OPERATING_PARAMS:</b> Architecting high-performance systems spanning frontend interfaces, distributed async backends, and edge AI implementations.</p>
+</blockquote>
 
----
+<h2 align="left"><code>&gt; CORE_ARCHITECTURE</code></h2>
 
-## Work Experience
+<table width="100%">
+  <tr>
+    <td width="25%" valign="top">
+      <b>[ FRONTEND ]</b><br><br>
+      <code>React</code><br>
+      <code>Next.js</code><br>
+      <code>Three.js / WebGL</code><br>
+      <code>Tailwind CSS</code><br>
+      <code>Framer Motion</code>
+    </td>
+    <td width="25%" valign="top">
+      <b>[ BACKEND ]</b><br><br>
+      <code>FastAPI</code><br>
+      <code>Node.js</code><br>
+      <code>PostgreSQL</code><br>
+      <code>Redis</code><br>
+      <code>Celery</code>
+    </td>
+    <td width="25%" valign="top">
+      <b>[ AI & ML ]</b><br><br>
+      <code>PyTorch</code><br>
+      <code>Scikit-Learn</code><br>
+      <code>Whisper</code><br>
+      <code>Computer Vision</code><br>
+      <code>Sensor Fusion</code>
+    </td>
+    <td width="25%" valign="top">
+      <b>[ SYSTEMS & LANG ]</b><br><br>
+      <code>Python / C++</code><br>
+      <code>TypeScript</code><br>
+      <code>Linux / Nginx</code><br>
+      <code>Docker</code><br>
+      <code>ESP32 / Edge</code>
+    </td>
+  </tr>
+</table>
 
-### **DCM Shriram Ltd.** — *Software Engineering Intern*
-*(May 2026 – July 2026 • Uttar Pradesh, India)*
-- Developed and maintained an enterprise **Audit Management System** using **React, FastAPI, and PostgreSQL** for voice recording management and QA workflows.
-- Migrated backend from SQLite to PostgreSQL to improve scalability, query performance, and concurrent access.
-- Deployed and configured applications on **Ubuntu Linux** using **Nginx, Uvicorn, and PostgreSQL** with role-based access control (RBAC) and automated retention policies.
-- Gained hands-on exposure to enterprise networking (MPLS, VPN, Layer 2–7 routing, Linux networking).
+<h2 align="left"><code>&gt; ENGINEERING_MODULES</code></h2>
 
-### **MossX** — *Frontend Developer*
-*(June 2025 – Present • Remote)*
-- Architected a modular React component system across 6–8 production features, improving code reusability by **40%**.
-- Built **Framer Motion** animation pipelines sustaining **60 FPS** and engineered **Zustand** global state stores for async data dashboards.
+<table width="100%">
+  <tr>
+    <td width="50%" valign="top">
+      <b>01 // <a href="https://github.com/Vaibhav8075/Audict-audio-Technology">FINANCIAL_AUDIO_INTELLIGENCE</a></b><br>
+      <i>End-to-end AI speech pipeline for financial call analysis.</i><br><br>
+      <b>STACK:</b> <code>FastAPI</code> <code>Whisper</code> <code>Celery</code> <code>Redis</code><br>
+      <b>SPECS:</b> Engineered an asynchronous backend utilizing Celery and Redis for rate limiting and task queuing, integrating custom NLP risk-signal detection.
+    </td>
+    <td width="50%" valign="top">
+      <b>02 // <a href="https://github.com/Vaibhav8075/IOT-ML-Project">IOT_FIRE_DETECTION_SYSTEM</a></b><br>
+      <i>Intelligent 5-sensor hazard detection network.</i><br><br>
+      <b>STACK:</b> <code>Python</code> <code>ESP32</code> <code>Random Forest</code> <code>Flask</code><br>
+      <b>SPECS:</b> Hardware-software integration via WiFi telemetry. ML classifier achieved 25% reduction in false alarms with real-time remote monitoring.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <b>03 // <a href="https://vaibhav-goel-portfolio.vercel.app/">INTERACTIVE_3D_ENVIRONMENT</a></b><br>
+      <i>High-performance spatial web portfolio.</i><br><br>
+      <b>STACK:</b> <code>Three.js</code> <code>React Three Fiber</code> <code>WebGL</code> <code>GSAP</code><br>
+      <b>SPECS:</b> GPU-optimized custom shaders. Sustains 60 FPS scroll-driven animations across diverse hardware targets.
+    </td>
+    <td width="50%" valign="top">
+      <b>04 // <a href="https://github.com/Vaibhav8075/rider-risk-intelligence">RIDER_RISK_INTELLIGENCE</a></b><br>
+      <i>Real-time safety scoring for gig delivery infrastructure.</i><br><br>
+      <b>STACK:</b> <code>Python</code> <code>Computer Vision</code> <code>Sensor Fusion</code><br>
+      <b>SPECS:</b> AI-powered phone-only telemetry processing and risk modeling via edge machine learning algorithms.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <b>05 // ENTERPRISE_AUDIT_SYSTEM</b><br>
+      <i>Voice recording management and QA evaluation platform.</i><br><br>
+      <b>STACK:</b> <code>PostgreSQL</code> <code>FastAPI</code> <code>Ubuntu</code> <code>Nginx</code><br>
+      <b>SPECS:</b> Executed database migration from SQLite to PostgreSQL for concurrent access. Implemented strict RBAC and automated data retention policies.
+    </td>
+    <td width="50%" valign="top">
+      <b>06 // <a href="https://github.com/Vaibhav8075/OpenRescue-AI-Driven-Disaster-Response-Resource-Optimization-System">OPENRESCUE_AI</a></b><br>
+      <i>Disaster response resource optimization.</i><br><br>
+      <b>STACK:</b> <code>Node.js</code> <code>Machine Learning</code> <code>JavaScript</code><br>
+      <b>SPECS:</b> AI-powered predictive risk modeling platform optimizing emergency unit deployment during disaster response scenarios.
+    </td>
+  </tr>
+</table>
 
-### **Aarvasa** — *Frontend Developer Intern*
-*(Jan 2026 – May 2026 • Remote)*
-- Delivered 20+ responsive components in **React + Tailwind CSS** with pixel-perfect Figma accuracy.
-- Integrated REST APIs and implemented GSAP and Framer Motion animation systems.
+<h2 align="left"><code>&gt; OPERATIONAL_HISTORY</code></h2>
 
-### **Team Sammard (VIT Rocket Team)** — *Software Team Member*
-*(May 2025 – Oct 2025 • Vellore, India)*
-- Developed a real-time Ground Control Station (GCS) telemetry dashboard (altitude, velocity, multi-sensor streams) over a **WebSocket** pipeline.
-- Integrated hardware-level **ESP32** avionics sensor data into simulation pipelines for flight tests.
+<table width="100%">
+  <tr>
+    <td width="20%" valign="top"><code>2026.05_2026.07</code></td>
+    <td width="80%" valign="top">
+      <b>SOFTWARE ENGINEERING INTERN</b> // <i>DCM SHRIRAM LTD.</i><br>
+      Architected enterprise audit management platforms. Configured Linux networking protocols (MPLS, VPN, Layer 2-7 routing) and deployed production servers via Nginx and Uvicorn.
+    </td>
+  </tr>
+  <tr>
+    <td width="20%" valign="top"><code>2025.06_PRESENT</code></td>
+    <td width="80%" valign="top">
+      <b>FRONTEND DEVELOPER</b> // <i>MOSSX</i><br>
+      Engineered modular React component architectures yielding a 40% improvement in code reusability. Built sustained 60 FPS animation pipelines using Framer Motion and implemented Zustand global state.
+    </td>
+  </tr>
+  <tr>
+    <td width="20%" valign="top"><code>2026.01_2026.05</code></td>
+    <td width="80%" valign="top">
+      <b>FRONTEND DEVELOPER INTERN</b> // <i>AARVASA</i><br>
+      Delivered 20+ responsive components with pixel-perfect Figma accuracy. Built highly interactive interfaces using GSAP and optimized REST API integrations.
+    </td>
+  </tr>
+  <tr>
+    <td width="20%" valign="top"><code>2025.05_2025.10</code></td>
+    <td width="80%" valign="top">
+      <b>SOFTWARE DIVISION MEMBER</b> // <i>TEAM SAMMARD (VIT ROCKETRY)</i><br>
+      Built real-time Ground Control Station (GCS) telemetry via WebSocket pipelines. Integrated hardware-level ESP32 avionics streams into simulation frameworks for flight tests.
+    </td>
+  </tr>
+</table>
 
----
+<h2 align="left"><code>&gt; RESEARCH_VECTORS</code></h2>
 
-## Featured Projects
+<blockquote>
+<p><b>[ PROCESS ]</b> Investigating Agentic AI architectures and multi-agent collaboration frameworks.</p>
+<p><b>[ PROCESS ]</b> Exploring the boundaries of the Model Context Protocol (MCP) for tool integration.</p>
+<p><b>[ PROCESS ]</b> Optimizing Edge AI inference on constrained IoT environments (ESP32) for decentralized data processing.</p>
+</blockquote>
 
-<table>
-<tr>
-<td width="50%" valign="top">
+<h2 align="left"><code>&gt; TELEMETRY</code></h2>
 
-### [AI Financial Audio Intelligence](https://github.com/Vaibhav8075/Audict-audio-Technology)
-An end-to-end AI speech pipeline for financial call analysis using OpenAI Whisper transcription and custom NLP risk-signal detection.
-- Scalable async FastAPI backend with Celery + Redis for rate limiting and background task queuing.
-- Real-time React dashboard for risk visualization.
-
-**Tech Stack:** FastAPI • React • Whisper • Celery • Redis
-
-</td>
-<td width="50%" valign="top">
-
-### [Enterprise Audit Management System](https://github.com/Vaibhav8075/Audict-audio-Technology)
-Enterprise voice recording management and QA evaluation platform built during internship at DCM Shriram.
-- Automated audio retention policies and role-based access control (RBAC).
-- Deployed on Ubuntu Linux with Nginx and Uvicorn.
-
-**Tech Stack:** React • FastAPI • PostgreSQL • Ubuntu • Nginx
-
-</td>
-</tr>
-
-<tr>
-<td width="50%" valign="top">
-
-### [ML & IoT Fire Detection System](https://github.com/Vaibhav8075/IOT-ML-Project)
-Intelligent 5-sensor IoT hazard detection system integrating ESP32 with machine learning for real-time monitoring.
-- Random Forest classifier reducing false alarms by 25%.
-- Real-time remote telemetry transmission via WiFi to a Flask backend.
-
-**Tech Stack:** Python • ESP32 • Random Forest • Flask • Dash
-
-</td>
-<td width="50%" valign="top">
-
-### [3D Interactive Portfolio](https://vaibhav-goel-portfolio.vercel.app/)
-A high-performance 3D portfolio experience with GPU-optimized shaders and interactive animations.
-- Sustains 60 FPS scroll-driven animations across devices.
-- Deployed on Vercel.
-
-**Tech Stack:** Three.js • React Three Fiber • GSAP • Vercel
-
-</td>
-</tr>
-
-<tr>
-<td width="50%" valign="top">
-
-### [Rider Risk Intelligence](https://github.com/Vaibhav8075/rider-risk-intelligence)
-AI-powered phone-only real-time safety and risk scoring platform for gig delivery riders using sensor fusion and computer vision.
-
-**Tech Stack:** Python • Computer Vision • Sensor Fusion • ML
-
-</td>
-<td width="50%" valign="top">
-
-### [OpenRescue AI Platform](https://github.com/Vaibhav8075/OpenRescue-AI-Driven-Disaster-Response-Resource-Optimization-System)
-AI-powered disaster response platform combining predictive risk modeling and resource optimization for emergency teams.
-
-**Tech Stack:** JavaScript • Machine Learning • Node.js
-
-</td>
-</tr>
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/output/github-contribution-grid-snake-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/output/github-contribution-grid-snake.svg">
+    <img alt="GitHub Contribution Grid Snake" src="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/output/github-contribution-grid-snake.svg" width="100%" />
+  </picture>
+</div>
+<br>
+<table width="100%">
+  <tr>
+    <td width="50%" valign="top" align="center">
+      <img src="https://github-readme-stats-one-bice.vercel.app/api?username=Vaibhav8075&show_icons=true&theme=tokyonight&count_private=true&bg_color=00000000&hide_border=true&title_color=00E5FF&icon_color=00E5FF&text_color=c9c9c9" alt="GitHub Stats" width="100%" />
+    </td>
+    <td width="50%" valign="top" align="center">
+      <img src="https://github-readme-stats-one-bice.vercel.app/api/top-langs/?username=Vaibhav8075&layout=compact&theme=tokyonight&bg_color=00000000&hide_border=true&title_color=00E5FF&text_color=c9c9c9" alt="Top Languages" width="100%" />
+    </td>
+  </tr>
 </table>
 
 ---
 
-## Technical Skills
-
-### Languages
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![C++](https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-336791?style=for-the-badge)
-
-### Frontend & 3D
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![Three.js](https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=three.js&logoColor=white)
-![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white)
-![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
-
-### Backend & Distributed Systems
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
-![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
-![Express](https://img.shields.io/badge/Express-404D59?style=for-the-badge)
-![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
-![Celery](https://img.shields.io/badge/Celery-37814A?style=for-the-badge&logo=celery&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
-
-### AI / ML & Audio Intelligence
-![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
-![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
-![OpenAI Whisper](https://img.shields.io/badge/OpenAI_Whisper-412991?style=for-the-badge&logo=openai&logoColor=white)
-
-### Infrastructure, Tools & Hardware
-![Linux](https://img.shields.io/badge/Ubuntu_Linux-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
-![Nginx](https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
-![ESP32](https://img.shields.io/badge/ESP32-E7352C?style=for-the-badge&logo=espressif&logoColor=white)
-
----
-
-## Contribution Graph & Activity
-
 <div align="center">
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/output/github-contribution-grid-snake-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/output/github-contribution-grid-snake.svg">
-  <img alt="GitHub Contribution Grid Snake" src="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/output/github-contribution-grid-snake.svg" width="100%" />
-</picture>
-
+  <p><code>[ SYSTEM_READY ]</code></p>
 </div>
-
----
-
-## Activity & Statistics
-
-<p align="center">
-  <img width="100%" src="https://github-readme-activity-graph.vercel.app/graph?username=Vaibhav8075&theme=tokyo-night&area=true&hide_border=true" alt="Vaibhav's Activity Graph" />
-</p>
-
-<p align="center">
-  <img height="180em" src="https://github-readme-stats-one-bice.vercel.app/api?username=Vaibhav8075&show_icons=true&theme=tokyonight&count_private=true" alt="GitHub Stats" />
-  <img height="180em" src="https://github-readme-stats-one-bice.vercel.app/api/top-langs/?username=Vaibhav8075&layout=compact&theme=tokyonight" alt="Top Languages" />
-</p>
-
-<p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Vaibhav8075&theme=tokyonight" alt="GitHub Streak Stats" />
-</p>
-
----
-
-## Connect
-
-<p align="center">
-  <a href="https://www.linkedin.com/in/vaibhav-goel-23983b344">
-    <img src="https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin" alt="LinkedIn" />
-  </a>
-  &nbsp;&nbsp;
-  <a href="https://vaibhav-goel-portfolio.vercel.app/">
-    <img src="https://img.shields.io/badge/Portfolio-Visit-orange?style=for-the-badge" alt="Portfolio" />
-  </a>
-  &nbsp;&nbsp;
-  <a href="mailto:vaibhav.goel0531@gmail.com">
-    <img src="https://img.shields.io/badge/Email-Contact-red?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
-  </a>
-</p>
