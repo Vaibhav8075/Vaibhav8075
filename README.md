@@ -16,19 +16,19 @@ I am a software engineer specializing in **machine learning pipelines**, **distr
 <table width="100%">
   <tr>
     <td width="50%" valign="top">
-      <b><a href="https://github.com/Vaibhav8075/Financial-Technology">FINANCIAL TECHNOLOGY</a></b><br>
-      <i>Smart tools for finance and analytics.</i><br><br>
-      An automation and data processing ecosystem built with JavaScript and Python. Designed to support budgeting, forecasting, and financial insights for modern decision-making.
+      <b><a href="https://github.com/Vaibhav8075/Agentic-Ledger">AGENTIC LEDGER</a></b><br>
+      <i>Autonomous multi-agent financial engine.</i><br><br>
+      Built on Phinite OS. Leverages PyTorch LSTMs and FastAPI to dynamically underwrite SMB micro-loans and prevent transaction fraud in real-time.
     </td>
     <td width="50%" valign="top">
-      <b><a href="https://github.com/Moss-X/Website">MOSS-X / WEBSITE</a></b><br>
-      <i>Frontend architecture & UI/UX engineering.</i><br><br>
-      Modular React component architectures and high-performance interactive interfaces sustaining 60 FPS animation pipelines via Framer Motion and Zustand.
+      <b><a href="https://github.com/Vaibhav8075/-Physics-Augmented-1D-CNN">PHYSICS-AUGMENTED 1D-CNN</a></b><br>
+      <i>Industrial fault diagnosis system.</i><br><br>
+      Engineered a predictive maintenance and condition monitoring model using a physics-informed 1D Convolutional Neural Network for industrial bearing analysis.
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <b><a href="https://github.com/Vaibhav8075/Audict-audio-Technology">FINANCIAL AUDIO AI</a></b><br>
+      <b><a href="https://github.com/Vaibhav8075/Audict-audio-Technology">FINANCIAL AUDIO AI (AUDICT)</a></b><br>
       <i>End-to-end AI speech pipeline.</i><br><br>
       Architected an asynchronous FastAPI backend utilizing Celery and Redis to process audio streams via OpenAI Whisper for custom NLP risk-signal detection.
     </td>
@@ -36,6 +36,13 @@ I am a software engineer specializing in **machine learning pipelines**, **distr
       <b><a href="https://github.com/Vaibhav8075/IOT-ML-Project">IoT SMART MONITORING</a></b><br>
       <i>Edge ML telemetry network.</i><br><br>
       Integrated a Random Forest classifier with ESP32 hardware to process sensor data locally, reducing false alarms by 25% with real-time cloud connectivity.
+    </td>
+  </tr>
+  <tr>
+    <td width="100%" colspan="2" valign="top">
+      <b><a href="https://github.com/Vaibhav8075/Semantic-Segmentation-for-Autonomous-Driving-">SEMANTIC SEGMENTATION FOR AUTONOMOUS DRIVING</a></b><br>
+      <i>Real-time road scene interpretation.</i><br><br>
+      Trained and evaluated deep learning models for autonomous driving capable of classifying each pixel of an image into meaningful categories in real-time.
     </td>
   </tr>
 </table>
