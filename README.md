@@ -8,16 +8,16 @@
 
 <img src="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/main/assets/experience.svg?bust=123" width="100%" alt="Experience Timeline" />
 
-<img src="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/main/assets/telemetry.svg?bust=123" width="100%" alt="GitHub Telemetry" />
+<img src="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/main/assets/telemetry.svg?bust=124" width="100%" alt="GitHub Telemetry" />
 
 <br><br>
 
 <a href="https://vaibhav-goel-portfolio.vercel.app/" target="_blank">
-  <img src="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/main/assets/btn-portfolio.svg?bust=123" height="40" alt="PORTFOLIO ENTER" />
+  <img src="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/main/assets/btn-portfolio.svg?bust=124" height="40" alt="PORTFOLIO ENTER" />
 </a>
 &nbsp;&nbsp;
 <a href="https://www.linkedin.com/in/vaibhav-goel-23983b344" target="_blank">
-  <img src="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/main/assets/btn-linkedin.svg?bust=123" height="40" alt="LINKEDIN CONNECT" />
+  <img src="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/main/assets/btn-linkedin.svg?bust=124" height="40" alt="LINKEDIN CONNECT" />
 </a>
 
 <br><br>
