@@ -52,15 +52,15 @@
     <!-- MIDDLE SECTION (Stats) -->
     <g transform="translate(310, 0)">
       <!-- Stars -->
-      <text x="0" y="60" class="stat-num">3</text>
+      <text x="0" y="60" class="stat-num">1</text>
       <text x="0" y="75" class="sub-label">STARS</text>
 
       <!-- Repositories -->
-      <text x="0" y="115" class="stat-num">13</text>
+      <text x="0" y="115" class="stat-num">19</text>
       <text x="0" y="130" class="sub-label">REPOSITORIES</text>
       
       <!-- Followers -->
-      <text x="120" y="60" class="stat-num">3</text>
+      <text x="120" y="60" class="stat-num">5</text>
       <text x="120" y="75" class="sub-label">FOLLOWERS</text>
     </g>
 
