@@ -16,38 +16,26 @@ I am a software engineer specializing in **machine learning pipelines**, **distr
 <table width="100%">
   <tr>
     <td width="50%" valign="top">
-      <b><a href="https://github.com/Vaibhav8075/Agentic-Ledger">AGENTIC LEDGER</a></b><br>
-      <i>Autonomous multi-agent financial engine.</i><br><br>
-      Built on Phinite OS. Leverages PyTorch LSTMs and FastAPI to dynamically underwrite SMB micro-loans and prevent transaction fraud in real-time.
+      <b><a href="https://github.com/Vaibhav8075/Financial-Technology">FINANCIAL TECHNOLOGY</a></b><br>
+      <i>Smart tools for finance and analytics.</i><br><br>
+      An automation and data processing ecosystem built with JavaScript and Python. Designed to support budgeting, forecasting, and financial insights for modern decision-making.
     </td>
     <td width="50%" valign="top">
-      <b><a href="https://github.com/Vaibhav8075/-Physics-Augmented-1D-CNN">PHYSICS-AUGMENTED 1D-CNN</a></b><br>
-      <i>Industrial fault diagnosis system.</i><br><br>
-      Engineered a predictive maintenance and condition monitoring model using a physics-informed 1D Convolutional Neural Network for industrial bearing analysis.
+      <b><a href="https://github.com/Moss-X/Website">MOSS-X / WEBSITE</a></b><br>
+      <i>Frontend architecture & UI/UX engineering.</i><br><br>
+      Modular React component architectures and high-performance interactive interfaces sustaining 60 FPS animation pipelines via Framer Motion and Zustand.
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <b><a href="https://github.com/Vaibhav8075/OpenRescue-AI-Driven-Disaster-Response-Resource-Optimization-System">OPENRESCUE AI</a></b><br>
-      <i>Disaster response resource optimization.</i><br><br>
-      An AI platform that converts real-time incident reports into prioritized insights. Combines predictive risk modeling and intelligent deployment optimization.
+      <b><a href="https://github.com/Vaibhav8075/Audict-audio-Technology">FINANCIAL AUDIO AI</a></b><br>
+      <i>End-to-end AI speech pipeline.</i><br><br>
+      Architected an asynchronous FastAPI backend utilizing Celery and Redis to process audio streams via OpenAI Whisper for custom NLP risk-signal detection.
     </td>
     <td width="50%" valign="top">
       <b><a href="https://github.com/Vaibhav8075/IOT-ML-Project">IoT SMART MONITORING</a></b><br>
       <i>Edge ML telemetry network.</i><br><br>
       Integrated a Random Forest classifier with ESP32 hardware to process sensor data locally, reducing false alarms by 25% with real-time cloud connectivity.
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <b><a href="https://github.com/Vaibhav8075/openPumta">OPENPUMTA</a></b><br>
-      <i>Data-driven productivity engine.</i><br><br>
-      An open-source, cross-platform productivity ecosystem combining focus tracking, analytical data visualization, and an integrated AI assistant.
-    </td>
-    <td width="50%" valign="top">
-      <b><a href="https://github.com/Vaibhav8075/Audict-audio-Technology">FINANCIAL AUDIO AI</a></b><br>
-      <i>End-to-end AI speech pipeline.</i><br><br>
-      Architected an asynchronous FastAPI backend utilizing Celery and Redis to process audio streams via OpenAI Whisper for custom NLP risk-signal detection.
     </td>
   </tr>
 </table>
