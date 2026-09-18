@@ -12,7 +12,7 @@
 
 <br><br>
 
-<a href="https://vaibhav-goel-portfolio.vercel.app/" target="_blank">
+<a href="https://www.vaibhavgoel.dev" target="_blank">
   <img src="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/main/assets/btn-portfolio.svg?t=4" height="40" alt="PORTFOLIO ENTER" />
 </a>
 &nbsp;&nbsp;
