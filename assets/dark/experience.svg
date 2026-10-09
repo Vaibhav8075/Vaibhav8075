@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 256" width="800" height="256">
+  <style>
+    .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif; }
+    .mono { font-family: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace; }
+    .label { font-size: 11px; fill: #8b949e; letter-spacing: 3px; }
+    .role { font-size: 15px; font-weight: 600; fill: #c9d1d9; }
+    .org { font-weight: 400; fill: #8b949e; }
+    .date { font-size: 11px; fill: #8b949e; }
+    .dot { fill: #21262d; stroke: #30363d; stroke-width: 2; }
+  </style>
+  <text x="38" y="28" class="mono label">EXPERIENCE</text>
+  <path d="M48 72 V228" stroke="#30363d" stroke-width="2"/>
+  <circle cx="48" cy="72" r="5" fill="#3fb950"/><circle cx="48" cy="72" r="5" fill="none" stroke="#3fb950" stroke-width="1.5"><animate attributeName="r" values="5;11" dur="2.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.7;0" dur="2.4s" repeatCount="indefinite"/></circle>
+  <text x="72" y="77" class="sans role">Frontend Developer<tspan class="org"> at MossX</tspan></text>
+  <text x="762" y="76" text-anchor="end" class="mono date">2025.06 – Present</text>
+  <circle cx="48" cy="124" r="5" class="dot"/>
+  <text x="72" y="129" class="sans role">Software Engineering Intern<tspan class="org"> at DCM Shriram Ltd.</tspan></text>
+  <text x="762" y="128" text-anchor="end" class="mono date">2026.05 – 2026.07</text>
+  <circle cx="48" cy="176" r="5" class="dot"/>
+  <text x="72" y="181" class="sans role">Frontend Developer Intern<tspan class="org"> at Aarvasa</tspan></text>
+  <text x="762" y="180" text-anchor="end" class="mono date">2026.01 – 2026.05</text>
+  <circle cx="48" cy="228" r="5" class="dot"/>
+  <text x="72" y="233" class="sans role">Software Division<tspan class="org"> at Team Sammard (VIT Rocketry)</tspan></text>
+  <text x="762" y="232" text-anchor="end" class="mono date">2025.05 – 2025.10</text>
+</svg>

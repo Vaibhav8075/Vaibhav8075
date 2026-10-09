@@ -1,104 +1,92 @@
-import urllib.request
+"""Fetch live GitHub stats for the telemetry card into data/stats.json.
+
+The contribution count is only exposed by the GraphQL API, which needs a token
+(GITHUB_TOKEN, set from the PAT secret in CI). Without one, or if the query
+fails, the previous count is kept rather than replaced with a guess.
+
+    python scripts/update_telemetry.py && python scripts/build.py
+"""
 import json
 import os
-from datetime import datetime
-import re
+import pathlib
+import urllib.request
+from datetime import datetime, timezone
 
-def fetch_stats():
-    username = "Vaibhav8075"
-    token = os.environ.get("GITHUB_TOKEN")
-    
-    headers = {
-        "User-Agent": "Telemetry-Updater",
-        "Accept": "application/vnd.github.v3+json"
-    }
+USER = "Vaibhav8075"
+STATS = pathlib.Path(__file__).resolve().parent.parent / "data" / "stats.json"
+
+# Markup, docs and build files, left out of the language mix.
+IGNORED_LANGUAGES = {
+    "HTML", "CSS", "SCSS", "TeX", "Markdown", "Shell", "PowerShell", "Batchfile",
+    "Dockerfile", "Makefile", "CMake", "Procfile",
+}
+TOP_LANGUAGES = 4
+
+
+def request(url, token, body=None):
+    headers = {"User-Agent": f"{USER}-profile", "Accept": "application/vnd.github+json"}
     if token:
         headers["Authorization"] = f"Bearer {token}"
+    data = json.dumps(body).encode() if body is not None else None
+    with urllib.request.urlopen(urllib.request.Request(url, data=data, headers=headers), timeout=30) as res:
+        return json.load(res)
 
-    # 1. Fetch User Data
-    req = urllib.request.Request(f"https://api.github.com/users/{username}", headers=headers)
-    user_data = json.loads(urllib.request.urlopen(req).read().decode())
-    followers = user_data.get("followers", 0)
-    public_repos = user_data.get("public_repos", 0)
 
-    # 2. Fetch Repos for Stars
-    stars = 0
+def owned_repos(token):
     page = 1
-    while True:
-        req = urllib.request.Request(f"https://api.github.com/users/{username}/repos?per_page=100&page={page}", headers=headers)
-        repos = json.loads(urllib.request.urlopen(req).read().decode())
-        if not repos:
-            break
-        for repo in repos:
-            stars += repo.get("stargazers_count", 0)
+    while batch := request(f"https://api.github.com/users/{USER}/repos?type=owner&per_page=100&page={page}", token):
+        yield from batch
         page += 1
 
-    # 3. Fetch Contributions via GraphQL
-    contributions = 568
+
+def contributions(token):
+    query = "query($login: String!) { user(login: $login) { contributionsCollection { contributionCalendar { totalContributions } } } }"
+    res = request("https://api.github.com/graphql", token, {"query": query, "variables": {"login": USER}})
+    return res["data"]["user"]["contributionsCollection"]["contributionCalendar"]["totalContributions"]
+
+
+def language_mix(repos, token):
+    """Top languages by bytes across original repos, as percentages of all counted code."""
+    totals = {}
+    for repo in repos:
+        if repo["fork"] or repo["name"] == USER:
+            continue
+        for lang, size in request(repo["languages_url"], token).items():
+            if lang not in IGNORED_LANGUAGES:
+                totals[lang] = totals.get(lang, 0) + size
+    total = sum(totals.values()) or 1
+    top = sorted(totals.items(), key=lambda kv: -kv[1])[:TOP_LANGUAGES]
+    return [[lang, round(size / total * 100, 1)] for lang, size in top]
+
+
+def main():
+    token = os.environ.get("GITHUB_TOKEN")
+    previous = json.loads(STATS.read_text(encoding="utf-8")) if STATS.exists() else {}
+
+    user = request(f"https://api.github.com/users/{USER}", token)
+    repos = list(owned_repos(token))
+
+    count = previous.get("contributions")
     if token:
         try:
-            graphql_url = "https://api.github.com/graphql"
-            query = {
-                "query": f"""
-                query {{
-                  user(login: "{username}") {{
-                    contributionsCollection {{
-                      contributionCalendar {{
-                        totalContributions
-                      }}
-                    }}
-                  }}
-                }}
-                """
-            }
-            req_gql = urllib.request.Request(graphql_url, data=json.dumps(query).encode('utf-8'), headers=headers)
-            res_gql = json.loads(urllib.request.urlopen(req_gql).read().decode())
-            contributions = res_gql['data']['user']['contributionsCollection']['contributionCalendar']['totalContributions']
-        except Exception as e:
-            print(f"Failed to fetch contributions via GraphQL: {e}")
-            
-            # Fallback scraper if GraphQL token fails
-            try:
-                import re
-                url = f"https://github.com/{username}?tab=contributions"
-                html = urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent': 'Mozilla'})).read().decode()
-                # We can't easily regex it directly from HTML because it's lazy-loaded. 
-            except:
-                pass
-        
-    return {
-        "contributions": contributions,
-        "stars": stars,
-        "repos": public_repos,
-        "followers": followers,
-        "sync_date": datetime.now().strftime("%Y-%m-%d")
+            count = contributions(token)
+        except Exception as e:  # keep the last known count
+            print(f"Contribution query failed, keeping {count}: {e}")
+    else:
+        print(f"No GITHUB_TOKEN; keeping contribution count {count}")
+
+    stats = {
+        "contributions": count,
+        "stars": sum(r["stargazers_count"] for r in repos),
+        "repositories": user["public_repos"],
+        "followers": user["followers"],
+        "languages": language_mix(repos, token),
+        "synced": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
     }
+    STATS.parent.mkdir(exist_ok=True)
+    STATS.write_text(json.dumps(stats, indent=2) + "\n", encoding="utf-8", newline="\n")
+    print(json.dumps(stats))
 
-def update_svg(stats):
-    svg_path = "assets/telemetry.svg"
-    with open(svg_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-
-    # Regex replacements to inject new data securely while preserving layout
-    content = re.sub(r'(<text x="40" y="115" class="big-num">)\d+(</text>)', rf'\g<1>{stats["contributions"]}\g<2>', content)
-    
-    # Stars
-    content = re.sub(r'(<!-- Stars -->\s*<text x="0" y="60" class="stat-num">)\d+(</text>)', rf'\g<1>{stats["stars"]}\g<2>', content)
-    
-    # Repos
-    content = re.sub(r'(<!-- Repositories -->\s*<text x="0" y="115" class="stat-num">)\d+(</text>)', rf'\g<1>{stats["repos"]}\g<2>', content)
-    
-    # Followers
-    content = re.sub(r'(<!-- Followers -->\s*<text x="120" y="60" class="stat-num">)\d+(</text>)', rf'\g<1>{stats["followers"]}\g<2>', content)
-    
-    # Date
-    content = re.sub(r'(<text x="680" y="165" class="sync" text-anchor="end">)SYNC \d{4}-\d{2}-\d{2}(</text>)', rf'\g<1>SYNC {stats["sync_date"]}\g<2>', content)
-
-    with open(svg_path, 'w', encoding='utf-8') as f:
-        f.write(content)
-        
-    print(f"Successfully updated telemetry.svg with: {stats}")
 
 if __name__ == "__main__":
-    stats = fetch_stats()
-    update_svg(stats)
+    main()

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 196" width="400" height="196">
+  <style>
+    .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif; }
+    .mono { font-family: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace; }
+    .card { fill: none; stroke: #30363d; }
+    .icon-box { fill: #21262d; stroke: #30363d; }
+    .icon { fill: none; stroke: #c9d1d9; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .float { animation: float 6s ease-in-out infinite; }
+    @keyframes float { 50% { transform: translateY(-2px); } }
+    .title { font-size: 17px; font-weight: 600; fill: #c9d1d9; }
+    .kind { font-size: 10px; fill: #8b949e; letter-spacing: 1.5px; }
+    .desc { font-size: 13px; fill: #8b949e; }
+    .tag { font-size: 11px; fill: #8b949e; }
+    .arrow { fill: none; stroke: #8b949e; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+  <g transform="translate(8, 8)">
+  <rect x="0.5" y="0.5" width="383" height="179" rx="12" class="card"/>
+  <rect x="24" y="24" width="32" height="32" rx="6" class="icon-box"/>
+  <path d="M29 40 C 33 30, 36 30, 40 40 S 47 50, 51 40" class="icon float"/>
+  <text x="72" y="39" class="sans title">Physics-Augmented 1D-CNN</text>
+  <text x="72" y="56" class="mono kind">ML RESEARCH</text>
+  <text x="24" y="92" class="sans desc">Leakage-controlled benchmark of 1D-CNN</text>
+  <text x="24" y="112" class="sans desc">bearing-fault classifiers on CWRU and Paderborn.</text>
+  <text x="24" y="132" class="sans desc">The protocol, not the architecture, decides the score.</text>
+  <circle cx="28" cy="152" r="4" fill="#ee4c2c"/><text x="38" y="156" class="mono tag">PyTorch</text><circle cx="106" cy="152" r="4" fill="#4d8fd1"/><text x="116" y="156" class="mono tag">ONNX</text><circle cx="164" cy="152" r="4" fill="#3d6117"/><text x="174" y="156" class="mono tag">LaTeX</text>
+  <path d="M350 158 L360 148 M352.5 148 H360 V155.5" class="arrow"/>
+  </g>
+</svg>

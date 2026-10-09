@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 196" width="400" height="196">
+  <style>
+    .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif; }
+    .mono { font-family: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace; }
+    .card { fill: none; stroke: #d1d9e0; }
+    .icon-box { fill: #f6f8fa; stroke: #d1d9e0; }
+    .icon { fill: none; stroke: #1f2328; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .float { animation: float 6s ease-in-out infinite; }
+    @keyframes float { 50% { transform: translateY(-2px); } }
+    .title { font-size: 17px; font-weight: 600; fill: #1f2328; }
+    .kind { font-size: 10px; fill: #59636e; letter-spacing: 1.5px; }
+    .desc { font-size: 13px; fill: #59636e; }
+    .tag { font-size: 11px; fill: #59636e; }
+    .arrow { fill: none; stroke: #59636e; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+  <g transform="translate(8, 8)">
+  <rect x="0.5" y="0.5" width="383" height="179" rx="12" class="card"/>
+  <rect x="24" y="24" width="32" height="32" rx="6" class="icon-box"/>
+  <path d="M30 38 A 12 12 0 0 1 50 38 M34 42 A 7 7 0 0 1 46 42" class="icon float"/>
+  <text x="72" y="39" class="sans title">IoT Fire Detection</text>
+  <text x="72" y="56" class="mono kind">IOT · ML</text>
+  <text x="24" y="92" class="sans desc">ESP32-S3 sensor fusion and a Random Forest</text>
+  <text x="24" y="112" class="sans desc">(94.9% test accuracy, 367k real readings) built to cut</text>
+  <text x="24" y="132" class="sans desc">false fire alarms, with a live digital twin.</text>
+  <circle cx="28" cy="152" r="4" fill="#f34b7d"/><text x="38" y="156" class="mono tag">C++</text><circle cx="80" cy="152" r="4" fill="#3572a5"/><text x="90" y="156" class="mono tag">Python</text><circle cx="152" cy="152" r="4" fill="#f7931e"/><text x="162" y="156" class="mono tag">scikit-learn</text>
+  <path d="M350 158 L360 148 M352.5 148 H360 V155.5" class="arrow"/>
+  </g>
+</svg>
