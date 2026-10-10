@@ -20,10 +20,9 @@ jobs:
         uses: Platane/snk/svg-only@v3
         with:
           github_user_name: Vaibhav8075
-          # Violet-to-blue palette matching the README cards; the first dot colour is the empty cell.
           outputs: |
-            dist/github-contribution-grid-snake.svg?color_snake=#2563eb&color_dots=#ebedf0,#ddd6fe,#c4b5fd,#8b5cf6,#6d28d9
-            dist/github-contribution-grid-snake-dark.svg?palette=github-dark&color_snake=#60a5fa&color_dots=#161b22,#2e1f5e,#4c2f9e,#7451d6,#a78bfa
+            dist/github-contribution-grid-snake.svg
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
 
       - name: Push generated SVGs to the output branch
         uses: crazy-max/ghaction-github-pages@v3.1.0

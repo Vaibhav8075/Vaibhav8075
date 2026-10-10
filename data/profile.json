@@ -2,6 +2,7 @@
   "header": {
     "name": "Vaibhav Goel",
     "role": "Software Engineer · Intelligent Systems",
+    "location": "Vellore, India",
     "tagline": "I build production-grade systems at the intersection of machine learning, distributed engineering, and frontend architecture.",
     "stack": ["TypeScript", "Python", "React", "FastAPI", "PyTorch"],
     "typing": [

@@ -2,25 +2,19 @@
   <style>
     .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif; }
     .mono { font-family: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace; }
-    .label { font-size: 11px; fill: #59636e; letter-spacing: 3px; }
+    .heading { font-size: 11px; fill: #59636e; letter-spacing: 3px; }
+    .heading-num { fill: #bc4c00; font-weight: 700; }
     .role { font-size: 15px; font-weight: 600; fill: #1f2328; }
     .org { font-weight: 400; fill: #59636e; }
     .date { font-size: 11px; fill: #59636e; }
-    .now { fill: #7c3aed; font-weight: 700; }
-    .dot { fill: #f6f8fa; stroke: #7c3aed; stroke-opacity: 0.55; stroke-width: 2; }
+    .now { fill: #bc4c00; font-weight: 700; }
+    .dot { fill: #f6f8fa; stroke: #59636e; stroke-width: 2; }
   </style>
-  <defs>
-  <linearGradient id="rule" x1="0" x2="1"><stop offset="0" stop-color="#7c3aed" stop-opacity="0.8"/><stop offset="1" stop-color="#2563eb" stop-opacity="0"/></linearGradient>
-  <linearGradient id="line" x1="0" y1="0" x2="0" y2="1">
-  <stop offset="0" stop-color="#7c3aed"/>
-  <stop offset="0.6" stop-color="#2563eb" stop-opacity="0.6"/>
-  <stop offset="1" stop-color="#d1d9e0"/>
-  </linearGradient>
-  </defs>
-  <text x="38" y="28" class="mono label">EXPERIENCE</text>
-  <rect x="144.0" y="24" width="618.0" height="1" fill="url(#rule)"/>
-  <rect x="47" y="72" width="2" height="156" fill="url(#line)"/>
-  <circle cx="48" cy="72" r="6" fill="#7c3aed"/><circle cx="48" cy="72" r="6" fill="none" stroke="#7c3aed" stroke-width="1.5"><animate attributeName="r" values="6;13" dur="2.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0" dur="2.4s" repeatCount="indefinite"/></circle>
+  <text x="38" y="28" class="mono heading heading-num">02</text>
+  <text x="65.2" y="28" class="mono heading">EXPERIENCE</text>
+  <rect x="169.2" y="24" width="592.8" height="1" fill="#d1d9e0"/>
+  <rect x="47" y="72" width="2" height="156" fill="#d1d9e0"/>
+  <circle cx="48" cy="72" r="6" fill="#bc4c00"/><circle cx="48" cy="72" r="6" fill="none" stroke="#bc4c00" stroke-width="1.5"><animate attributeName="r" values="6;13" dur="2.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.8;0" dur="2.4s" repeatCount="indefinite"/></circle>
   <text x="74" y="77" class="sans role">Frontend Developer<tspan class="org"> at MossX</tspan></text>
   <text x="762" y="76" text-anchor="end" class="mono date now">2025.06 – Present</text>
   <circle cx="48" cy="124" r="5" class="dot"/>

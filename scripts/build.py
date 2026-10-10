@@ -17,24 +17,17 @@ RAW = f"https://raw.githubusercontent.com/{USER}/{USER}"
 SANS = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif"
 MONO = "ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace"
 
-# GitHub's dark and light palettes, plus a violet-to-blue accent taken from the avatar.
+# GitHub's dark and light palettes with one flat accent (Primer's orange).
+# Everything is a solid colour: no gradients, glows or blurs.
 THEMES = {
     "dark": {
-        "text": "#e6edf3", "muted": "#8b949e", "border": "#30363d", "surface": "#161b22",
-        "accent": "#a78bfa", "accent2": "#60a5fa", "wash": 0.14,
-        "panel": ("#161b22", "#0d1117"), "live": "#3fb950",
+        "text": "#f0f6fc", "muted": "#8b949e", "border": "#30363d", "surface": "#161b22",
+        "accent": "#f0883e", "on_accent": "#0d1117", "live": "#3fb950",
     },
     "light": {
         "text": "#1f2328", "muted": "#59636e", "border": "#d1d9e0", "surface": "#f6f8fa",
-        "accent": "#7c3aed", "accent2": "#2563eb", "wash": 0.07,
-        "panel": ("#faf7ff", "#ffffff"), "live": "#1a7f37",
+        "accent": "#bc4c00", "on_accent": "#ffffff", "live": "#1a7f37",
     },
-}
-
-# The hero is identical in both themes: a dark aurora reads well on either page.
-HERO = {
-    "base": ("#160c33", "#0a1230"), "blobs": ("#7c3aed", "#2563eb", "#c026d3"),
-    "kicker": "#c4b5fd", "soft": "#ddd6fe", "accent": "#a78bfa",
 }
 
 # Linguist colours for languages, brand colours for frameworks.
@@ -119,18 +112,21 @@ def svg(width, height, css, body):
     )
 
 
-def section_rule(text, y, t):
-    """Mono section label followed by an accent rule that fades out. Needs the .label class."""
-    x = PAD + mono_width(text, 11, 3) + 10
-    defs = (
-        f'<linearGradient id="rule" x1="0" x2="1"><stop offset="0" stop-color="{t["accent"]}" stop-opacity="0.8"/>'
-        f'<stop offset="1" stop-color="{t["accent2"]}" stop-opacity="0"/></linearGradient>'
-    )
+def section_heading(number, text, y, t):
+    """'01  SELECTED WORK ────' in mono, with the number in the accent colour."""
+    num, label = f"{number:02d}", text.upper()
+    lx = PAD + mono_width(num, 11, 3) + 8
+    rx = lx + mono_width(label, 11, 3) + 8
+    css = f"""
+        .heading {{ font-size: 11px; fill: {t["muted"]}; letter-spacing: 3px; }}
+        .heading-num {{ fill: {t["accent"]}; font-weight: 700; }}
+    """
     body = (
-        f'<text x="{PAD}" y="{y}" class="mono label">{escape(text.upper())}</text>\n'
-        f'<rect x="{x:.1f}" y="{y - 4}" width="{800 - PAD - x:.1f}" height="1" fill="url(#rule)"/>'
+        f'<text x="{PAD}" y="{y}" class="mono heading heading-num">{num}</text>\n'
+        f'<text x="{lx:.1f}" y="{y}" class="mono heading">{escape(label)}</text>\n'
+        f'<rect x="{rx:.1f}" y="{y - 4}" width="{800 - PAD - rx:.1f}" height="1" fill="{t["border"]}"/>'
     )
-    return defs, body
+    return css, body
 
 
 def typing_timeline(phrases):
@@ -148,16 +144,14 @@ def typing_timeline(phrases):
     return frames, t
 
 
-def hero(profile):
+def hero(profile, t):
     h = profile["header"]
-    tagline = wrap(h["tagline"], 15, 540, 2, "header.tagline")
+    tagline = wrap(h["tagline"], 16, 620, 2, "header.tagline")
 
     # Typing line. Each phrase is pinned to an exact monospace width with textLength, so
     # a clip that grows one character cell per frame reveals it a letter at a time.
-    cw, phrases = 9, h["typing"]
-    cap_w = 40 + (len(">") + 1 + max(map(len, phrases)) + 1) * cw
-    cap_x = (800 - cap_w) / 2
-    x0 = cap_x + 20 + 2 * cw
+    cw, base, phrases = 8.4, 262, h["typing"]
+    x0 = PAD + 2 * cw
     frames, total = typing_timeline(phrases)
     key_times = ";".join(f"{ft / total:.5f}" for ft, _, _ in frames)
 
@@ -169,100 +163,57 @@ def hero(profile):
 
     clips, typed = [], []
     for i, phrase in enumerate(phrases):
-        widths = [str(n * cw if p == i else 0) for _, p, n in frames]
-        clips.append(f'<clipPath id="type{i}"><rect x="{x0:.1f}" y="224" width="0" height="26">{discrete("width", widths)}</rect></clipPath>')
+        widths = [f"{n * cw:.1f}" if p == i else "0" for _, p, n in frames]
+        clips.append(f'<clipPath id="type{i}"><rect x="{x0:.1f}" y="{base - 15}" width="0" height="20">{discrete("width", widths)}</rect></clipPath>')
         typed.append(
-            f'<text x="{x0:.1f}" y="241" textLength="{len(phrase) * cw}" lengthAdjust="spacing" '
+            f'<text x="{x0:.1f}" y="{base}" textLength="{len(phrase) * cw:.1f}" lengthAdjust="spacing" '
             f'clip-path="url(#type{i})" class="mono typed">{escape(phrase)}</text>'
         )
     cursor = discrete("x", [f"{x0 + n * cw:.1f}" for _, _, n in frames])
 
-    chips, widths = [], [round(32 + mono_width(tech.upper(), 10, 0.5)) for tech in h["stack"]]
-    x = (800 - sum(widths) - 10 * (len(widths) - 1)) / 2
-    for tech, w in zip(h["stack"], widths):
-        chips.append(
-            f'<rect x="{x:.1f}" y="272" width="{w}" height="24" rx="12" class="chip"/>'
-            f'<circle cx="{x + 13:.1f}" cy="284" r="3" fill="{color(tech)}"/>'
-            f'<text x="{x + 22:.1f}" y="287.5" class="mono chip-text">{escape(tech.upper())}</text>'
-        )
-        x += w + 10
+    stack = " · ".join(s.upper() for s in h["stack"])
+    if x0 + (max(map(len, phrases)) + 1) * cw + 24 > 800 - PAD - mono_width(stack, 11, 0.5):
+        raise SystemExit("header.typing or header.stack is too long to share the hero's bottom row; shorten one.")
 
-    violet, blue, magenta = HERO["blobs"]
     css = f"""
-        .kicker {{ font-size: 12px; fill: {HERO["kicker"]}; letter-spacing: 4px; }}
-        .name {{ font-size: 64px; font-weight: 800; fill: url(#name); letter-spacing: -1.5px; }}
-        .tagline {{ font-size: 15px; fill: {HERO["soft"]}; fill-opacity: 0.85; }}
-        .typed {{ font-size: 15px; fill: {HERO["soft"]}; }}
-        .prompt {{ font-size: 15px; fill: {HERO["accent"]}; font-weight: 700; }}
-        .capsule {{ fill: #000000; fill-opacity: 0.32; stroke: #ffffff; stroke-opacity: 0.14; }}
-        .chip {{ fill: #ffffff; fill-opacity: 0.07; stroke: #ffffff; stroke-opacity: 0.16; }}
-        .chip-text {{ font-size: 10px; fill: {HERO["soft"]}; letter-spacing: 0.5px; }}
+        .panel {{ fill: {t["surface"]}; stroke: {t["border"]}; }}
+        .meta {{ font-size: 11px; fill: {t["muted"]}; letter-spacing: 2px; }}
+        .name {{ font-size: 76px; font-weight: 800; fill: {t["text"]}; letter-spacing: -2.5px; }}
+        .stop {{ fill: {t["accent"]}; }}
+        .tagline {{ font-size: 16px; fill: {t["muted"]}; }}
+        .typed {{ font-size: 14px; fill: {t["text"]}; }}
+        .prompt {{ font-size: 14px; fill: {t["accent"]}; font-weight: 700; }}
+        .stack {{ font-size: 11px; fill: {t["muted"]}; letter-spacing: 0.5px; }}
     """
     lines = "\n".join(
-        f'<text x="400" y="{174 + 21 * i}" text-anchor="middle" class="sans tagline">{escape(line)}</text>'
-        for i, line in enumerate(tagline)
+        f'<text x="{PAD}" y="{180 + 22 * i}" class="sans tagline">{escape(line)}</text>' for i, line in enumerate(tagline)
     )
     body = f"""
-        <defs>
-          <clipPath id="frame"><rect width="800" height="330" rx="16"/></clipPath>
-          <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="{HERO["base"][0]}"/>
-            <stop offset="1" stop-color="{HERO["base"][1]}"/>
-          </linearGradient>
-          <linearGradient id="name" x1="0" x2="1">
-            <stop offset="0" stop-color="#ffffff"/>
-            <stop offset="1" stop-color="#e9d5ff"/>
-          </linearGradient>
-          <linearGradient id="scrim" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0.55" stop-color="#000000" stop-opacity="0"/>
-            <stop offset="1" stop-color="#000000" stop-opacity="0.35"/>
-          </linearGradient>
-          <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="70"/></filter>
-          <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#ffffff" fill-opacity="0.07"/></pattern>
-          {"".join(clips)}
-        </defs>
-        <g clip-path="url(#frame)">
-          <rect width="800" height="330" fill="url(#base)"/>
-          <g filter="url(#blur)">
-            <circle cx="170" cy="60" r="170" fill="{violet}" fill-opacity="0.85">
-              <animate attributeName="cx" values="170;330;170" dur="16s" repeatCount="indefinite"/>
-              <animate attributeName="cy" values="60;160;60" dur="12s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="650" cy="290" r="190" fill="{blue}" fill-opacity="0.8">
-              <animate attributeName="cx" values="650;480;650" dur="18s" repeatCount="indefinite"/>
-              <animate attributeName="cy" values="290;200;290" dur="14s" repeatCount="indefinite"/>
-            </circle>
-            <circle cx="540" cy="10" r="130" fill="{magenta}" fill-opacity="0.5">
-              <animate attributeName="cx" values="540;660;540" dur="11s" repeatCount="indefinite"/>
-            </circle>
-          </g>
-          <rect width="800" height="330" fill="url(#dots)"/>
-          <rect width="800" height="330" fill="url(#scrim)"/>
-          <rect width="800" height="1" fill="#ffffff" fill-opacity="0.25"/>
-          <text x="400" y="74" text-anchor="middle" class="mono kicker">{escape(h["role"].upper())}</text>
-          <text x="400" y="140" text-anchor="middle" class="sans name">{escape(h["name"])}</text>
-          {lines}
-          <rect x="{cap_x:.1f}" y="219" width="{cap_w:.1f}" height="34" rx="17" class="capsule"/>
-          <text x="{cap_x + 20:.1f}" y="241" class="mono prompt">&gt;</text>
-          {"".join(typed)}
-          <rect x="{x0:.1f}" y="229" width="{cw - 1}" height="16" rx="1" fill="{HERO["accent"]}">
-            {cursor}
-            <animate attributeName="opacity" values="1;0.15" dur="1s" calcMode="discrete" repeatCount="indefinite"/>
-          </rect>
-          {"".join(chips)}
-        </g>
-        <rect x="0.5" y="0.5" width="799" height="329" rx="16" fill="none" stroke="#ffffff" stroke-opacity="0.1"/>
+        <defs>{"".join(clips)}</defs>
+        <rect x="{EDGE + 0.5}" y="0.5" width="{800 - 2 * EDGE - 1}" height="295" rx="12" class="panel"/>
+        <text x="{PAD}" y="42" class="mono meta">{escape(h["role"].upper())}</text>
+        <text x="{800 - PAD}" y="42" text-anchor="end" class="mono meta">{escape(h["location"].upper())}</text>
+        <rect x="{PAD}" y="58" width="{800 - 2 * PAD}" height="1" fill="{t["border"]}"/>
+        <text x="{PAD - 4}" y="140" class="sans name">{escape(h["name"])}<tspan class="stop">.</tspan></text>
+        {lines}
+        <rect x="{PAD}" y="230" width="{800 - 2 * PAD}" height="1" fill="{t["border"]}"/>
+        <text x="{PAD}" y="{base}" class="mono prompt">&gt;</text>
+        {"".join(typed)}
+        <rect x="{x0:.1f}" y="{base - 12}" width="{cw - 1:.1f}" height="15" fill="{t["accent"]}">
+          {cursor}
+          <animate attributeName="opacity" values="1;0" dur="1s" calcMode="discrete" repeatCount="indefinite"/>
+        </rect>
+        <text x="{800 - PAD}" y="{base}" text-anchor="end" class="mono stack">{escape(stack)}</text>
     """
-    return svg(800, 330, css, body)
+    return svg(800, 296, css, body)
 
 
-def section_label(text, t):
-    defs, rule = section_rule(text, 24, t)
-    css = f'.label {{ font-size: 11px; fill: {t["muted"]}; letter-spacing: 3px; }}'
-    return svg(800, 36, css, f"<defs>{defs}</defs>\n{rule}")
+def section_label(number, text, t):
+    css, body = section_heading(number, text, 24, t)
+    return svg(800, 36, css, body)
 
 
-def project(p, t):
+def project(index, total, p, t):
     description = wrap(p["description"], 13, 316, 3, f'project "{p["name"]}" description')
     tags, x = [], 24
     for tag in p["tags"]:
@@ -275,35 +226,24 @@ def project(p, t):
         f'<text x="24" y="{92 + 20 * i}" class="sans desc">{escape(line)}</text>' for i, line in enumerate(description)
     )
     css = f"""
-        .card {{ fill: url(#wash); stroke: {t["border"]}; }}
-        .icon-box {{ fill: {t["accent"]}; fill-opacity: 0.12; stroke: {t["accent"]}; stroke-opacity: 0.4; }}
-        .icon {{ fill: none; stroke: {t["accent"]}; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }}
-        .float {{ animation: float 6s ease-in-out infinite; }}
-        @keyframes float {{ 50% {{ transform: translateY(-2px); }} }}
+        .card {{ fill: none; stroke: {t["border"]}; }}
+        .icon-box {{ fill: {t["surface"]}; stroke: {t["border"]}; }}
+        .icon {{ fill: none; stroke: {t["text"]}; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }}
         .title {{ font-size: 17px; font-weight: 600; fill: {t["text"]}; }}
-        .kind {{ font-size: 10px; fill: {t["accent"]}; letter-spacing: 1.5px; }}
+        .kind {{ font-size: 10px; fill: {t["accent"]}; letter-spacing: 1.5px; font-weight: 600; }}
+        .index {{ font-size: 10px; fill: {t["muted"]}; letter-spacing: 1px; }}
         .desc {{ font-size: 13px; fill: {t["muted"]}; }}
         .tag {{ font-size: 11px; fill: {t["muted"]}; }}
-        .arrow {{ fill: none; stroke: {t["accent"]}; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }}
+        .arrow {{ fill: none; stroke: {t["muted"]}; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }}
     """
     body = f"""
-        <defs>
-          <radialGradient id="wash" cx="0" cy="0" r="1">
-            <stop offset="0" stop-color="{t["accent"]}" stop-opacity="{t["wash"]}"/>
-            <stop offset="1" stop-color="{t["accent"]}" stop-opacity="0"/>
-          </radialGradient>
-          <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="{t["accent"]}"/>
-            <stop offset="1" stop-color="{t["accent2"]}"/>
-          </linearGradient>
-        </defs>
         <g transform="translate(8, 8)">
-          <rect x="0.5" y="0.5" width="383" height="179" rx="12" class="card"/>
-          <rect x="0" y="24" width="3" height="132" rx="1.5" fill="url(#edge)"/>
-          <rect x="24" y="24" width="32" height="32" rx="8" class="icon-box"/>
-          <path d="{ICONS[p["icon"]]}" class="icon float"/>
+          <rect x="0.5" y="0.5" width="383" height="179" rx="10" class="card"/>
+          <rect x="24" y="24" width="32" height="32" rx="6" class="icon-box"/>
+          <path d="{ICONS[p["icon"]]}" class="icon"/>
           <text x="72" y="39" class="sans title">{escape(p["name"])}</text>
           <text x="72" y="56" class="mono kind">{escape(p["kind"].upper())}</text>
+          <text x="360" y="36" text-anchor="end" class="mono index">{index:02d}/{total:02d}</text>
           {lines}
           {"".join(tags)}
           <path d="M350 158 L360 148 M352.5 148 H360 V155.5" class="arrow"/>
@@ -334,26 +274,17 @@ def experience(profile, t):
             f'<text x="{800 - PAD}" y="{y + 4}" text-anchor="end" class="mono date{" now" if current else ""}">'
             f'{escape(r["start"])} – {escape(r["end"])}</text>'
         )
-    defs, rule = section_rule("Experience", 28, t)
-    css = f"""
-        .label {{ font-size: 11px; fill: {t["muted"]}; letter-spacing: 3px; }}
+    heading_css, heading = section_heading(2, "Experience", 28, t)
+    css = heading_css + f"""
         .role {{ font-size: 15px; font-weight: 600; fill: {t["text"]}; }}
         .org {{ font-weight: 400; fill: {t["muted"]}; }}
         .date {{ font-size: 11px; fill: {t["muted"]}; }}
         .now {{ fill: {t["accent"]}; font-weight: 700; }}
-        .dot {{ fill: {t["surface"]}; stroke: {t["accent"]}; stroke-opacity: 0.55; stroke-width: 2; }}
+        .dot {{ fill: {t["surface"]}; stroke: {t["muted"]}; stroke-width: 2; }}
     """
     body = f"""
-        <defs>
-          {defs}
-          <linearGradient id="line" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="{t["accent"]}"/>
-            <stop offset="0.6" stop-color="{t["accent2"]}" stop-opacity="0.6"/>
-            <stop offset="1" stop-color="{t["border"]}"/>
-          </linearGradient>
-        </defs>
-        {rule}
-        <rect x="47" y="{top}" width="2" height="{bottom - top}" fill="url(#line)"/>
+        {heading}
+        <rect x="47" y="{top}" width="2" height="{bottom - top}" fill="{t["border"]}"/>
         {chr(10).join(rows)}
     """
     return svg(800, bottom + 28, css, body)
@@ -386,40 +317,21 @@ def telemetry(stats, t):
     )
     synced = stats.get("synced", "—")
     css = f"""
-        .panel {{ fill: url(#panel); }}
-        .label {{ font-size: 11px; fill: {t["accent"]}; letter-spacing: 3px; }}
-        .big {{ font-size: 60px; font-weight: 700; fill: url(#num); letter-spacing: -2px; }}
+        .panel {{ fill: {t["surface"]}; stroke: {t["border"]}; }}
+        .label {{ font-size: 11px; fill: {t["muted"]}; letter-spacing: 3px; }}
+        .big {{ font-size: 60px; font-weight: 800; fill: {t["text"]}; letter-spacing: -2px; }}
         .sub {{ font-size: 9px; fill: {t["muted"]}; letter-spacing: 2px; }}
-        .stat {{ font-size: 22px; font-weight: 600; fill: {t["text"]}; }}
+        .stat {{ font-size: 22px; font-weight: 700; fill: {t["text"]}; }}
         .lang {{ font-size: 9px; fill: {t["muted"]}; letter-spacing: 1px; }}
         .divider {{ stroke: {t["border"]}; }}
     """
     w = 800 - 2 * EDGE
     body = f"""
-        <defs>
-          <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="{t["panel"][0]}"/>
-            <stop offset="1" stop-color="{t["panel"][1]}"/>
-          </linearGradient>
-          <radialGradient id="glow" cx="0" cy="0" r="0.75">
-            <stop offset="0" stop-color="{t["accent"]}" stop-opacity="{t["wash"] * 1.4:.2f}"/>
-            <stop offset="1" stop-color="{t["accent"]}" stop-opacity="0"/>
-          </radialGradient>
-          <linearGradient id="stroke" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="{t["accent"]}" stop-opacity="0.6"/>
-            <stop offset="0.5" stop-color="{t["border"]}"/>
-            <stop offset="1" stop-color="{t["accent2"]}" stop-opacity="0.6"/>
-          </linearGradient>
-          <linearGradient id="num" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" stop-color="{t["accent"]}"/>
-            <stop offset="1" stop-color="{t["accent2"]}"/>
-          </linearGradient>
-          <clipPath id="bar"><rect width="218" height="6" rx="3"/></clipPath>
-        </defs>
+        <defs><clipPath id="bar"><rect width="218" height="6" rx="3"/></clipPath></defs>
         <g transform="translate({EDGE}, 10)">
           <rect x="0.5" y="0.5" width="{w - 1}" height="189" rx="12" class="panel"/>
-          <rect x="0.5" y="0.5" width="{w - 1}" height="189" rx="12" fill="url(#glow)" stroke="url(#stroke)"/>
-          <text x="24" y="38" class="mono label">TELEMETRY</text>
+          <rect x="24" y="30" width="8" height="8" fill="{t["accent"]}"/>
+          <text x="40" y="38" class="mono label">TELEMETRY</text>
           <text x="21" y="116" class="sans big">{num("contributions")}</text>
           <text x="24" y="142" class="mono sub">CONTRIBUTIONS · PAST YEAR</text>
           <line x1="270" y1="30" x2="270" y2="160" class="divider"/>
@@ -444,22 +356,15 @@ def button(link, t):
     lw, aw = mono_width(label, 10, 1), mono_width(action, 10, 1) + 24
     width = round(16 + lw + 12 + aw + 6)
     ax = width - 6 - aw
-    # The key uses the deep hero violet and blue in both themes so white text stays readable.
     css = f"""
         .outline {{ fill: none; stroke: {t["border"]}; }}
         .label {{ font-size: 10px; fill: {t["muted"]}; letter-spacing: 1px; font-weight: 500; }}
-        .action {{ font-size: 10px; fill: #ffffff; letter-spacing: 1px; font-weight: 700; }}
+        .action {{ font-size: 10px; fill: {t["on_accent"]}; letter-spacing: 1px; font-weight: 700; }}
     """
     body = f"""
-        <defs>
-          <linearGradient id="key" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="{HERO["blobs"][0]}"/>
-            <stop offset="1" stop-color="{HERO["blobs"][1]}"/>
-          </linearGradient>
-        </defs>
         <rect x="0.5" y="0.5" width="{width - 1}" height="39" rx="8" class="outline"/>
         <text x="16" y="24" class="mono label">{escape(label)}</text>
-        <rect x="{ax:.1f}" y="5" width="{aw:.1f}" height="30" rx="6" fill="url(#key)"/>
+        <rect x="{ax:.1f}" y="5" width="{aw:.1f}" height="30" rx="6" fill="{t["accent"]}"/>
         <text x="{ax + aw / 2 + 0.5:.1f}" y="24" text-anchor="middle" class="mono action">{escape(action)}</text>
     """
     return svg(width, 40, css, body)
@@ -480,7 +385,7 @@ def readme(profile):
     # Project cards go two per line, so the grid holds whether GitHub renders a
     # newline as a space or as <br>.
     h = profile["header"]
-    header_alt = f'{h["name"]}, {h["role"].replace(" · ", ", ")}. {h["tagline"]} Stack: {", ".join(h["stack"])}.'
+    header_alt = f'{h["name"]}, {h["role"].replace(" · ", ", ")}, {h["location"]}. {h["tagline"]} Stack: {", ".join(h["stack"])}.'
     projects = []
     for p in profile["projects"]:
         card = themed("project-%s.svg" % p["slug"], "%s (%s): %s" % (p["name"], p["kind"], p["description"]), 'width="49%"')
@@ -517,15 +422,16 @@ def readme(profile):
 def render(profile, stats):
     """Map of file name to SVG source, per theme."""
     out = {}
+    projects = profile["projects"]
     for theme, t in THEMES.items():
         files = {
-            "hero.svg": hero(profile),
+            "hero.svg": hero(profile, t),
             "telemetry.svg": telemetry(stats, t),
-            "label-work.svg": section_label("Selected work", t),
+            "label-work.svg": section_label(1, "Selected work", t),
             "experience.svg": experience(profile, t),
         }
-        for p in profile["projects"]:
-            files[f'project-{p["slug"]}.svg'] = project(p, t)
+        for i, p in enumerate(projects, 1):
+            files[f'project-{p["slug"]}.svg'] = project(i, len(projects), p, t)
         for link in profile["links"]:
             files[f'button-{link["slug"]}.svg'] = button(link, t)
         out[theme] = files
