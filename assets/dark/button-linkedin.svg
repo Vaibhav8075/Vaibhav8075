@@ -4,10 +4,10 @@
     .mono { font-family: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace; }
     .outline { fill: none; stroke: #30363d; }
     .label { font-size: 10px; fill: #8b949e; letter-spacing: 1px; font-weight: 500; }
-    .action { font-size: 10px; fill: #0d1117; letter-spacing: 1px; font-weight: 700; }
+    .action { font-size: 10px; fill: #ffffff; letter-spacing: 1px; font-weight: 700; }
   </style>
   <rect x="0.5" y="0.5" width="162" height="39" rx="8" class="outline"/>
   <text x="16" y="24" class="mono label">LINKEDIN</text>
-  <rect x="84.0" y="5" width="73.0" height="30" rx="6" fill="#f0883e"/>
+  <rect x="84.0" y="5" width="73.0" height="30" rx="6" fill="#1f6feb"/>
   <text x="121.0" y="24" text-anchor="middle" class="mono action">CONNECT</text>
 </svg>

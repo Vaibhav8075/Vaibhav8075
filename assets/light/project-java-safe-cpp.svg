@@ -6,7 +6,7 @@
     .icon-box { fill: #f6f8fa; stroke: #d1d9e0; }
     .icon { fill: none; stroke: #1f2328; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .title { font-size: 17px; font-weight: 600; fill: #1f2328; }
-    .kind { font-size: 10px; fill: #bc4c00; letter-spacing: 1.5px; font-weight: 600; }
+    .kind { font-size: 10px; fill: #59636e; letter-spacing: 1.5px; font-weight: 600; }
     .index { font-size: 10px; fill: #59636e; letter-spacing: 1px; }
     .desc { font-size: 13px; fill: #59636e; }
     .tag { font-size: 11px; fill: #59636e; }

@@ -3,7 +3,7 @@
     .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif; }
     .mono { font-family: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace; }
     .heading { font-size: 11px; fill: #8b949e; letter-spacing: 3px; }
-    .heading-num { fill: #f0883e; font-weight: 700; }
+    .heading-num { fill: #4493f8; font-weight: 700; }
   </style>
   <text x="38" y="24" class="mono heading heading-num">01</text>
   <text x="65.2" y="24" class="mono heading">SELECTED WORK</text>

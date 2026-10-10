@@ -17,27 +17,25 @@ RAW = f"https://raw.githubusercontent.com/{USER}/{USER}"
 SANS = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif"
 MONO = "ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace"
 
-# GitHub's dark and light palettes with one flat accent (Primer's orange).
+# GitHub's own dark and light palettes; the accent is Primer's link blue, used sparingly.
 # Everything is a solid colour: no gradients, glows or blurs.
 THEMES = {
     "dark": {
         "text": "#f0f6fc", "muted": "#8b949e", "border": "#30363d", "surface": "#161b22",
-        "accent": "#f0883e", "on_accent": "#0d1117", "live": "#3fb950",
+        "accent": "#4493f8", "accent_fill": "#1f6feb", "on_accent": "#ffffff", "live": "#3fb950",
     },
     "light": {
         "text": "#1f2328", "muted": "#59636e", "border": "#d1d9e0", "surface": "#f6f8fa",
-        "accent": "#bc4c00", "on_accent": "#ffffff", "live": "#1a7f37",
+        "accent": "#0969da", "accent_fill": "#0969da", "on_accent": "#ffffff", "live": "#1a7f37",
     },
 }
 
-# Linguist colours for languages, brand colours for frameworks.
+# GitHub's linguist colours for programming languages, as on its own repository cards.
+# Frameworks and tools get the neutral fallback.
 TECH_COLORS = {
     "python": "#3572a5", "typescript": "#3178c6", "javascript": "#f1e05a", "c++": "#f34b7d",
-    "c": "#555555", "java": "#b07219", "go": "#00add8", "rust": "#dea584", "jupyter notebook": "#da5b0b",
-    "tex": "#3d6117", "latex": "#3d6117", "html": "#e34c26", "css": "#663399", "cmake": "#da3434",
-    "react": "#61dafb", "fastapi": "#009688", "pytorch": "#ee4c2c", "tensorflow": "#ff6f00",
-    "onnx": "#4d8fd1", "postgresql": "#336791", "redis": "#dc382d", "scikit-learn": "#f7931e",
-    "vite": "#646cff", "docker": "#2496ed",
+    "c": "#555555", "java": "#b07219", "go": "#00add8", "rust": "#dea584",
+    "tex": "#3d6117", "latex": "#3d6117", "cmake": "#da3434",
 }
 
 # 32x32 line icons, drawn in a box whose top-left corner is (24, 24).
@@ -53,9 +51,6 @@ ICONS = {
 # Edges shared by all cards so they line up when stacked in the README.
 EDGE = 14   # x of a full-width panel's border
 PAD = 38    # x of full-width content; equals a project card's inner edge at 49% width
-
-# Typing line timing, in seconds.
-TYPE_STEP, HOLD, ERASE_STEP, GAP = 0.07, 1.8, 0.03, 0.5
 
 
 def color(tech):
@@ -129,80 +124,46 @@ def section_heading(number, text, y, t):
     return css, body
 
 
-def typing_timeline(phrases):
-    """Discrete (time, phrase, characters shown) frames for a type, hold, erase loop."""
-    frames, t = [], 0.0
-    for i, phrase in enumerate(phrases):
-        for n in range(len(phrase) + 1):
-            frames.append((t, i, n))
-            t += TYPE_STEP
-        t += HOLD - TYPE_STEP
-        for n in range(len(phrase) - 1, -1, -1):
-            frames.append((t, i, n))
-            t += ERASE_STEP
-        t += GAP - ERASE_STEP
-    return frames, t
-
-
 def hero(profile, t):
     h = profile["header"]
     tagline = wrap(h["tagline"], 16, 620, 2, "header.tagline")
 
-    # Typing line. Each phrase is pinned to an exact monospace width with textLength, so
-    # a clip that grows one character cell per frame reveals it a letter at a time.
-    cw, base, phrases = 8.4, 262, h["typing"]
-    x0 = PAD + 2 * cw
-    frames, total = typing_timeline(phrases)
-    key_times = ";".join(f"{ft / total:.5f}" for ft, _, _ in frames)
-
-    def discrete(attr, values):
-        return (
-            f'<animate attributeName="{attr}" dur="{total:.2f}s" repeatCount="indefinite" calcMode="discrete" '
-            f'keyTimes="{key_times}" values="{";".join(values)}"/>'
-        )
-
-    clips, typed = [], []
-    for i, phrase in enumerate(phrases):
-        widths = [f"{n * cw:.1f}" if p == i else "0" for _, p, n in frames]
-        clips.append(f'<clipPath id="type{i}"><rect x="{x0:.1f}" y="{base - 15}" width="0" height="20">{discrete("width", widths)}</rect></clipPath>')
-        typed.append(
-            f'<text x="{x0:.1f}" y="{base}" textLength="{len(phrase) * cw:.1f}" lengthAdjust="spacing" '
-            f'clip-path="url(#type{i})" class="mono typed">{escape(phrase)}</text>'
-        )
-    cursor = discrete("x", [f"{x0 + n * cw:.1f}" for _, _, n in frames])
-
+    # Bottom row: the current role (the experience entry ending "Present") and the stack.
+    base = 262
+    current = next((r for r in profile["experience"] if r["end"].lower() == "present"), None)
+    now_label = "CURRENTLY"
+    now_x = PAD + mono_width(now_label, 11, 2) + 12
+    now_text = f'{current["role"]} at {current["org"]}' if current else ""
     stack = " · ".join(s.upper() for s in h["stack"])
-    if x0 + (max(map(len, phrases)) + 1) * cw + 24 > 800 - PAD - mono_width(stack, 11, 0.5):
-        raise SystemExit("header.typing or header.stack is too long to share the hero's bottom row; shorten one.")
+    if now_x + text_width(now_text, 14) + 24 > 800 - PAD - mono_width(stack, 11, 0.5):
+        raise SystemExit("The current role and header.stack are too long to share the hero's bottom row; shorten one.")
 
     css = f"""
         .panel {{ fill: {t["surface"]}; stroke: {t["border"]}; }}
         .meta {{ font-size: 11px; fill: {t["muted"]}; letter-spacing: 2px; }}
         .name {{ font-size: 76px; font-weight: 800; fill: {t["text"]}; letter-spacing: -2.5px; }}
-        .stop {{ fill: {t["accent"]}; }}
         .tagline {{ font-size: 16px; fill: {t["muted"]}; }}
-        .typed {{ font-size: 14px; fill: {t["text"]}; }}
-        .prompt {{ font-size: 14px; fill: {t["accent"]}; font-weight: 700; }}
+        .now-label {{ font-size: 11px; fill: {t["accent"]}; letter-spacing: 2px; font-weight: 700; }}
+        .now {{ font-size: 14px; fill: {t["text"]}; font-weight: 600; }}
         .stack {{ font-size: 11px; fill: {t["muted"]}; letter-spacing: 0.5px; }}
     """
     lines = "\n".join(
         f'<text x="{PAD}" y="{180 + 22 * i}" class="sans tagline">{escape(line)}</text>' for i, line in enumerate(tagline)
     )
+    now = (
+        f'<text x="{PAD}" y="{base}" class="mono now-label">{now_label}</text>\n'
+        f'<text x="{now_x:.1f}" y="{base}" class="sans now">{escape(now_text)}</text>'
+        if current else ""
+    )
     body = f"""
-        <defs>{"".join(clips)}</defs>
         <rect x="{EDGE + 0.5}" y="0.5" width="{800 - 2 * EDGE - 1}" height="295" rx="12" class="panel"/>
         <text x="{PAD}" y="42" class="mono meta">{escape(h["role"].upper())}</text>
         <text x="{800 - PAD}" y="42" text-anchor="end" class="mono meta">{escape(h["location"].upper())}</text>
         <rect x="{PAD}" y="58" width="{800 - 2 * PAD}" height="1" fill="{t["border"]}"/>
-        <text x="{PAD - 4}" y="140" class="sans name">{escape(h["name"])}<tspan class="stop">.</tspan></text>
+        <text x="{PAD - 4}" y="140" class="sans name">{escape(h["name"])}</text>
         {lines}
         <rect x="{PAD}" y="230" width="{800 - 2 * PAD}" height="1" fill="{t["border"]}"/>
-        <text x="{PAD}" y="{base}" class="mono prompt">&gt;</text>
-        {"".join(typed)}
-        <rect x="{x0:.1f}" y="{base - 12}" width="{cw - 1:.1f}" height="15" fill="{t["accent"]}">
-          {cursor}
-          <animate attributeName="opacity" values="1;0" dur="1s" calcMode="discrete" repeatCount="indefinite"/>
-        </rect>
+        {now}
         <text x="{800 - PAD}" y="{base}" text-anchor="end" class="mono stack">{escape(stack)}</text>
     """
     return svg(800, 296, css, body)
@@ -230,7 +191,7 @@ def project(index, total, p, t):
         .icon-box {{ fill: {t["surface"]}; stroke: {t["border"]}; }}
         .icon {{ fill: none; stroke: {t["text"]}; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }}
         .title {{ font-size: 17px; font-weight: 600; fill: {t["text"]}; }}
-        .kind {{ font-size: 10px; fill: {t["accent"]}; letter-spacing: 1.5px; font-weight: 600; }}
+        .kind {{ font-size: 10px; fill: {t["muted"]}; letter-spacing: 1.5px; font-weight: 600; }}
         .index {{ font-size: 10px; fill: {t["muted"]}; letter-spacing: 1px; }}
         .desc {{ font-size: 13px; fill: {t["muted"]}; }}
         .tag {{ font-size: 11px; fill: {t["muted"]}; }}
@@ -260,14 +221,8 @@ def experience(profile, t):
     for i, r in enumerate(roles):
         y = top + i * step
         current = r["end"].lower() == "present"
-        dot = (
-            f'<circle cx="48" cy="{y}" r="6" fill="{t["accent"]}"/>'
-            f'<circle cx="48" cy="{y}" r="6" fill="none" stroke="{t["accent"]}" stroke-width="1.5">'
-            f'<animate attributeName="r" values="6;13" dur="2.4s" repeatCount="indefinite"/>'
-            f'<animate attributeName="opacity" values="0.8;0" dur="2.4s" repeatCount="indefinite"/></circle>'
-            if current
-            else f'<circle cx="48" cy="{y}" r="5" class="dot"/>'
-        )
+        dot = (f'<circle cx="48" cy="{y}" r="6" fill="{t["accent"]}"/>' if current
+               else f'<circle cx="48" cy="{y}" r="5" class="dot"/>')
         rows.append(
             f'{dot}\n'
             f'<text x="74" y="{y + 5}" class="sans role">{escape(r["role"])}<tspan class="org"> at {escape(r["org"])}</tspan></text>\n'
@@ -331,7 +286,7 @@ def telemetry(stats, t):
         <g transform="translate({EDGE}, 10)">
           <rect x="0.5" y="0.5" width="{w - 1}" height="189" rx="12" class="panel"/>
           <rect x="24" y="30" width="8" height="8" fill="{t["accent"]}"/>
-          <text x="40" y="38" class="mono label">TELEMETRY</text>
+          <text x="40" y="38" class="mono label">GITHUB ACTIVITY</text>
           <text x="21" y="116" class="sans big">{num("contributions")}</text>
           <text x="24" y="142" class="mono sub">CONTRIBUTIONS · PAST YEAR</text>
           <line x1="270" y1="30" x2="270" y2="160" class="divider"/>
@@ -364,7 +319,7 @@ def button(link, t):
     body = f"""
         <rect x="0.5" y="0.5" width="{width - 1}" height="39" rx="8" class="outline"/>
         <text x="16" y="24" class="mono label">{escape(label)}</text>
-        <rect x="{ax:.1f}" y="5" width="{aw:.1f}" height="30" rx="6" fill="{t["accent"]}"/>
+        <rect x="{ax:.1f}" y="5" width="{aw:.1f}" height="30" rx="6" fill="{t["accent_fill"]}"/>
         <text x="{ax + aw / 2 + 0.5:.1f}" y="24" text-anchor="middle" class="mono action">{escape(action)}</text>
     """
     return svg(width, 40, css, body)
@@ -395,14 +350,13 @@ def readme(profile):
         button = themed("button-%s.svg" % link["slug"], link["label"], 'height="40"')
         buttons.append(f'<a href="{link["url"]}">{button}</a>')
     roles = "; ".join("%s at %s, %s – %s" % (r["role"], r["org"], r["start"], r["end"]) for r in profile["experience"])
-    snake = f"{RAW}/output/github-contribution-grid-snake"
     return f"""\
 <!-- Generated by scripts/build.py from data/profile.json. Edit that file instead: changes made here are overwritten. -->
 <div align="center">
 
 {themed("hero.svg", header_alt, 'width="100%"')}
 
-{themed("telemetry.svg", "GitHub telemetry: contributions in the past year, stars, repositories, followers and language mix.", 'width="100%"')}
+{themed("telemetry.svg", "GitHub activity: contributions in the past year, stars, repositories, followers and language mix.", 'width="100%"')}
 
 {themed("label-work.svg", "Selected work", 'width="100%"')}
 {chr(10).join(" ".join(projects[i:i + 2]) for i in range(0, len(projects), 2))}
@@ -412,8 +366,6 @@ def readme(profile):
 {"&nbsp;&nbsp;".join(buttons)}
 
 <code>{escape(h["motto"])}</code>
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="{snake}-dark.svg"><source media="(prefers-color-scheme: light)" srcset="{snake}.svg"><img src="{snake}.svg" width="100%" alt="Contribution graph being eaten by a snake"></picture>
 
 </div>
 """

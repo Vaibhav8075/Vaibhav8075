@@ -6,7 +6,7 @@
     .icon-box { fill: #f6f8fa; stroke: #d1d9e0; }
     .icon { fill: none; stroke: #1f2328; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .title { font-size: 17px; font-weight: 600; fill: #1f2328; }
-    .kind { font-size: 10px; fill: #bc4c00; letter-spacing: 1.5px; font-weight: 600; }
+    .kind { font-size: 10px; fill: #59636e; letter-spacing: 1.5px; font-weight: 600; }
     .index { font-size: 10px; fill: #59636e; letter-spacing: 1px; }
     .desc { font-size: 13px; fill: #59636e; }
     .tag { font-size: 11px; fill: #59636e; }
@@ -22,7 +22,7 @@
   <text x="24" y="92" class="sans desc">ESP32-S3 sensor fusion and a Random Forest</text>
   <text x="24" y="112" class="sans desc">(94.9% test accuracy, 367k real readings) built to cut</text>
   <text x="24" y="132" class="sans desc">false fire alarms, with a live digital twin.</text>
-  <circle cx="28" cy="152" r="4" fill="#f34b7d"/><text x="38" y="156" class="mono tag">C++</text><circle cx="80" cy="152" r="4" fill="#3572a5"/><text x="90" y="156" class="mono tag">Python</text><circle cx="152" cy="152" r="4" fill="#f7931e"/><text x="162" y="156" class="mono tag">scikit-learn</text>
+  <circle cx="28" cy="152" r="4" fill="#f34b7d"/><text x="38" y="156" class="mono tag">C++</text><circle cx="80" cy="152" r="4" fill="#3572a5"/><text x="90" y="156" class="mono tag">Python</text><circle cx="152" cy="152" r="4" fill="#8b949e"/><text x="162" y="156" class="mono tag">scikit-learn</text>
   <path d="M350 158 L360 148 M352.5 148 H360 V155.5" class="arrow"/>
   </g>
 </svg>
