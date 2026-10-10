@@ -18,11 +18,11 @@
   <path d="M31 37 V43 M35.5 33 V47 M40 30 V50 M44.5 34 V46 M49 37 V43" class="icon"/>
   <text x="72" y="39" class="sans title">Audict</text>
   <text x="72" y="56" class="mono kind">FULL-STACK AI</text>
-  <text x="360" y="36" text-anchor="end" class="mono index">04/06</text>
+  <text x="360" y="36" text-anchor="end" class="mono index">05/05</text>
   <text x="24" y="92" class="sans desc">Call-audit platform for QA teams: Whisper transcripts</text>
   <text x="24" y="112" class="sans desc">and Llama 3.3 scoring via Groq, with JWT-protected</text>
   <text x="24" y="132" class="sans desc">audio streaming.</text>
-  <circle cx="28" cy="152" r="4" fill="#8b949e"/><text x="38" y="156" class="mono tag">FastAPI</text><circle cx="106" cy="152" r="4" fill="#8b949e"/><text x="116" y="156" class="mono tag">React</text><circle cx="171" cy="152" r="4" fill="#8b949e"/><text x="181" y="156" class="mono tag">PostgreSQL</text>
+  <circle cx="28" cy="152" r="4" fill="#3572a5"/><text x="38" y="156" class="mono tag">Python</text><circle cx="100" cy="152" r="4" fill="#f1e05a"/><text x="110" y="156" class="mono tag">JavaScript</text><circle cx="198" cy="152" r="4" fill="#8b949e"/><text x="208" y="156" class="mono tag">FastAPI</text>
   <path d="M350 158 L360 148 M352.5 148 H360 V155.5" class="arrow"/>
   </g>
 </svg>

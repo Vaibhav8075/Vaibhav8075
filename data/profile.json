@@ -9,49 +9,22 @@
   },
   "projects": [
     {
-      "slug": "agentic-ledger",
-      "name": "Agentic Ledger",
-      "kind": "AI agents · Fintech",
-      "url": "https://github.com/Vaibhav8075/Agentic-Ledger",
-      "icon": "trend",
-      "description": "Four Phinite OS agents for small merchants: catch spoofed payments in under 200 ms and approve micro-loans from an LSTM revenue forecast.",
-      "tags": ["Python", "PyTorch", "FastAPI"]
-    },
-    {
       "slug": "pac-1dcnn",
       "name": "Physics-Augmented 1D-CNN",
       "kind": "ML research",
       "url": "https://github.com/Vaibhav8075/-Physics-Augmented-1D-CNN",
       "icon": "wave",
       "description": "Leakage-controlled benchmark of 1D-CNN bearing-fault classifiers on CWRU and Paderborn. The protocol, not the architecture, decides the score.",
-      "tags": ["PyTorch", "ONNX", "LaTeX"]
+      "tags": ["Python", "PyTorch", "LaTeX"]
     },
     {
-      "slug": "java-safe-cpp",
-      "name": "Java-Safe C++",
-      "kind": "Compilers",
-      "url": "https://github.com/Vaibhav8075/Compiler",
-      "icon": "code",
-      "description": "From-scratch compiler and stack VM for a memory-safe C++ subset, with null, bounds and refcount checks injected into the bytecode.",
-      "tags": ["C++", "CMake"]
-    },
-    {
-      "slug": "audict",
-      "name": "Audict",
-      "kind": "Full-stack AI",
-      "url": "https://github.com/Vaibhav8075/Audict-audio-Technology",
-      "icon": "audio",
-      "description": "Call-audit platform for QA teams: Whisper transcripts and Llama 3.3 scoring via Groq, with JWT-protected audio streaming.",
-      "tags": ["FastAPI", "React", "PostgreSQL"]
-    },
-    {
-      "slug": "little-world",
-      "name": "Little World",
-      "kind": "Local-first web app",
-      "url": "https://github.com/Vaibhav8075/little-world",
-      "icon": "photo",
-      "description": "A private photo journal for two. Offline-first on IndexedDB and synced between devices through a Google Drive you own.",
-      "tags": ["TypeScript", "React", "Vite"]
+      "slug": "semantic-segmentation",
+      "name": "Semantic Segmentation",
+      "kind": "Computer vision",
+      "url": "https://github.com/Vaibhav8075/Semantic-Segmentation-for-Autonomous-Driving-",
+      "icon": "road",
+      "description": "Cityscapes road scenes labelled pixel by pixel into 7 classes, with U-Net, ResNet50-UNet, DeepLabV3+ and SegFormer built in PyTorch.",
+      "tags": ["Python", "PyTorch", "ONNX"]
     },
     {
       "slug": "iot-fire-detection",
@@ -61,6 +34,24 @@
       "icon": "signal",
       "description": "ESP32-S3 sensor fusion and a Random Forest (94.9% test accuracy, 367k real readings) built to cut false fire alarms, with a live digital twin.",
       "tags": ["C++", "Python", "scikit-learn"]
+    },
+    {
+      "slug": "agentic-ledger",
+      "name": "Agentic Ledger",
+      "kind": "AI agents · Fintech",
+      "url": "https://github.com/Vaibhav8075/Agentic-Ledger",
+      "icon": "trend",
+      "description": "Four Phinite OS agents for small merchants: catch spoofed payments in under 200 ms and approve micro-loans from an LSTM revenue forecast.",
+      "tags": ["Python", "PyTorch", "FastAPI"]
+    },
+    {
+      "slug": "audict",
+      "name": "Audict",
+      "kind": "Full-stack AI",
+      "url": "https://github.com/Vaibhav8075/Audict-audio-Technology",
+      "icon": "audio",
+      "description": "Call-audit platform for QA teams: Whisper transcripts and Llama 3.3 scoring via Groq, with JWT-protected audio streaming.",
+      "tags": ["Python", "JavaScript", "FastAPI"]
     }
   ],
   "experience": [

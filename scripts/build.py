@@ -46,6 +46,7 @@ ICONS = {
     "audio": "M31 37 V43 M35.5 33 V47 M40 30 V50 M44.5 34 V46 M49 37 V43",
     "photo": "M30 31 H50 V49 H30 Z M30 46 L37 39 L42 44 L45 41 L50 46",
     "signal": "M30 38 A 12 12 0 0 1 50 38 M34 42 A 7 7 0 0 1 46 42",
+    "road": "M30 49 L37 31 M50 49 L43 31 M40 49 V45 M40 41 V38 M40 35 V33",
 }
 
 # Edges shared by all cards so they line up when stacked in the README.
