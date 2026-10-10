@@ -2,20 +2,31 @@
   <style>
     .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif; }
     .mono { font-family: ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace; }
-    .card { fill: none; stroke: #d1d9e0; }
-    .icon-box { fill: #f6f8fa; stroke: #d1d9e0; }
-    .icon { fill: none; stroke: #1f2328; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .card { fill: url(#wash); stroke: #d1d9e0; }
+    .icon-box { fill: #7c3aed; fill-opacity: 0.12; stroke: #7c3aed; stroke-opacity: 0.4; }
+    .icon { fill: none; stroke: #7c3aed; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .float { animation: float 6s ease-in-out infinite; }
     @keyframes float { 50% { transform: translateY(-2px); } }
     .title { font-size: 17px; font-weight: 600; fill: #1f2328; }
-    .kind { font-size: 10px; fill: #59636e; letter-spacing: 1.5px; }
+    .kind { font-size: 10px; fill: #7c3aed; letter-spacing: 1.5px; }
     .desc { font-size: 13px; fill: #59636e; }
     .tag { font-size: 11px; fill: #59636e; }
-    .arrow { fill: none; stroke: #59636e; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .arrow { fill: none; stroke: #7c3aed; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
   </style>
+  <defs>
+  <radialGradient id="wash" cx="0" cy="0" r="1">
+  <stop offset="0" stop-color="#7c3aed" stop-opacity="0.07"/>
+  <stop offset="1" stop-color="#7c3aed" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="edge" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#7c3aed"/>
+  <stop offset="1" stop-color="#2563eb"/>
+  </linearGradient>
+  </defs>
   <g transform="translate(8, 8)">
   <rect x="0.5" y="0.5" width="383" height="179" rx="12" class="card"/>
-  <rect x="24" y="24" width="32" height="32" rx="6" class="icon-box"/>
+  <rect x="0" y="24" width="3" height="132" rx="1.5" fill="url(#edge)"/>
+  <rect x="24" y="24" width="32" height="32" rx="8" class="icon-box"/>
   <path d="M31 37 V43 M35.5 33 V47 M40 30 V50 M44.5 34 V46 M49 37 V43" class="icon float"/>
   <text x="72" y="39" class="sans title">Audict</text>
   <text x="72" y="56" class="mono kind">FULL-STACK AI</text>
