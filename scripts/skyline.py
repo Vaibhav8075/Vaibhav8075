@@ -6,6 +6,9 @@ soft shadow, so it sits on GitHub's page colour; one render per README theme.
     blender -b -P scripts/skyline.py -- --theme dark  --out assets/dark/skyline.png
     blender -b -P scripts/skyline.py -- --theme light --out assets/light/skyline.png
 
+With --frames N it renders the skyline growing instead (frames in build/skyline-<theme>/), which
+scripts/animate.py turns into the animated assets/<theme>/skyline.webp.
+
 Bar height grows with the square root of the day's count, so one very busy day does not flatten
 the rest. Each bar takes the colour of its day's activity level (0-4) in GitHub's own contribution
 calendar, and days without contributions are low tiles, which keeps the 7 x 53 grid readable.
@@ -37,6 +40,7 @@ BAR = 0.8           # bar footprint
 TILE_H = 0.12       # height of a day without contributions
 BASE_H, SCALE_H = 0.35, 0.9   # active day: BASE_H + SCALE_H * sqrt(count)
 PLINTH_H, PLINTH_FLARE, MARGIN = 2.2, 1.6, 1.2
+GROW_SPREAD = 0.55  # animation: share of the run over which the weeks start rising, left to right
 FONT = "C:/Windows/Fonts/seguisb.ttf"   # Segoe UI Semibold if present, else Blender's built-in font
 
 
@@ -98,6 +102,35 @@ def text(body, size, x, align, mat, slope):
     return obj
 
 
+def ease(p):
+    """Ease-out cubic on [0, 1]: fast rise, gentle landing."""
+    p = min(max(p, 0.0), 1.0)
+    return 1 - (1 - p) ** 3
+
+
+def bar_specs(days, weeks, first):
+    """(x, y, full height, material index, week) for every day of the calendar."""
+    specs = []
+    offset = (first.weekday() + 1) % 7   # Python: Monday=0; calendar rows start on Sunday
+    for i, day in enumerate(days):
+        week, row = divmod(i + offset, 7)
+        count = day["count"]
+        height = TILE_H if count == 0 else BASE_H + SCALE_H * math.sqrt(count)
+        index = 0 if count == 0 else max(1, min(4, day["level"]))
+        specs.append(((week + 0.5) * CELL - weeks * CELL / 2, (3 - row) * CELL, height, index, week))
+    return specs
+
+
+def bars_mesh(specs, weeks, progress):
+    """Bars at growth progress 0..1: the year rises from left to right, empty days stay tiles."""
+    bm = bmesh.new()
+    for cx, cy, height, index, week in specs:
+        grown = ease((progress - week / weeks * GROW_SPREAD) / (1 - GROW_SPREAD))
+        h = TILE_H + (height - TILE_H) * grown
+        add_box(bm, cx - BAR / 2, cx + BAR / 2, cy - BAR / 2, cy + BAR / 2, 0.0, h, index)
+    return bm
+
+
 def build(days, theme):
     t = THEMES[theme]
     first = datetime.date.fromisoformat(days[0]["date"])
@@ -106,17 +139,8 @@ def build(days, theme):
     mats = [material(f"level{i}", c) for i, c in enumerate(t["levels"])]
 
     # Bars: week along x, weekday along y (Sunday at the back, as on GitHub's calendar).
-    bm = bmesh.new()
-    offset = (first.weekday() + 1) % 7   # Python: Monday=0; calendar rows start on Sunday
-    for i, day in enumerate(days):
-        week, row = divmod(i + offset, 7)
-        cx = (week + 0.5) * CELL - weeks * CELL / 2
-        cy = (3 - row) * CELL
-        count = day["count"]
-        height = TILE_H if count == 0 else BASE_H + SCALE_H * math.sqrt(count)
-        index = 0 if count == 0 else max(1, min(4, day["level"]))
-        add_box(bm, cx - BAR / 2, cx + BAR / 2, cy - BAR / 2, cy + BAR / 2, 0.0, height, index)
-    mesh_object("bars", bm, mats, 0.03)
+    specs = bar_specs(days, weeks, first)
+    bars = mesh_object("bars", bars_mesh(specs, weeks, 1.0), mats, 0.03)
 
     # Plinth: a frustum whose sides flare out towards the floor.
     bm = bmesh.new()
@@ -137,7 +161,7 @@ def build(days, theme):
     last = datetime.date.fromisoformat(days[-1]["date"])
     text(f"@{USER}", 1.35, -half_w + 1.2, "LEFT", label, slope)
     text(f"{first:%b %Y} – {last:%b %Y}", 1.35, half_w - 1.2, "RIGHT", label, slope)
-    return half_w, half_d
+    return half_w, half_d, bars, lambda progress: bars_mesh(specs, weeks, progress)
 
 
 def stage(half_w, half_d, resolution, samples):
@@ -212,19 +236,35 @@ def main():
     argv = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
     parser = argparse.ArgumentParser()
     parser.add_argument("--theme", choices=THEMES, default="dark")
-    parser.add_argument("--out", required=True)
+    parser.add_argument("--out", help="still image path (the finished skyline)")
+    parser.add_argument("--frames", type=int, default=0,
+                        help="render this many growth frames to build/skyline-<theme>/ instead of a still")
     parser.add_argument("--samples", type=int, default=192)
     parser.add_argument("--res", default="1800x420")
     args = parser.parse_args(argv)
+    if not args.out and not args.frames:
+        parser.error("give --out for a still or --frames for an animation")
 
     with open(os.path.join(ROOT, "data", "contributions.json"), encoding="utf-8") as fh:
         days = json.load(fh)["days"]
     bpy.ops.wm.read_factory_settings(use_empty=True)
-    half_w, half_d = build(days, args.theme)
+    half_w, half_d, bars, grow = build(days, args.theme)
     stage(half_w, half_d, tuple(int(v) for v in args.res.split("x")), args.samples)
-    bpy.context.scene.render.filepath = os.path.abspath(os.path.join(ROOT, args.out))
-    bpy.ops.render.render(write_still=True)
-    print(f"Saved {bpy.context.scene.render.filepath}")
+    scene = bpy.context.scene
+    if not args.frames:
+        scene.render.filepath = os.path.abspath(os.path.join(ROOT, args.out))
+        bpy.ops.render.render(write_still=True)
+        print(f"Saved {scene.render.filepath}")
+        return
+    out_dir = os.path.join(ROOT, "build", f"skyline-{args.theme}")
+    os.makedirs(out_dir, exist_ok=True)
+    for f in range(args.frames):
+        bm = grow(f / (args.frames - 1))
+        bm.to_mesh(bars.data)
+        bm.free()
+        scene.render.filepath = os.path.join(out_dir, f"{f:04d}.png")
+        bpy.ops.render.render(write_still=True)
+    print(f"Saved {args.frames} frames to {out_dir}")
 
 
 if __name__ == "__main__":

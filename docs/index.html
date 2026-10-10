@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vaibhav Goel · GitHub in 3D</title>
+<meta name="description" content="Vaibhav Goel's GitHub contributions and repositories in 3D: hover a bar or building to grow it, drag to rotate.">
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1f2328; --muted: #59636e; --border: #d1d9e0; --surface: #f6f8fa;
+    --panel: #ffffff; --accent: #0969da;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0d1117; --fg: #f0f6fc; --muted: #8b949e; --border: #30363d; --surface: #161b22;
+            --panel: #0d1117; --accent: #4493f8; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.5 var(--sans); }
+  main { max-width: 1100px; margin: 0 auto; padding: 32px 16px 48px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  header { margin-bottom: 28px; }
+  header .back { font: 13px var(--mono); }
+  h1 { font-size: clamp(28px, 6vw, 44px); font-weight: 800; letter-spacing: -1px; margin: 8px 0 4px; }
+  header p { color: var(--muted); margin: 0; max-width: 640px; }
+  section { margin-top: 36px; }
+  .heading { display: flex; align-items: baseline; gap: 10px; font: 11px var(--mono); letter-spacing: 3px;
+             text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+  .heading b { color: var(--accent); }
+  .hint { color: var(--muted); font-size: 13px; margin: 0 0 10px; }
+  .stage { position: relative; height: 340px; border: 1px solid var(--border); border-radius: 12px;
+           background: var(--surface); overflow: hidden; }
+  #city .stage { height: 620px; }
+  .stage canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+  .stage canvas.pointing { cursor: pointer; }
+  .tip, .tag { position: absolute; left: 0; top: 0; pointer-events: none; white-space: nowrap;
+               background: var(--panel); border: 1px solid var(--border); }
+  .tip { padding: 6px 10px; border-radius: 6px; font-size: 13px; opacity: 0; transition: opacity .12s;
+         box-shadow: 0 4px 16px rgba(0,0,0,.18); z-index: 2; }
+  .tip b { display: block; }
+  .tip span { color: var(--muted); }
+  .tag { padding: 1px 8px; border-radius: 999px; font: 600 12px var(--sans); }
+  .tag span { color: var(--muted); font-weight: 400; margin-left: 4px; }
+  .tag.on { border-color: var(--accent); }
+  .fallback { padding: 24px; color: var(--muted); }
+  footer { margin-top: 32px; color: var(--muted); font-size: 13px; }
+  @media (max-width: 640px) { .stage { height: 260px; } #city .stage { height: 440px; } }
+</style>
+<script type="importmap">
+  { "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  } }
+</script>
+</head>
+<body>
+<main>
+  <header>
+    <a class="back" href="https://github.com/Vaibhav8075">← github.com/Vaibhav8075</a>
+    <h1>GitHub in 3D</h1>
+    <p>Built from my public GitHub data. Hover a bar or a building to grow it, drag to turn the scene, click to open what it stands for.</p>
+  </header>
+
+  <section id="skyline">
+    <div class="heading"><b>01</b> Contribution skyline</div>
+    <p class="hint">One bar per day of the past year, coloured like GitHub's calendar. Click a bar to see that day's activity.</p>
+    <div class="stage"><div class="tip"></div></div>
+  </section>
+
+  <section id="city">
+    <div class="heading"><b>02</b> Repo city</div>
+    <p class="hint">One building per public repository: taller means more commits, greener roofs mean busier repositories. Click a building to open it.</p>
+    <div class="stage"><div class="tip"></div></div>
+  </section>
+
+  <footer id="synced"></footer>
+</main>
+
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+const USER = "Vaibhav8075";
+// Same solid colours as the README renders (scripts/skyline.py, scripts/repo_city.py).
+const PALETTES = {
+  dark: { plinth: 0x1c2128, plot: 0x2d333b, facade: 0x57606a, window: 0x22272e,
+          levels: [0x161b22, 0x0e4429, 0x006d32, 0x26a641, 0x39d353] },
+  light: { plinth: 0xbfc7d0, plot: 0xe6eaef, facade: 0xd8dee4, window: 0x8c959f,
+           levels: [0xebedf0, 0x9be9a8, 0x40c463, 0x30a14e, 0x216e39] },
+};
+const darkQuery = matchMedia("(prefers-color-scheme: dark)");
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const palette = () => PALETTES[darkQuery.matches ? "dark" : "light"];
+const ease = p => 1 - Math.pow(1 - Math.min(Math.max(p, 0), 1), 3);
+
+// ---------------------------------------------------------------- shared stage
+function stage(section, { fov, direction, target, width, height, margin }) {
+  const el = section.querySelector(".stage"), tip = el.querySelector(".tip");
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  el.prepend(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x8c959f, 1.6));
+  const sun = new THREE.DirectionalLight(0xffffff, 2.4);
+  sun.position.set(-40, 70, 45);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(2048, 2048);
+  Object.assign(sun.shadow.camera, { left: -60, right: 60, top: 60, bottom: -60, near: 1, far: 200 });
+  sun.shadow.bias = -0.0005;
+  scene.add(sun);
+
+  const camera = new THREE.PerspectiveCamera(fov, 1, 0.1, 2000);
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.enablePan = false;
+  controls.maxPolarAngle = Math.PI * 0.47;
+  controls.target.set(...target);
+  const dir = new THREE.Vector3(...direction).normalize();
+
+  function fit() {
+    const w = el.clientWidth, h = el.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    // Distance at which the scene's width and height both fit, whatever the stage's aspect ratio.
+    const vfov = THREE.MathUtils.degToRad(fov);
+    const hfov = 2 * Math.atan(Math.tan(vfov / 2) * camera.aspect);
+    const d = Math.max((width / 2) / Math.tan(hfov / 2), (height / 2) / Math.tan(vfov / 2)) * margin;
+    camera.position.copy(controls.target).addScaledVector(dir, d);
+    controls.minDistance = d * 0.45;
+    controls.maxDistance = d * 1.6;
+    camera.updateProjectionMatrix();
+  }
+  new ResizeObserver(fit).observe(el);
+
+  // Hover and click; a press that moves more than a few pixels is a drag, not a click.
+  const ray = new THREE.Raycaster(), pointer = new THREE.Vector2(), pickables = [];
+  let hovered = null, pressed = null;
+  const pick = e => {
+    const r = renderer.domElement.getBoundingClientRect();
+    pointer.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1);
+    ray.setFromCamera(pointer, camera);
+    const hit = ray.intersectObjects(pickables, true)[0];
+    let o = hit && hit.object;
+    while (o && !o.userData.item) o = o.parent;
+    return { item: o, x: e.clientX - r.left, y: e.clientY - r.top };
+  };
+  const api = { scene, camera, el, pickables, onHover: null, onClick: null, onFrame: null };
+  renderer.domElement.addEventListener("pointermove", e => {
+    const { item, x, y } = pick(e);
+    if (item !== hovered) {
+      hovered = item;
+      api.onHover && api.onHover(item);
+    }
+    renderer.domElement.classList.toggle("pointing", !!item);
+    if (item) {
+      tip.innerHTML = item.userData.tip;
+      const left = Math.min(Math.max(x, tip.offsetWidth / 2 + 6), el.clientWidth - tip.offsetWidth / 2 - 6);
+      // Above the pointer, or below it when there is no room above.
+      const below = y - tip.offsetHeight - 14 < 4;
+      tip.style.transform = `translate(${left}px, ${y}px) translate(-50%, ${below ? "18px" : "calc(-100% - 14px)"})`;
+      tip.style.opacity = 1;
+    } else tip.style.opacity = 0;
+  });
+  renderer.domElement.addEventListener("pointerleave", () => {
+    hovered = null; tip.style.opacity = 0; api.onHover && api.onHover(null);
+  });
+  renderer.domElement.addEventListener("pointerdown", e => { pressed = { x: e.clientX, y: e.clientY }; });
+  renderer.domElement.addEventListener("pointerup", e => {
+    if (pressed && Math.hypot(e.clientX - pressed.x, e.clientY - pressed.y) < 6) {
+      const { item } = pick(e);
+      if (item && api.onClick) api.onClick(item);
+    }
+    pressed = null;
+  });
+
+  // Render only while the stage is on screen.
+  let visible = false;
+  new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }).observe(el);
+  const start = performance.now();
+  renderer.setAnimationLoop(now => {
+    if (!visible) return;
+    controls.update();
+    api.onFrame && api.onFrame(reduceMotion ? Infinity : (now - start) / 1000);
+    renderer.render(scene, camera);
+  });
+  fit();
+  return api;
+}
+
+// A rectangular frustum (flared plinth), top at y = 0.
+function frustum(w, d, flare, height) {
+  const t = [[-w, -d], [w, -d], [w, d], [-w, d]].map(([x, z]) => [x, 0, z]);
+  const b = [[-w - flare, -d - flare], [w + flare, -d - flare], [w + flare, d + flare], [-w - flare, d + flare]]
+    .map(([x, z]) => [x, -height, z]);
+  const quads = [[t[3], t[2], t[1], t[0]], [b[0], b[1], b[2], b[3]],
+                 [b[0], t[0], t[1], b[1]], [b[1], t[1], t[2], b[2]], [b[2], t[2], t[3], b[3]], [b[3], t[3], t[0], b[0]]];
+  const pos = quads.flatMap(([a, b2, c, d2]) => [a, b2, c, a, c, d2]).flat();
+  const g = new THREE.BufferGeometry();
+  g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3));
+  g.computeVertexNormals();
+  return g;
+}
+
+// A unit box standing on y = 0, so scale.y is its height.
+const box = new THREE.BoxGeometry(1, 1, 1).translate(0, 0.5, 0);
+const mat = (color, roughness = 0.6) => new THREE.MeshStandardMaterial({ color, roughness });
+
+// ---------------------------------------------------------------- skyline
+function skyline(days) {
+  const CELL = 1, BAR = 0.8, TILE_H = 0.12, PLINTH_H = 2.2, FLARE = 1.6, MARGIN = 1.2;
+  const first = new Date(days[0].date + "T00:00:00Z");
+  const weeks = Math.floor((new Date(days[days.length - 1].date + "T00:00:00Z") - first) / 6048e5) + 1;
+  const halfW = weeks * CELL / 2 + MARGIN, halfD = 3.5 * CELL + MARGIN;
+  const s = stage(document.getElementById("skyline"),
+                  { fov: 24, direction: [0, 0.6, 1], target: [0, 0, 0], width: 2 * (halfW + FLARE), height: 12, margin: 1.32 });
+
+  const plinth = new THREE.Mesh(frustum(halfW, halfD, FLARE, PLINTH_H), mat(0));
+  plinth.receiveShadow = true;
+  s.scene.add(plinth);
+  const levels = [0, 1, 2, 3, 4].map(() => mat(0));
+  const paint = () => {
+    const p = palette();
+    plinth.material.color.set(p.plinth);
+    levels.forEach((m, i) => m.color.set(p.levels[i]));
+  };
+  paint();
+  darkQuery.addEventListener("change", paint);
+
+  const fmt = new Intl.DateTimeFormat("en-GB", { weekday: "short", day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+  const bars = days.map((day, i) => {
+    const offset = first.getUTCDay();          // calendar rows start on Sunday
+    const week = Math.floor((i + offset) / 7), row = (i + offset) % 7;
+    const height = day.count ? 0.35 + 0.9 * Math.sqrt(day.count) : TILE_H;
+    const bar = new THREE.Mesh(box, levels[day.count ? Math.max(1, Math.min(4, day.level)) : 0]);
+    bar.position.set((week + 0.5) * CELL - weeks * CELL / 2, 0, (row - 3) * CELL);
+    bar.scale.set(BAR, TILE_H, BAR);
+    bar.castShadow = bar.receiveShadow = true;
+    const n = day.count;
+    bar.userData = {
+      item: true, day, height, grow: 0, rise: week / weeks * 0.55,
+      tip: `<b>${n ? n : "No"} contribution${n === 1 ? "" : "s"}</b><span>${fmt.format(new Date(day.date + "T00:00:00Z"))}</span>`,
+    };
+    s.scene.add(bar);
+    s.pickables.push(bar);
+    return bar;
+  });
+
+  let hovered = null;
+  s.onHover = item => { hovered = item; };
+  s.onClick = bar => window.open(`https://github.com/${USER}?tab=overview&from=${bar.userData.day.date}&to=${bar.userData.day.date}`, "_blank", "noopener");
+  s.onFrame = t => {
+    for (const bar of bars) {
+      const u = bar.userData;
+      u.grow += ((bar === hovered ? 1 : 0) - u.grow) * 0.2;
+      const intro = ease((t / 2.2 - u.rise) / 0.45);
+      const h = TILE_H + (u.height - TILE_H) * intro + u.grow * Math.max(1.2, u.height * 0.45);
+      bar.scale.y = h;
+    }
+  };
+}
+
+// ---------------------------------------------------------------- repo city
+function city(repos) {
+  const COLS = 5, ROWS = 4, PITCH = 7, GROUND = 0.08, PLINTH_H = 1.4, TURN = 38 * Math.PI / 180;
+  const cx = (COLS - 1) / 2, cy = (ROWS - 1) / 2;
+  // Tallest at the back of the default view, as in scripts/repo_city.py (blender y is -z here).
+  const depth = ([c, r]) => (c - cx) * Math.sin(TURN) + (r - cy) * Math.cos(TURN);
+  const cells = [];
+  for (let c = 0; c < COLS; c++) for (let r = 0; r < ROWS; r++) cells.push([c, r]);
+  cells.sort((a, b) => depth(b) - depth(a) || a[0] - b[0] || a[1] - b[1]);
+  const ranked = [...repos].sort((a, b) => b.commits - a.commits || a.name.localeCompare(b.name));
+  const sorted = repos.map(r => r.commits).sort((a, b) => a - b);
+  const quartiles = [0.25, 0.5, 0.75].map(q => sorted[Math.floor(sorted.length * q)]);
+
+  const halfW = COLS * PITCH / 2 + 1, halfD = ROWS * PITCH / 2 + 1;
+  const s = stage(document.getElementById("city"),
+                  { fov: 22, direction: [-0.522, 0.53, 0.668], target: [0, 9.5, 0], width: 2 * Math.hypot(halfW, halfD), height: 34, margin: 1.18 });
+  const plinth = new THREE.Mesh(new THREE.BoxGeometry(2 * halfW, PLINTH_H, 2 * halfD).translate(0, -PLINTH_H / 2, 0), mat(0));
+  plinth.receiveShadow = true;
+  s.scene.add(plinth);
+  const plotMat = mat(0, 0.8), roofs = [0, 1, 2, 3].map(() => mat(0, 0.5));
+  // Facade tile: one window (55% wide, 50% high) per 0.7 x 0.8 units, as in the render's material.
+  const canvas = Object.assign(document.createElement("canvas"), { width: 70, height: 80 });
+  const facades = [];
+  const paint = () => {
+    const p = palette(), g = canvas.getContext("2d");
+    plinth.material.color.set(p.plinth);
+    plotMat.color.set(p.plot);
+    roofs.forEach((m, i) => m.color.set(p.levels[i + 1]));
+    g.fillStyle = "#" + p.facade.toString(16).padStart(6, "0");
+    g.fillRect(0, 0, 70, 80);
+    g.fillStyle = "#" + p.window.toString(16).padStart(6, "0");
+    g.fillRect(0, 40, 38.5, 40);
+    facades.forEach(m => { m.map.needsUpdate = true; });
+  };
+  paint();
+  darkQuery.addEventListener("change", paint);
+
+  const mb = kb => kb >= 1024 ? `${(kb / 1024).toFixed(1)} MB` : `${kb} KB`;
+  const buildings = ranked.map((repo, i) => {
+    const [c, r] = cells[i];
+    const x = (c - cx) * PITCH, z = -(r - cy) * PITCH;
+    const plot = new THREE.Mesh(box, plotMat);
+    plot.position.set(x, 0, z);
+    plot.scale.set(PITCH * 0.84, GROUND, PITCH * 0.84);
+    plot.receiveShadow = true;
+    s.scene.add(plot);
+
+    const w = 1.9 + 0.55 * Math.log10(Math.max(repo.size_kb, 10));
+    const h = 1.2 + 2.1 * Math.sqrt(repo.commits);
+    const level = quartiles.filter(q => repo.commits > q).length;
+    const group = new THREE.Group();
+    group.position.set(x, GROUND, z);
+    const tex = new THREE.CanvasTexture(canvas);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+    tex.anisotropy = 4;
+    const facade = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.7 });
+    facades.push(facade);
+    const body = new THREE.Mesh(box, facade);
+    body.scale.set(w, 1, w);
+    const roof = new THREE.Mesh(box, roofs[level]);
+    roof.scale.set(w + 0.16, 0.35, w + 0.16);
+    for (const m of [body, roof]) { m.castShadow = m.receiveShadow = true; group.add(m); }
+    s.scene.add(group);
+    s.pickables.push(group);
+
+    const tag = document.createElement("div");
+    tag.className = "tag";
+    tag.innerHTML = `${repo.label}<span>${repo.commits}</span>`;
+    s.el.append(tag);
+    group.userData = {
+      item: true, repo, body, roof, tag, width: w, height: h - GROUND, grow: 0,
+      rise: (ranked.length - 1 - i) / (ranked.length - 1) * 0.5,
+      tip: `<b>${repo.name}</b><span>${repo.commits} commits · ${repo.language || "no language"} · ${mb(repo.size_kb)}</span>`,
+    };
+    return group;
+  });
+
+  paint();
+  let hovered = null;
+  s.onHover = item => { hovered = item; };
+  s.onClick = g => window.open(`https://github.com/${USER}/${g.userData.repo.name}`, "_blank", "noopener");
+  const v = new THREE.Vector3();
+  s.onFrame = t => {
+    const W = s.el.clientWidth, H = s.el.clientHeight;
+    for (const g of buildings) {
+      const u = g.userData;
+      u.grow += ((g === hovered ? 1 : 0) - u.grow) * 0.2;
+      const top = 0.12 + (u.height - 0.12) * ease((t / 2.4 - u.rise) / 0.5) + u.grow * Math.max(2, u.height * 0.2);
+      u.body.scale.y = top;
+      u.body.material.map.repeat.set(u.width / 0.7, top / 0.8);   // windows keep their size as it grows
+      u.roof.position.y = top;
+      // Name tag above the roof, in screen space.
+      v.set(g.position.x, g.position.y + top + 0.6, g.position.z).project(s.camera);
+      const shown = t > 2.6 && v.z < 1;
+      u.tag.style.opacity = shown ? 1 : 0;
+      u.tag.style.transform = `translate(${(v.x + 1) / 2 * W}px, ${(1 - v.y) / 2 * H}px) translate(-50%, -100%)`;
+      u.tag.classList.toggle("on", g === hovered);
+    }
+  };
+}
+
+// ---------------------------------------------------------------- data
+try {
+  const [contrib, repos] = await Promise.all(["data/contributions.json", "data/repos.json"]
+    .map(path => fetch(path).then(r => { if (!r.ok) throw new Error(path); return r.json(); })));
+  skyline(contrib.days);
+  city(repos.repos);
+  const last = contrib.days[contrib.days.length - 1].date;
+  document.getElementById("synced").textContent = `Data from GitHub, up to ${last}.`;
+} catch (err) {
+  for (const el of document.querySelectorAll(".stage"))
+    el.innerHTML = `<p class="fallback">Couldn't load the 3D view (${err.message}). WebGL and JavaScript are needed.</p>`;
+}
+</script>
+</body>
+</html>

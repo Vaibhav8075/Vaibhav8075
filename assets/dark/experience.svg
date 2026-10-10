@@ -10,7 +10,7 @@
     .now { fill: #4493f8; font-weight: 700; }
     .dot { fill: #161b22; stroke: #8b949e; stroke-width: 2; }
   </style>
-  <text x="38" y="28" class="mono heading heading-num">02</text>
+  <text x="38" y="28" class="mono heading heading-num">03</text>
   <text x="65.2" y="28" class="mono heading">EXPERIENCE</text>
   <rect x="169.2" y="24" width="592.8" height="1" fill="#30363d"/>
   <rect x="47" y="72" width="2" height="156" fill="#30363d"/>
