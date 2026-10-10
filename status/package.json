@@ -1,0 +1,6 @@
+{
+  "name": "vaibhav8075-status",
+  "private": true,
+  "type": "module",
+  "description": "Live latest-push card for the GitHub profile README (Vercel function in api/)."
+}

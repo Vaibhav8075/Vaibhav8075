@@ -6,6 +6,7 @@ owns README.md and those two folders: SVGs it no longer produces are deleted.
 
     python scripts/build.py
 """
+import base64
 import json
 import pathlib
 import shutil
@@ -15,6 +16,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 USER = "Vaibhav8075"
 RAW = f"https://raw.githubusercontent.com/{USER}/{USER}"
 PAGES = f"https://{USER.lower()}.github.io/{USER}/"   # GitHub Pages site from docs/: the 3D view
+STATUS = "https://vaibhav8075-status.vercel.app/api/status"   # live latest-push card (status/, on Vercel)
 
 SANS = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif"
 MONO = "ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace"
@@ -54,6 +56,7 @@ ICONS = {
 # Edges shared by all cards so they line up when stacked in the README.
 EDGE = 14   # x of a full-width panel's border
 PAD = 38    # x of full-width content; equals a project card's inner edge at 49% width
+BANNER = 120  # height of the 3D thumbnail band at the top of a project card
 
 
 def color(tech):
@@ -177,19 +180,48 @@ def section_label(number, text, t):
     return svg(800, 36, css, body)
 
 
+def thumbnail(slug):
+    """The project's 3D render (scripts/thumbnails.py) as a data URI, or None.
+
+    Embedded rather than linked: an SVG shown as an image may not load other files.
+    """
+    path = ROOT / "assets" / "thumbs" / f"{slug}.webp"
+    return "data:image/webp;base64," + base64.b64encode(path.read_bytes()).decode() if path.exists() else None
+
+
 def project(index, total, p, t):
     description = wrap(p["description"], 13, 316, 3, f'project "{p["name"]}" description')
+    thumb = thumbnail(p["slug"])
+    top = BANNER if thumb else 0
     tags, x = [], 24
     for tag in p["tags"]:
         tags.append(
-            f'<circle cx="{x + 4}" cy="152" r="4" fill="{color(tag)}"/>'
-            f'<text x="{x + 14}" y="156" class="mono tag">{escape(tag)}</text>'
+            f'<circle cx="{x + 4}" cy="{top + 152}" r="4" fill="{color(tag)}"/>'
+            f'<text x="{x + 14}" y="{top + 156}" class="mono tag">{escape(tag)}</text>'
         )
         x += round(14 + mono_width(tag, 11) + 18)
     lines = "\n".join(
-        f'<text x="24" y="{92 + 20 * i}" class="sans desc">{escape(line)}</text>' for i, line in enumerate(description)
+        f'<text x="24" y="{top + 92 + 20 * i}" class="sans desc">{escape(line)}</text>' for i, line in enumerate(description)
     )
+    if thumb:
+        # 3D band across the top (rounded to the card's corners), then the name at the left edge.
+        head = f"""
+          <path d="M0.5 10.5 A10 10 0 0 1 10.5 0.5 H373.5 A10 10 0 0 1 383.5 10.5 V{top} H0.5 Z" class="band"/>
+          <image href="{thumb}" x="0" y="0" width="384" height="{top}" preserveAspectRatio="xMidYMid meet"/>
+          <line x1="0.5" y1="{top}" x2="383.5" y2="{top}" class="divider"/>
+          <text x="20" y="24" class="mono index">{index:02d}/{total:02d}</text>
+          <text x="24" y="{top + 39}" class="sans title">{escape(p["name"])}</text>
+          <text x="24" y="{top + 56}" class="mono kind">{escape(p["kind"].upper())}</text>"""
+    else:
+        head = f"""
+          <rect x="24" y="24" width="32" height="32" rx="6" class="icon-box"/>
+          <path d="{ICONS[p["icon"]]}" class="icon"/>
+          <text x="72" y="39" class="sans title">{escape(p["name"])}</text>
+          <text x="72" y="56" class="mono kind">{escape(p["kind"].upper())}</text>
+          <text x="360" y="36" text-anchor="end" class="mono index">{index:02d}/{total:02d}</text>"""
     css = f"""
+        .band {{ fill: {t["surface"]}; }}
+        .divider {{ stroke: {t["border"]}; }}
         .card {{ fill: none; stroke: {t["border"]}; }}
         .icon-box {{ fill: {t["surface"]}; stroke: {t["border"]}; }}
         .icon {{ fill: none; stroke: {t["text"]}; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }}
@@ -202,18 +234,14 @@ def project(index, total, p, t):
     """
     body = f"""
         <g transform="translate(8, 8)">
-          <rect x="0.5" y="0.5" width="383" height="179" rx="10" class="card"/>
-          <rect x="24" y="24" width="32" height="32" rx="6" class="icon-box"/>
-          <path d="{ICONS[p["icon"]]}" class="icon"/>
-          <text x="72" y="39" class="sans title">{escape(p["name"])}</text>
-          <text x="72" y="56" class="mono kind">{escape(p["kind"].upper())}</text>
-          <text x="360" y="36" text-anchor="end" class="mono index">{index:02d}/{total:02d}</text>
+          {head}
+          <rect x="0.5" y="0.5" width="383" height="{top + 179}" rx="10" class="card"/>
           {lines}
           {"".join(tags)}
-          <path d="M350 158 L360 148 M352.5 148 H360 V155.5" class="arrow"/>
+          <path d="M350 {top + 158} L360 {top + 148} M352.5 {top + 148} H360 V{top + 155.5}" class="arrow"/>
         </g>
     """
-    return svg(400, 196, css, body)
+    return svg(400, 196 + top, css, body)
 
 
 def experience(profile, t, number):
@@ -328,14 +356,18 @@ def button(link, t):
     return svg(width, 40, css, body)
 
 
-def themed(name, alt, size):
-    """<picture> that follows the viewer's GitHub theme."""
-    dark, light = f"{RAW}/main/assets/dark/{name}", f"{RAW}/main/assets/light/{name}"
+def picture(dark, light, alt, size):
+    """<picture> that shows the dark or light image to match the viewer's GitHub theme."""
     return (
         f'<picture><source media="(prefers-color-scheme: dark)" srcset="{dark}">'
         f'<source media="(prefers-color-scheme: light)" srcset="{light}">'
         f'<img src="{light}" {size} alt="{escape(alt)}"></picture>'
     )
+
+
+def themed(name, alt, size):
+    """picture() for a card rendered into assets/<theme>/."""
+    return picture(f"{RAW}/main/assets/dark/{name}", f"{RAW}/main/assets/light/{name}", alt, size)
 
 
 def readme(profile):
@@ -377,6 +409,8 @@ def readme(profile):
 {skyline}{themed("hero.svg", header_alt, 'width="100%"')}
 
 {themed("telemetry.svg", "GitHub activity: contributions in the past year, stars, repositories, followers and language mix.", 'width="100%"')}
+
+<a href="https://github.com/{USER}?tab=repositories&amp;sort=updated">{picture(f"{STATUS}?theme=dark", f"{STATUS}?theme=light", "Latest public push: repository, commit message and how long ago.", 'width="100%"')}</a>
 
 {themed("label-work.svg", "Selected work", 'width="100%"')}
 {chr(10).join(" ".join(projects[i:i + 2]) for i in range(0, len(projects), 2))}
