@@ -15,11 +15,11 @@
    "name": "Agentic-Ledger",
    "label": "Agentic-Ledger",
    "language": "Python",
-   "size_kb": 10484,
+   "size_kb": 10590,
    "stars": 0,
-   "commits": 17,
+   "commits": 62,
    "created": "2026-09-15",
-   "pushed": "2026-09-15"
+   "pushed": "2026-10-11"
   },
   {
    "name": "Akoin",
@@ -155,11 +155,11 @@
    "name": "Semantic-Segmentation-for-Autonomous-Driving-",
    "label": "Segmentation",
    "language": "Python",
-   "size_kb": 83,
+   "size_kb": 394,
    "stars": 0,
-   "commits": 4,
+   "commits": 27,
    "created": "2026-06-22",
-   "pushed": "2026-06-26"
+   "pushed": "2026-10-11"
   },
   {
    "name": "Shortest-path-visualizer",
@@ -175,11 +175,11 @@
    "name": "Vaibhav-Goel-Portfolio",
    "label": "Portfolio",
    "language": "JavaScript",
-   "size_kb": 15641,
+   "size_kb": 15659,
    "stars": 0,
-   "commits": 98,
+   "commits": 102,
    "created": "2026-02-15",
-   "pushed": "2026-10-10"
+   "pushed": "2026-10-11"
   }
  ]
 }
