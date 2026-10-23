@@ -30,6 +30,6 @@
   <g transform="translate(0, 14)"><circle cx="4" cy="22.5" r="3.5" fill="#f1e05a"/><text x="14" y="26" class="mono lang">JAVASCRIPT</text><text x="218" y="26" text-anchor="end" class="mono lang">43%</text><circle cx="4" cy="40.5" r="3.5" fill="#3572a5"/><text x="14" y="44" class="mono lang">PYTHON</text><text x="218" y="44" text-anchor="end" class="mono lang">32%</text><circle cx="4" cy="58.5" r="3.5" fill="#3178c6"/><text x="14" y="62" class="mono lang">TYPESCRIPT</text><text x="218" y="62" text-anchor="end" class="mono lang">21%</text><circle cx="4" cy="76.5" r="3.5" fill="#f34b7d"/><text x="14" y="80" class="mono lang">C++</text><text x="218" y="80" text-anchor="end" class="mono lang">4%</text></g>
   </g>
   <circle cx="614.2" cy="168.5" r="2.5" fill="#1a7f37"/>
-  <text x="748" y="172" text-anchor="end" class="mono sub">SYNCED 2026-10-22</text>
+  <text x="748" y="172" text-anchor="end" class="mono sub">SYNCED 2026-10-23</text>
   </g>
 </svg>
