@@ -274,18 +274,12 @@ def telemetry(stats, t):
     if langs:
         segments.append(f'<rect x="{x:.1f}" width="{max(218 - x, 0):.1f}" height="6" fill="{t["border"]}"/>')
 
-    stat_rows = "\n".join(
-        f'<text x="56" y="{40 * i}" text-anchor="end" class="sans stat">{num(key)}</text>'
-        f'<text x="70" y="{40 * i - 2}" class="mono sub">{label}</text>'
-        for i, (key, label) in enumerate([("stars", "STARS"), ("repositories", "REPOSITORIES"), ("followers", "FOLLOWERS")])
-    )
     synced = stats.get("synced", "—")
     css = f"""
         .panel {{ fill: {t["surface"]}; stroke: {t["border"]}; }}
         .label {{ font-size: 11px; fill: {t["muted"]}; letter-spacing: 3px; }}
         .big {{ font-size: 60px; font-weight: 800; fill: {t["text"]}; letter-spacing: -2px; }}
         .sub {{ font-size: 9px; fill: {t["muted"]}; letter-spacing: 2px; }}
-        .stat {{ font-size: 22px; font-weight: 700; fill: {t["text"]}; }}
         .lang {{ font-size: 9px; fill: {t["muted"]}; letter-spacing: 1px; }}
         .divider {{ stroke: {t["border"]}; }}
     """
@@ -299,9 +293,8 @@ def telemetry(stats, t):
           <text x="21" y="116" class="sans big">{num("contributions")}</text>
           <text x="24" y="142" class="mono sub">CONTRIBUTIONS · PAST YEAR</text>
           <line x1="270" y1="30" x2="270" y2="160" class="divider"/>
-          <g transform="translate(300, 66)">
-            {stat_rows}
-          </g>
+          <text x="297" y="116" class="sans big">{num("repositories")}</text>
+          <text x="300" y="142" class="mono sub">PUBLIC REPOSITORIES</text>
           <line x1="500" y1="30" x2="500" y2="160" class="divider"/>
           <g transform="translate(530, 38)">
             <text class="mono label">LANGUAGES</text>
