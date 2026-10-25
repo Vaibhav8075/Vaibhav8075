@@ -54,8 +54,8 @@
     }
   ],
   "experience": [
-    { "role": "Frontend Developer", "org": "MossX", "start": "2025.06", "end": "Present" },
     { "role": "Software Engineering Intern", "org": "DCM Shriram Ltd.", "start": "2026.05", "end": "2026.07" },
+    { "role": "Frontend Developer", "org": "MossX", "start": "2025.06", "end": "2026.07" },
     { "role": "Frontend Developer Intern", "org": "Aarvasa", "start": "2026.01", "end": "2026.05" },
     { "role": "Software Division", "org": "Team Sammard (VIT Rocketry)", "start": "2025.05", "end": "2025.10" }
   ],

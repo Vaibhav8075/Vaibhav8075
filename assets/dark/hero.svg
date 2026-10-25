@@ -18,7 +18,5 @@
   <text x="38" y="180" class="sans tagline">CSE undergraduate building machine-learning systems and the web apps around</text>
   <text x="38" y="202" class="sans tagline">them, from leakage-controlled PyTorch research to production React frontends.</text>
   <rect x="38" y="230" width="724" height="1" fill="#30363d"/>
-  <text x="38" y="262" class="mono now-label">CURRENTLY</text>
-  <text x="127.4" y="262" class="sans now">Frontend Developer at MossX</text>
   <text x="762" y="262" text-anchor="end" class="mono stack">TYPESCRIPT · PYTHON · REACT · FASTAPI · PYTORCH</text>
 </svg>
