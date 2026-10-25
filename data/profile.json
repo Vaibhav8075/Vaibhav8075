@@ -11,7 +11,7 @@
       "slug": "pac-1dcnn",
       "name": "Physics-Augmented 1D-CNN",
       "kind": "ML research",
-      "url": "https://github.com/Vaibhav8075/-Physics-Augmented-1D-CNN",
+      "url": "https://www.vaibhavgoel.dev/work/physics-1d-cnn",
       "icon": "wave",
       "description": "Leakage-controlled benchmark of 1D-CNN bearing-fault classifiers on CWRU and Paderborn. The protocol, not the architecture, decides the score.",
       "tags": ["Python", "PyTorch", "LaTeX"]
@@ -20,7 +20,7 @@
       "slug": "semantic-segmentation",
       "name": "Semantic Segmentation",
       "kind": "Computer vision",
-      "url": "https://github.com/Vaibhav8075/Semantic-Segmentation-for-Autonomous-Driving-",
+      "url": "https://www.vaibhavgoel.dev/work/road-segmentation",
       "icon": "road",
       "description": "Cityscapes road scenes labelled pixel by pixel into 7 classes, with U-Net, ResNet50-UNet, DeepLabV3+ and SegFormer built in PyTorch.",
       "tags": ["Python", "PyTorch", "ONNX"]
@@ -29,7 +29,7 @@
       "slug": "iot-fire-detection",
       "name": "IoT Fire Detection",
       "kind": "IoT · ML",
-      "url": "https://github.com/Vaibhav8075/IOT-ML-Project",
+      "url": "https://www.vaibhavgoel.dev/work/iot-fire-detection",
       "icon": "signal",
       "description": "ESP32-S3 sensor fusion and a Random Forest (94.9% test accuracy, 367k real readings) built to cut false fire alarms, with a live digital twin.",
       "tags": ["C++", "Python", "scikit-learn"]
@@ -38,7 +38,7 @@
       "slug": "agentic-ledger",
       "name": "Agentic Ledger",
       "kind": "AI agents · Fintech",
-      "url": "https://github.com/Vaibhav8075/Agentic-Ledger",
+      "url": "https://www.vaibhavgoel.dev/work/agentic-ledger",
       "icon": "trend",
       "description": "Four Phinite OS agents for small merchants: catch spoofed payments in under 200 ms and approve micro-loans from an LSTM revenue forecast.",
       "tags": ["Python", "PyTorch", "FastAPI"]
@@ -47,7 +47,7 @@
       "slug": "audict",
       "name": "Audict",
       "kind": "Full-stack AI",
-      "url": "https://github.com/Vaibhav8075/Audict-audio-Technology",
+      "url": "https://www.vaibhavgoel.dev/work/call-audit-platform",
       "icon": "audio",
       "description": "Call-audit platform for QA teams: Whisper transcripts and Llama 3.3 scoring via Groq, with JWT-protected audio streaming.",
       "tags": ["Python", "JavaScript", "FastAPI"]
