@@ -1,11 +1,10 @@
 {
   "header": {
     "name": "Vaibhav Goel",
-    "role": "Software Engineer · Intelligent Systems",
-    "location": "Vellore, India",
-    "tagline": "I build production-grade systems at the intersection of machine learning, distributed engineering, and frontend architecture.",
-    "stack": ["TypeScript", "Python", "React", "FastAPI", "PyTorch"],
-    "motto": "built quietly • shipped often"
+    "role": "Software Engineer · ML & Full-stack",
+    "location": "VIT Vellore, India",
+    "tagline": "CSE undergraduate building machine-learning systems and the web apps around them, from leakage-controlled PyTorch research to production React frontends.",
+    "stack": ["TypeScript", "Python", "React", "FastAPI", "PyTorch"]
   },
   "projects": [
     {
@@ -61,7 +60,7 @@
     { "role": "Software Division", "org": "Team Sammard (VIT Rocketry)", "start": "2025.05", "end": "2025.10" }
   ],
   "links": [
-    { "slug": "portfolio", "label": "Portfolio", "action": "Enter", "url": "https://www.vaibhavgoel.dev" },
+    { "slug": "portfolio", "label": "Portfolio", "action": "Visit", "url": "https://www.vaibhavgoel.dev" },
     { "slug": "linkedin", "label": "LinkedIn", "action": "Connect", "url": "https://www.linkedin.com/in/vaibhav-goel-23983b344" }
   ]
 }
