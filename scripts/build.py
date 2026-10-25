@@ -6,7 +6,6 @@ owns README.md and those two folders: SVGs it no longer produces are deleted.
 
     python scripts/build.py
 """
-import base64
 import json
 import pathlib
 import shutil
@@ -16,7 +15,6 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 USER = "Vaibhav8075"
 RAW = f"https://raw.githubusercontent.com/{USER}/{USER}"
 PAGES = f"https://{USER.lower()}.github.io/{USER}/"   # GitHub Pages site from docs/: the 3D view
-STATUS = "https://vaibhav8075-status.vercel.app/api/status"   # live latest-push card (status/, on Vercel)
 
 SANS = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif"
 MONO = "ui-monospace, 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace"
@@ -55,8 +53,7 @@ ICONS = {
 
 # Edges shared by all cards so they line up when stacked in the README.
 EDGE = 14   # x of a full-width panel's border
-PAD = 38    # x of full-width content; equals a project card's inner edge at 49% width
-BANNER = 120  # height of the 3D thumbnail band at the top of a project card
+PAD = 38    # x of full-width content
 
 
 def color(tech):
@@ -180,68 +177,46 @@ def section_label(number, text, t):
     return svg(800, 36, css, body)
 
 
-def thumbnail(slug):
-    """The project's 3D render (scripts/thumbnails.py) as a data URI, or None.
-
-    Embedded rather than linked: an SVG shown as an image may not load other files.
-    """
-    path = ROOT / "assets" / "thumbs" / f"{slug}.webp"
-    return "data:image/webp;base64," + base64.b64encode(path.read_bytes()).decode() if path.exists() else None
-
-
 def project(index, total, p, t):
-    description = wrap(p["description"], 13, 316, 3, f'project "{p["name"]}" description')
-    thumb = thumbnail(p["slug"])
-    top = BANNER if thumb else 0
-    tags, x = [], 24
+    """A full-width row in the same panel style as the hero, so any number of projects stack evenly."""
+    left = PAD + 52   # text column, right of the icon box
+    description = wrap(p["description"], 14, 800 - PAD - left - 40, 2, f'project "{p["name"]}" description')
+    lines = "\n".join(
+        f'<text x="{left}" y="{88 + 21 * i}" class="sans desc">{escape(line)}</text>' for i, line in enumerate(description)
+    )
+    tags, x = [], left
     for tag in p["tags"]:
         tags.append(
-            f'<circle cx="{x + 4}" cy="{top + 152}" r="4" fill="{color(tag)}"/>'
-            f'<text x="{x + 14}" y="{top + 156}" class="mono tag">{escape(tag)}</text>'
+            f'<circle cx="{x + 4}" cy="{136.5}" r="4" fill="{color(tag)}"/>'
+            f'<text x="{x + 14}" y="140" class="mono tag">{escape(tag)}</text>'
         )
         x += round(14 + mono_width(tag, 11) + 18)
-    lines = "\n".join(
-        f'<text x="24" y="{top + 92 + 20 * i}" class="sans desc">{escape(line)}</text>' for i, line in enumerate(description)
-    )
-    if thumb:
-        # 3D band across the top (rounded to the card's corners), then the name at the left edge.
-        head = f"""
-          <path d="M0.5 10.5 A10 10 0 0 1 10.5 0.5 H373.5 A10 10 0 0 1 383.5 10.5 V{top} H0.5 Z" class="band"/>
-          <image href="{thumb}" x="0" y="0" width="384" height="{top}" preserveAspectRatio="xMidYMid meet"/>
-          <line x1="0.5" y1="{top}" x2="383.5" y2="{top}" class="divider"/>
-          <text x="20" y="24" class="mono index">{index:02d}/{total:02d}</text>
-          <text x="24" y="{top + 39}" class="sans title">{escape(p["name"])}</text>
-          <text x="24" y="{top + 56}" class="mono kind">{escape(p["kind"].upper())}</text>"""
-    else:
-        head = f"""
-          <rect x="24" y="24" width="32" height="32" rx="6" class="icon-box"/>
-          <path d="{ICONS[p["icon"]]}" class="icon"/>
-          <text x="72" y="39" class="sans title">{escape(p["name"])}</text>
-          <text x="72" y="56" class="mono kind">{escape(p["kind"].upper())}</text>
-          <text x="360" y="36" text-anchor="end" class="mono index">{index:02d}/{total:02d}</text>"""
+    ax = 800 - PAD
     css = f"""
-        .band {{ fill: {t["surface"]}; }}
-        .divider {{ stroke: {t["border"]}; }}
-        .card {{ fill: none; stroke: {t["border"]}; }}
-        .icon-box {{ fill: {t["surface"]}; stroke: {t["border"]}; }}
+        .panel {{ fill: {t["surface"]}; stroke: {t["border"]}; }}
+        .icon-box {{ fill: none; stroke: {t["border"]}; }}
         .icon {{ fill: none; stroke: {t["text"]}; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }}
-        .title {{ font-size: 17px; font-weight: 600; fill: {t["text"]}; }}
-        .kind {{ font-size: 10px; fill: {t["muted"]}; letter-spacing: 1.5px; font-weight: 600; }}
+        .title {{ font-size: 18px; font-weight: 600; fill: {t["text"]}; }}
+        .kind {{ font-size: 10px; fill: {t["accent"]}; letter-spacing: 1.5px; font-weight: 700; }}
         .index {{ font-size: 10px; fill: {t["muted"]}; letter-spacing: 1px; }}
-        .desc {{ font-size: 13px; fill: {t["muted"]}; }}
+        .desc {{ font-size: 14px; fill: {t["muted"]}; }}
         .tag {{ font-size: 11px; fill: {t["muted"]}; }}
         .arrow {{ fill: none; stroke: {t["muted"]}; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }}
     """
     body = f"""
-        <g transform="translate(8, 8)">
-          {head}
-          <rect x="0.5" y="0.5" width="383" height="{top + 179}" rx="10" class="card"/>
-          {lines}
-          {"".join(tags)}
-          <path d="M350 {top + 158} L360 {top + 148} M352.5 {top + 148} H360 V{top + 155.5}" class="arrow"/>
+        <rect x="{EDGE + 0.5}" y="0.5" width="{800 - 2 * EDGE - 1}" height="163" rx="12" class="panel"/>
+        <g transform="translate({PAD - 24}, 4)">
+          <rect x="24" y="24" width="32" height="32" rx="6" class="icon-box"/>
+          <path d="{ICONS[p["icon"]]}" class="icon"/>
         </g>
+        <text x="{left}" y="42" class="sans title">{escape(p["name"])}</text>
+        <text x="{left}" y="60" class="mono kind">{escape(p["kind"].upper())}</text>
+        <text x="{ax}" y="40" text-anchor="end" class="mono index">{index:02d}/{total:02d}</text>
+        {lines}
+        {"".join(tags)}
+        <path d="M{ax - 10} 142 L{ax} 132 M{ax - 7.5} 132 H{ax} V139.5" class="arrow"/>
     """
-    return svg(400, 196 + top, css, body)
+    return svg(800, 176, css, body)
 
 
 def experience(profile, t, number):
@@ -296,18 +271,12 @@ def telemetry(stats, t):
     if langs:
         segments.append(f'<rect x="{x:.1f}" width="{max(218 - x, 0):.1f}" height="6" fill="{t["border"]}"/>')
 
-    stat_rows = "\n".join(
-        f'<text x="56" y="{40 * i}" text-anchor="end" class="sans stat">{num(key)}</text>'
-        f'<text x="70" y="{40 * i - 2}" class="mono sub">{label}</text>'
-        for i, (key, label) in enumerate([("stars", "STARS"), ("repositories", "REPOSITORIES"), ("followers", "FOLLOWERS")])
-    )
     synced = stats.get("synced", "—")
     css = f"""
         .panel {{ fill: {t["surface"]}; stroke: {t["border"]}; }}
         .label {{ font-size: 11px; fill: {t["muted"]}; letter-spacing: 3px; }}
         .big {{ font-size: 60px; font-weight: 800; fill: {t["text"]}; letter-spacing: -2px; }}
         .sub {{ font-size: 9px; fill: {t["muted"]}; letter-spacing: 2px; }}
-        .stat {{ font-size: 22px; font-weight: 700; fill: {t["text"]}; }}
         .lang {{ font-size: 9px; fill: {t["muted"]}; letter-spacing: 1px; }}
         .divider {{ stroke: {t["border"]}; }}
     """
@@ -321,9 +290,8 @@ def telemetry(stats, t):
           <text x="21" y="116" class="sans big">{num("contributions")}</text>
           <text x="24" y="142" class="mono sub">CONTRIBUTIONS · PAST YEAR</text>
           <line x1="270" y1="30" x2="270" y2="160" class="divider"/>
-          <g transform="translate(300, 66)">
-            {stat_rows}
-          </g>
+          <text x="297" y="116" class="sans big">{num("repositories")}</text>
+          <text x="300" y="142" class="mono sub">PUBLIC REPOSITORIES</text>
           <line x1="500" y1="30" x2="500" y2="160" class="divider"/>
           <g transform="translate(530, 38)">
             <text class="mono label">LANGUAGES</text>
@@ -372,81 +340,52 @@ def themed(name, alt, size):
 
 def readme(profile):
     # Each <a> is kept on one line: whitespace inside it renders as an underlined gap.
-    # Project cards go two per line, so the grid holds whether GitHub renders a
-    # newline as a space or as <br>.
+    # Project rows are full width, so they stack whether GitHub renders a newline as a space or as <br>.
     h = profile["header"]
     header_alt = f'{h["name"]}, {h["role"].replace(" · ", ", ")}, {h["location"]}. {h["tagline"]} Stack: {", ".join(h["stack"])}.'
     projects = []
     for p in profile["projects"]:
-        card = themed("project-%s.svg" % p["slug"], "%s (%s): %s" % (p["name"], p["kind"], p["description"]), 'width="49%"')
+        card = themed("project-%s.svg" % p["slug"], "%s (%s): %s" % (p["name"], p["kind"], p["description"]), 'width="100%"')
         projects.append(f'<a href="{p["url"]}">{card}</a>')
     buttons = []
     for link in profile["links"]:
         button = themed("button-%s.svg" % link["slug"], link["label"], 'height="40"')
         buttons.append(f'<a href="{link["url"]}">{button}</a>')
     roles = "; ".join("%s at %s, %s – %s" % (r["role"], r["org"], r["start"], r["end"]) for r in profile["experience"])
-    # The 3D renders come from Blender (scripts/skyline.py, scripts/repo_city.py), not from here.
-    # Each is shown once both of its theme versions exist, animated when scripts/animate.py has
-    # made one, and links to its interactive version on the 3D page in docs/.
-    skyline = city = ""
-    sky_file, city_file = render_file("skyline"), render_file("repo-city")
-    if sky_file:
-        skyline_alt = (f"3D skyline of {h['name']}'s GitHub contributions over the past year: one bar per "
-                       "day, taller for more contributions. Opens the interactive 3D view.")
-        sky_img = themed(sky_file, skyline_alt, 'width="100%"')
-        skyline = f'<a href="{PAGES}#skyline">{sky_img}</a>' + "\n\n"
-    if city_file:
-        city_alt = (f"Repo City: each of {h['name']}'s public repositories as a building with its name and "
-                    "commit count; taller buildings and greener roofs mean more commits. "
-                    "Opens the interactive 3D view.")
-        city_img = themed(city_file, city_alt, 'width="100%"')
-        city = (themed("label-city.svg", "Repo city", 'width="100%"') + "\n"
-                + f'<a href="{PAGES}#city">{city_img}</a>' + "\n\n")
+    # Every card shares one flat panel style. The Blender renders (skyline, Repo City) stay on the
+    # interactive 3D page in docs/, linked from the footer, rather than in the README.
     return f"""\
 <!-- Generated by scripts/build.py from data/profile.json. Edit that file instead: changes made here are overwritten. -->
 <div align="center">
 
-{skyline}{themed("hero.svg", header_alt, 'width="100%"')}
+{themed("hero.svg", header_alt, 'width="100%"')}
 
-{themed("telemetry.svg", "GitHub activity: contributions in the past year, stars, repositories, followers and language mix.", 'width="100%"')}
-
-<a href="https://github.com/{USER}?tab=repositories&amp;sort=updated">{picture(f"{STATUS}?theme=dark", f"{STATUS}?theme=light", "Latest public push: repository, commit message and how long ago.", 'width="100%"')}</a>
+{themed("telemetry.svg", "GitHub activity: contributions in the past year, public repositories and language mix.", 'width="100%"')}
 
 {themed("label-work.svg", "Selected work", 'width="100%"')}
-{chr(10).join(" ".join(projects[i:i + 2]) for i in range(0, len(projects), 2))}
+{chr(10).join(projects)}
 
-{city}{themed("experience.svg", "Experience: %s." % roles, 'width="100%"')}
+{themed("experience.svg", "Experience: %s." % roles, 'width="100%"')}
 
 {"&nbsp;&nbsp;".join(buttons)}
 
-<code>{escape(h["motto"])}</code>
+<sub><a href="{PAGES}">Interactive 3D view of my GitHub activity</a></sub>
 
 </div>
 """
-
-
-def render_file(stem):
-    """File name of a Blender render present for every theme, preferring the animation."""
-    for name in (f"{stem}.webp", f"{stem}.png"):
-        if all((ROOT / "assets" / theme / name).exists() for theme in THEMES):
-            return name
-    return None
 
 
 def render(profile, stats):
     """Map of file name to SVG source, per theme."""
     out = {}
     projects = profile["projects"]
-    city = render_file("repo-city") is not None
     for theme, t in THEMES.items():
         files = {
             "hero.svg": hero(profile, t),
             "telemetry.svg": telemetry(stats, t),
             "label-work.svg": section_label(1, "Selected work", t),
-            "experience.svg": experience(profile, t, 3 if city else 2),
+            "experience.svg": experience(profile, t, 2),
         }
-        if city:
-            files["label-city.svg"] = section_label(2, "Repo city", t)
         for i, p in enumerate(projects, 1):
             files[f'project-{p["slug"]}.svg'] = project(i, len(projects), p, t)
         for link in profile["links"]:
