@@ -14,12 +14,12 @@
   <text x="65.2" y="28" class="mono heading">EXPERIENCE</text>
   <rect x="169.2" y="24" width="592.8" height="1" fill="#d1d9e0"/>
   <rect x="47" y="72" width="2" height="156" fill="#d1d9e0"/>
-  <circle cx="48" cy="72" r="6" fill="#0969da"/>
-  <text x="74" y="77" class="sans role">Frontend Developer<tspan class="org"> at MossX</tspan></text>
-  <text x="762" y="76" text-anchor="end" class="mono date now">2025.06 – Present</text>
+  <circle cx="48" cy="72" r="5" class="dot"/>
+  <text x="74" y="77" class="sans role">Software Engineering Intern<tspan class="org"> at DCM Shriram Ltd.</tspan></text>
+  <text x="762" y="76" text-anchor="end" class="mono date">2026.05 – 2026.07</text>
   <circle cx="48" cy="124" r="5" class="dot"/>
-  <text x="74" y="129" class="sans role">Software Engineering Intern<tspan class="org"> at DCM Shriram Ltd.</tspan></text>
-  <text x="762" y="128" text-anchor="end" class="mono date">2026.05 – 2026.07</text>
+  <text x="74" y="129" class="sans role">Frontend Developer<tspan class="org"> at MossX</tspan></text>
+  <text x="762" y="128" text-anchor="end" class="mono date">2025.06 – 2026.07</text>
   <circle cx="48" cy="176" r="5" class="dot"/>
   <text x="74" y="181" class="sans role">Frontend Developer Intern<tspan class="org"> at Aarvasa</tspan></text>
   <text x="762" y="180" text-anchor="end" class="mono date">2026.01 – 2026.05</text>
