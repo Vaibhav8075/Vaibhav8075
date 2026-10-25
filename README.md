@@ -16,6 +16,6 @@
 
 <a href="https://www.vaibhavgoel.dev"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/main/assets/dark/button-portfolio.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/main/assets/light/button-portfolio.svg"><img src="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/main/assets/light/button-portfolio.svg" height="40" alt="Portfolio"></picture></a>&nbsp;&nbsp;<a href="https://www.linkedin.com/in/vaibhav-goel-23983b344"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/main/assets/dark/button-linkedin.svg"><source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/main/assets/light/button-linkedin.svg"><img src="https://raw.githubusercontent.com/Vaibhav8075/Vaibhav8075/main/assets/light/button-linkedin.svg" height="40" alt="LinkedIn"></picture></a>
 
-<sub><a href="https://vaibhav8075.github.io/Vaibhav8075/">Interactive 3D view of my GitHub activity</a></sub>
+<sub><a href="https://vaibhav8075.github.io/Vaibhav8075/">Interactive 3D view of my GitHub activity</a> · © Vaibhav Goel · all rights reserved</sub>
 
 </div>

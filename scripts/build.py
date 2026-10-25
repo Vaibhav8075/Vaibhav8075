@@ -369,7 +369,7 @@ def readme(profile):
 
 {"&nbsp;&nbsp;".join(buttons)}
 
-<sub><a href="{PAGES}">Interactive 3D view of my GitHub activity</a></sub>
+<sub><a href="{PAGES}">Interactive 3D view of my GitHub activity</a> · © {escape(h["name"])} · all rights reserved</sub>
 
 </div>
 """
