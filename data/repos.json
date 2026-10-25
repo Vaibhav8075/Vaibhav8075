@@ -2,26 +2,6 @@
  "user": "Vaibhav8075",
  "repos": [
   {
-   "name": "-Physics-Augmented-1D-CNN",
-   "label": "1D-CNN",
-   "language": "TeX",
-   "size_kb": 26216,
-   "stars": 1,
-   "commits": 100,
-   "created": "2026-08-29",
-   "pushed": "2026-10-17"
-  },
-  {
-   "name": "Agentic-Ledger",
-   "label": "Agentic-Ledger",
-   "language": "Python",
-   "size_kb": 10590,
-   "stars": 0,
-   "commits": 62,
-   "created": "2026-09-15",
-   "pushed": "2026-10-11"
-  },
-  {
    "name": "Akoin",
    "label": "Akoin",
    "language": "HTML",
@@ -30,16 +10,6 @@
    "commits": 2,
    "created": "2026-03-13",
    "pushed": "2026-03-13"
-  },
-  {
-   "name": "Audict-audio-Technology",
-   "label": "Audict",
-   "language": "JavaScript",
-   "size_kb": 1192,
-   "stars": 0,
-   "commits": 102,
-   "created": "2026-05-27",
-   "pushed": "2026-10-21"
   },
   {
    "name": "Client-website",
@@ -62,16 +32,6 @@
    "pushed": "2026-09-24"
   },
   {
-   "name": "Financial-Technology",
-   "label": "Fintech",
-   "language": "JavaScript",
-   "size_kb": 206,
-   "stars": 0,
-   "commits": 20,
-   "created": "2026-02-08",
-   "pushed": "2026-08-19"
-  },
-  {
    "name": "GlassLink",
    "label": "GlassLink",
    "language": "TypeScript",
@@ -80,16 +40,6 @@
    "commits": 5,
    "created": "2026-05-18",
    "pushed": "2026-05-18"
-  },
-  {
-   "name": "IOT-ML-Project",
-   "label": "IOT-ML-Project",
-   "language": "Python",
-   "size_kb": 7225,
-   "stars": 0,
-   "commits": 10,
-   "created": "2025-11-08",
-   "pushed": "2026-06-18"
   },
   {
    "name": "karopitch-client",
@@ -160,16 +110,6 @@
    "commits": 87,
    "created": "2026-01-20",
    "pushed": "2026-02-12"
-  },
-  {
-   "name": "Semantic-Segmentation-for-Autonomous-Driving-",
-   "label": "Segmentation",
-   "language": "Python",
-   "size_kb": 394,
-   "stars": 0,
-   "commits": 27,
-   "created": "2026-06-22",
-   "pushed": "2026-10-11"
   },
   {
    "name": "Shortest-path-visualizer",

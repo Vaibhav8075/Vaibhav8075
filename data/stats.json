@@ -1,24 +1,24 @@
 {
-  "contributions": 809,
-  "stars": 2,
-  "repositories": 21,
+  "contributions": 818,
+  "stars": 1,
+  "repositories": 15,
   "followers": 6,
   "languages": [
     [
-      "Python",
-      38.5
+      "TypeScript",
+      51.7
     ],
     [
       "JavaScript",
-      30.9
-    ],
-    [
-      "TypeScript",
-      25.7
+      39.9
     ],
     [
       "C++",
-      4.4
+      8.1
+    ],
+    [
+      "Python",
+      0.4
     ]
   ],
   "synced": "2026-10-25"
