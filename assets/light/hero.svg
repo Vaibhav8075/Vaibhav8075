@@ -11,12 +11,12 @@
     .stack { font-size: 11px; fill: #59636e; letter-spacing: 0.5px; }
   </style>
   <rect x="14.5" y="0.5" width="771" height="295" rx="12" class="panel"/>
-  <text x="38" y="42" class="mono meta">SOFTWARE ENGINEER · INTELLIGENT SYSTEMS</text>
-  <text x="762" y="42" text-anchor="end" class="mono meta">VELLORE, INDIA</text>
+  <text x="38" y="42" class="mono meta">SOFTWARE ENGINEER · ML &amp; FULL-STACK</text>
+  <text x="762" y="42" text-anchor="end" class="mono meta">VIT VELLORE, INDIA</text>
   <rect x="38" y="58" width="724" height="1" fill="#d1d9e0"/>
   <text x="34" y="140" class="sans name">Vaibhav Goel</text>
-  <text x="38" y="180" class="sans tagline">I build production-grade systems at the intersection of machine learning, distributed</text>
-  <text x="38" y="202" class="sans tagline">engineering, and frontend architecture.</text>
+  <text x="38" y="180" class="sans tagline">CSE undergraduate building machine-learning systems and the web apps around</text>
+  <text x="38" y="202" class="sans tagline">them, from leakage-controlled PyTorch research to production React frontends.</text>
   <rect x="38" y="230" width="724" height="1" fill="#d1d9e0"/>
   <text x="38" y="262" class="mono now-label">CURRENTLY</text>
   <text x="127.4" y="262" class="sans now">Frontend Developer at MossX</text>
