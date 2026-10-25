@@ -180,68 +180,46 @@ def section_label(number, text, t):
     return svg(800, 36, css, body)
 
 
-def thumbnail(slug):
-    """The project's 3D render (scripts/thumbnails.py) as a data URI, or None.
-
-    Embedded rather than linked: an SVG shown as an image may not load other files.
-    """
-    path = ROOT / "assets" / "thumbs" / f"{slug}.webp"
-    return "data:image/webp;base64," + base64.b64encode(path.read_bytes()).decode() if path.exists() else None
-
-
 def project(index, total, p, t):
-    description = wrap(p["description"], 13, 316, 3, f'project "{p["name"]}" description')
-    thumb = thumbnail(p["slug"])
-    top = BANNER if thumb else 0
-    tags, x = [], 24
+    """A full-width row in the same panel style as the hero, so any number of projects stack evenly."""
+    left = PAD + 52   # text column, right of the icon box
+    description = wrap(p["description"], 14, 800 - PAD - left - 40, 2, f'project "{p["name"]}" description')
+    lines = "\n".join(
+        f'<text x="{left}" y="{88 + 21 * i}" class="sans desc">{escape(line)}</text>' for i, line in enumerate(description)
+    )
+    tags, x = [], left
     for tag in p["tags"]:
         tags.append(
-            f'<circle cx="{x + 4}" cy="{top + 152}" r="4" fill="{color(tag)}"/>'
-            f'<text x="{x + 14}" y="{top + 156}" class="mono tag">{escape(tag)}</text>'
+            f'<circle cx="{x + 4}" cy="{136.5}" r="4" fill="{color(tag)}"/>'
+            f'<text x="{x + 14}" y="140" class="mono tag">{escape(tag)}</text>'
         )
         x += round(14 + mono_width(tag, 11) + 18)
-    lines = "\n".join(
-        f'<text x="24" y="{top + 92 + 20 * i}" class="sans desc">{escape(line)}</text>' for i, line in enumerate(description)
-    )
-    if thumb:
-        # 3D band across the top (rounded to the card's corners), then the name at the left edge.
-        head = f"""
-          <path d="M0.5 10.5 A10 10 0 0 1 10.5 0.5 H373.5 A10 10 0 0 1 383.5 10.5 V{top} H0.5 Z" class="band"/>
-          <image href="{thumb}" x="0" y="0" width="384" height="{top}" preserveAspectRatio="xMidYMid meet"/>
-          <line x1="0.5" y1="{top}" x2="383.5" y2="{top}" class="divider"/>
-          <text x="20" y="24" class="mono index">{index:02d}/{total:02d}</text>
-          <text x="24" y="{top + 39}" class="sans title">{escape(p["name"])}</text>
-          <text x="24" y="{top + 56}" class="mono kind">{escape(p["kind"].upper())}</text>"""
-    else:
-        head = f"""
-          <rect x="24" y="24" width="32" height="32" rx="6" class="icon-box"/>
-          <path d="{ICONS[p["icon"]]}" class="icon"/>
-          <text x="72" y="39" class="sans title">{escape(p["name"])}</text>
-          <text x="72" y="56" class="mono kind">{escape(p["kind"].upper())}</text>
-          <text x="360" y="36" text-anchor="end" class="mono index">{index:02d}/{total:02d}</text>"""
+    ax = 800 - PAD
     css = f"""
-        .band {{ fill: {t["surface"]}; }}
-        .divider {{ stroke: {t["border"]}; }}
-        .card {{ fill: none; stroke: {t["border"]}; }}
-        .icon-box {{ fill: {t["surface"]}; stroke: {t["border"]}; }}
+        .panel {{ fill: {t["surface"]}; stroke: {t["border"]}; }}
+        .icon-box {{ fill: none; stroke: {t["border"]}; }}
         .icon {{ fill: none; stroke: {t["text"]}; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }}
-        .title {{ font-size: 17px; font-weight: 600; fill: {t["text"]}; }}
-        .kind {{ font-size: 10px; fill: {t["muted"]}; letter-spacing: 1.5px; font-weight: 600; }}
+        .title {{ font-size: 18px; font-weight: 600; fill: {t["text"]}; }}
+        .kind {{ font-size: 10px; fill: {t["accent"]}; letter-spacing: 1.5px; font-weight: 700; }}
         .index {{ font-size: 10px; fill: {t["muted"]}; letter-spacing: 1px; }}
-        .desc {{ font-size: 13px; fill: {t["muted"]}; }}
+        .desc {{ font-size: 14px; fill: {t["muted"]}; }}
         .tag {{ font-size: 11px; fill: {t["muted"]}; }}
         .arrow {{ fill: none; stroke: {t["muted"]}; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }}
     """
     body = f"""
-        <g transform="translate(8, 8)">
-          {head}
-          <rect x="0.5" y="0.5" width="383" height="{top + 179}" rx="10" class="card"/>
-          {lines}
-          {"".join(tags)}
-          <path d="M350 {top + 158} L360 {top + 148} M352.5 {top + 148} H360 V{top + 155.5}" class="arrow"/>
+        <rect x="{EDGE + 0.5}" y="0.5" width="{800 - 2 * EDGE - 1}" height="163" rx="12" class="panel"/>
+        <g transform="translate({PAD - 24}, 4)">
+          <rect x="24" y="24" width="32" height="32" rx="6" class="icon-box"/>
+          <path d="{ICONS[p["icon"]]}" class="icon"/>
         </g>
+        <text x="{left}" y="42" class="sans title">{escape(p["name"])}</text>
+        <text x="{left}" y="60" class="mono kind">{escape(p["kind"].upper())}</text>
+        <text x="{ax}" y="40" text-anchor="end" class="mono index">{index:02d}/{total:02d}</text>
+        {lines}
+        {"".join(tags)}
+        <path d="M{ax - 10} 142 L{ax} 132 M{ax - 7.5} 132 H{ax} V139.5" class="arrow"/>
     """
-    return svg(400, 196 + top, css, body)
+    return svg(800, 176, css, body)
 
 
 def experience(profile, t, number):
