@@ -42,6 +42,16 @@
    "pushed": "2026-05-18"
   },
   {
+   "name": "java-safe-cpp",
+   "label": "java-safe-cpp",
+   "language": "C++",
+   "size_kb": 371,
+   "stars": 0,
+   "commits": 31,
+   "created": "2026-10-28",
+   "pushed": "2026-10-28"
+  },
+  {
    "name": "karopitch-client",
    "label": "karopitch-client",
    "language": "JavaScript",
