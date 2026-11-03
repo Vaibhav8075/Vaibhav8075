@@ -102,6 +102,16 @@
    "pushed": "2026-03-06"
   },
   {
+   "name": "pariksha",
+   "label": "pariksha",
+   "language": "Python",
+   "size_kb": 0,
+   "stars": 0,
+   "commits": 20,
+   "created": "2026-11-03",
+   "pushed": "2026-11-03"
+  },
+  {
    "name": "photo-gallery",
    "label": "photo-gallery",
    "language": "JavaScript",
